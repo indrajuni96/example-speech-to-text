@@ -4,8 +4,8 @@ import { Example, Convert, Translate } from './pages'
 
 export default function App() {
   return (
-    // <Example />
+    <Example />
     // <Convert />
-    <Translate />
+    // <Translate />
   )
 }

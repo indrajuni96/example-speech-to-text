@@ -3,8 +3,10 @@ import { StyleSheet, ScrollView, Text, View, Image, StatusBar, TouchableOpacity 
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import Tts from 'react-native-tts';
 import Voice from '@react-native-community/voice';
+import { toRomaji } from 'wanakana'
+import { transliterate as tr } from 'transliteration';
 
-import { Space } from '../../components'
+import { Space, ModalExample } from '../../components'
 import { PoultryPng } from '../../assets'
 
 export default function Example() {
@@ -14,13 +16,17 @@ export default function Example() {
     error: '',
     end: '',
     started: '',
-    results: [],
+    results: [''],
     partialResults: [],
   })
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isBtnSpeak, setIsBtnSpeak] = useState(false)
+  const [isQuestion, setIsQuestion] = useState(false)
+  const quiz = '안녕하세요'
 
   useEffect(() => {
-    // Tts.setDefaultLanguage('ja_JP');
-    Tts.setDefaultRate(0.1)
+    Tts.setDefaultLanguage('ko_KR');
+    Tts.setDefaultRate(0.3)
 
     Voice.onSpeechStart = onSpeechStart;
     Voice.onSpeechRecognized = onSpeechRecognized;
@@ -35,11 +41,14 @@ export default function Example() {
     }
   }, [])
 
+  const toggleModal = (val) => {
+    setIsModalVisible(prev => !prev)
+  }
+
   const onSpek = async () => {
-    await Tts.setDefaultLanguage('ja_JP');
-    await Tts.setDefaultRate(0.3)
-    Tts.speak('チキン')
-    // チキン
+    // await Tts.setDefaultLanguage('ja_JP');
+    // await Tts.setDefaultRate(0.3)
+    Tts.speak(quiz)
   }
 
   const onSpeechStart = (e) => {
@@ -56,15 +65,33 @@ export default function Example() {
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
+    toggleModal()
+    setIsBtnSpeak(false)
+    setIsQuestion(false)
   };
 
   const onSpeechResults = (e) => {
     console.log('onSpeechResults: ', e.value);
+    let resultRomaji = []
+
+    e.value.forEach(result => {
+      // console.log(toRomaji(result).split(''))
+      if (quiz.includes(result)) {
+        resultRomaji.push(tr(result))
+        setIsQuestion(true)
+      } else {
+        setIsQuestion(false)
+      }
+      toggleModal()
+
+      // resultRomaji.push(tr(result))
+    });
 
     setDatas({
       ...datas,
-      ['results']: e.value
+      ['results']: resultRomaji
     })
+    setIsBtnSpeak(false)
   };
 
   const onSpeechPartialResults = (e) => {
@@ -77,14 +104,14 @@ export default function Example() {
 
   const startRecord = async () => {
     console.log('onStartMicroPhone')
-
+    setIsBtnSpeak(true)
     setDatas({
       ...datas,
       ['results']: []
     })
 
     try {
-      await Voice.start('ja_JP');
+      await Voice.start('ko_KR');
     } catch (error) {
       console.log(error)
     }
@@ -93,6 +120,12 @@ export default function Example() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
+
+      <ModalExample
+        isModalVisible={isModalVisible}
+        toggleModal={toggleModal}
+        isQuestion={isQuestion}
+      />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.textTitle}>What sound does this make?</Text>
@@ -105,35 +138,35 @@ export default function Example() {
           />
 
           <Space valSpace={20} />
-          <Text style={[styles.textJapan, { fontSize: 19 }]}>チキン</Text>
+          <Text style={[styles.textJapan, { fontSize: 19 }]}>{quiz}</Text>
 
           <Space valSpace={1} />
-          <Text style={[styles.textJapan, { fontSize: 15 }]}>Chikin</Text>
+          <Text style={[styles.textJapan, { fontSize: 15 }]}>{tr(quiz)}</Text>
 
-          <View style={styles.wrapperBtnVolume}>
-            <Icon name="volume-medium" size={30} color="white"
-              onPress={onSpek} />
-          </View>
+          <TouchableOpacity
+            disabled={isBtnSpeak ? true : false}
+            style={styles.wrapperBtnVolume}
+            onPress={onSpek}>
+            <Icon name="volume-medium" size={30} color="white" />
+          </TouchableOpacity>
         </View>
 
         <Space valSpace={25} />
+
         <TouchableOpacity
-          style={[styles.btnOnCheck, { backgroundColor: '#ce2e6c' }]}
+          disabled={isBtnSpeak ? true : false}
+          style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? '#78c800' : '#ce2e6c' }]}
           onPress={startRecord}>
-          <Text style={styles.textBtnCheck}>Speak</Text>
+          <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
 
-        {datas.results.map((result, index) => {
+        {/* {datas.results.map((result, index) => {
           return (
             <Text key={`result-${index}`} style={styles.stat}>
               {result}
             </Text>
           );
-        })}
-
-        <Text>
-          {datas.results[0]}
-        </Text>
+        })} */}
 
         {/* <Space valSpace={10} />
         <TouchableOpacity
@@ -171,7 +204,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderRadius: 20,
     backgroundColor: 'white',
-    // elevation: 3
   },
   imageMain: {
     width: 210,
