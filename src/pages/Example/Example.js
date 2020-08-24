@@ -8,7 +8,7 @@ import { transliterate as tr } from 'transliteration';
 import RNPermissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 import { Space, ModalExample } from '../../components'
-import { PoultryPng } from '../../assets'
+import { PoultryPng, PoultrySvg } from '../../assets'
 
 export default function Example() {
   const [datas, setDatas] = useState({
@@ -24,7 +24,6 @@ export default function Example() {
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
   const [isPermission, setIsPermission] = useState(false)
-  const [isBtnStart, setIsBtnStart] = useState(false)
   const quiz = 'なにしてるの'
 
   useEffect(() => {
@@ -165,10 +164,7 @@ export default function Example() {
         <Space valSpace={40} />
 
         <View style={styles.cardMain}>
-          <Image
-            style={styles.imageMain}
-            source={PoultryPng}
-          />
+          <PoultrySvg width={210} height={200} />
 
           <Space valSpace={20} />
           <Text style={[styles.textJapan, { fontSize: 19 }]}>{quiz}</Text>
@@ -229,10 +225,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderRadius: 20,
     backgroundColor: 'white',
-  },
-  imageMain: {
-    width: 210,
-    height: 200
   },
   textJapan: {
     fontFamily: 'Roboto-Regular',
