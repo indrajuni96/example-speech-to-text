@@ -5,6 +5,7 @@ import Tts from 'react-native-tts';
 import Voice from '@react-native-community/voice';
 import { toRomaji } from 'wanakana'
 import { transliterate as tr } from 'transliteration';
+import RNPermissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 import { Space, ModalExample } from '../../components'
 import { PoultryPng } from '../../assets'
@@ -22,9 +23,12 @@ export default function Example() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
+  const [isPermission, setIsPermission] = useState(false)
+  const [isBtnStart, setIsBtnStart] = useState(false)
   const quiz = 'なにしてるの'
 
   useEffect(() => {
+    requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
     Tts.getInitStatus().then(initTs())
 
     Voice.onSpeechStart = onSpeechStart;
@@ -36,6 +40,37 @@ export default function Example() {
       Voice.destroy().then(Voice.removeAllListeners)
     }
   }, [])
+
+  const requestPermission = (PERMISSIONS_VALUES) => {
+    RNPermissions.request(PERMISSIONS_VALUES)
+      .then(() => checkPermissions(PERMISSIONS_VALUES))
+      .catch(error => console.log(error))
+  }
+
+  const checkPermissions = (PERMISSIONS_VALUES) => {
+    RNPermissions.check(PERMISSIONS_VALUES)
+      .then((result) => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            console.log(
+              'This feature is not available (on this device / in this context)',
+            );
+            break;
+          case RESULTS.DENIED:
+            console.log(
+              'The permission has not been requested / is denied but requestable',
+            );
+            break;
+          case RESULTS.GRANTED:
+            console.log('The permission is granted');
+            setIsPermission(true)
+            break;
+          case RESULTS.BLOCKED:
+            console.log('The permission is denied and not requestable anymore');
+            break;
+        }
+      })
+  }
 
   const toggleModal = (val) => {
     setIsModalVisible(val)
@@ -96,17 +131,23 @@ export default function Example() {
 
   const startRecord = async () => {
     console.log('onStartMicroPhone')
-    setIsBtnSpeak(true)
-    setDatas({
-      ...datas,
-      ['results']: []
-    })
 
-    try {
-      await Voice.start('ja');
-    } catch (error) {
-      console.log(error)
+    if (isPermission) {
+      setIsBtnSpeak(true)
+      setDatas({
+        ...datas,
+        ['results']: []
+      })
+
+      try {
+        await Voice.start('ja');
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
     }
+
   }
 
   return (
