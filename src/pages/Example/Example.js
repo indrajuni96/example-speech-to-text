@@ -22,19 +22,15 @@ export default function Example() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
-  const quiz = '안녕하세요'
+  const quiz = 'なにしてるの'
 
   useEffect(() => {
-    Tts.setDefaultLanguage('ko_KR');
-    Tts.setDefaultRate(0.3)
+    Tts.getInitStatus().then(initTs())
 
     Voice.onSpeechStart = onSpeechStart;
-    Voice.onSpeechRecognized = onSpeechRecognized;
     Voice.onSpeechEnd = onSpeechEnd;
     Voice.onSpeechError = onSpeechError;
     Voice.onSpeechResults = onSpeechResults;
-    Voice.onSpeechPartialResults = onSpeechPartialResults;
-    Voice.onSpeechVolumeChanged = onSpeechVolumeChanged;
 
     return () => {
       Voice.destroy().then(Voice.removeAllListeners)
@@ -42,21 +38,20 @@ export default function Example() {
   }, [])
 
   const toggleModal = (val) => {
-    setIsModalVisible(prev => !prev)
+    setIsModalVisible(val)
+  }
+
+  const initTs = async () => {
+    await Tts.setDefaultLanguage('ja');
+    await Tts.setDefaultRate(0.3)
   }
 
   const onSpek = async () => {
-    // await Tts.setDefaultLanguage('ja_JP');
-    // await Tts.setDefaultRate(0.3)
     Tts.speak(quiz)
   }
 
   const onSpeechStart = (e) => {
     console.log('onSpeechStart: ', e);
-  };
-
-  const onSpeechRecognized = (e) => {
-    console.log('onSpeechRecognized: ', e);
   };
 
   const onSpeechEnd = (e) => {
@@ -65,7 +60,7 @@ export default function Example() {
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
-    toggleModal()
+    toggleModal(true)
     setIsBtnSpeak(false)
     setIsQuestion(false)
   };
@@ -73,33 +68,30 @@ export default function Example() {
   const onSpeechResults = (e) => {
     console.log('onSpeechResults: ', e.value);
     let resultRomaji = []
+    // let quizRomaji = toRomaji(quiz)
 
     e.value.forEach(result => {
-      // console.log(toRomaji(result).split(''))
       if (quiz.includes(result)) {
-        resultRomaji.push(tr(result))
-        setIsQuestion(true)
-      } else {
-        setIsQuestion(false)
+        resultRomaji.push(toRomaji(result))
       }
-      toggleModal()
-
-      // resultRomaji.push(tr(result))
+      resultRomaji.push(toRomaji(result))
     });
+
+
+    if (resultRomaji.length > 0) {
+      console.log('BENAR')
+      setIsQuestion(true)
+    } else {
+      console.log('salah')
+      setIsQuestion(false)
+    }
+    toggleModal(true)
 
     setDatas({
       ...datas,
       ['results']: resultRomaji
     })
     setIsBtnSpeak(false)
-  };
-
-  const onSpeechPartialResults = (e) => {
-    console.log('onSpeechPartialResults: ', e);
-  };
-
-  const onSpeechVolumeChanged = (e) => {
-    console.log('onSpeechVolumeChanged: ', e);
   };
 
   const startRecord = async () => {
@@ -111,7 +103,7 @@ export default function Example() {
     })
 
     try {
-      await Voice.start('ko_KR');
+      await Voice.start('ja');
     } catch (error) {
       console.log(error)
     }
@@ -123,7 +115,7 @@ export default function Example() {
 
       <ModalExample
         isModalVisible={isModalVisible}
-        toggleModal={toggleModal}
+        toggleModal={() => toggleModal(false)}
         isQuestion={isQuestion}
       />
 
@@ -141,7 +133,7 @@ export default function Example() {
           <Text style={[styles.textJapan, { fontSize: 19 }]}>{quiz}</Text>
 
           <Space valSpace={1} />
-          <Text style={[styles.textJapan, { fontSize: 15 }]}>{tr(quiz)}</Text>
+          <Text style={[styles.textJapan, { fontSize: 15 }]}>{toRomaji(quiz)}</Text>
 
           <TouchableOpacity
             disabled={isBtnSpeak ? true : false}
@@ -160,21 +152,13 @@ export default function Example() {
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
 
-        {/* {datas.results.map((result, index) => {
+        {datas.results.map((result, index) => {
           return (
             <Text key={`result-${index}`} style={styles.stat}>
-              {result}
+              {toRomaji(result)}
             </Text>
           );
-        })} */}
-
-        {/* <Space valSpace={10} />
-        <TouchableOpacity
-          style={[styles.btnOnCheck, { backgroundColor: '#f0f0f0', }]}
-          onPress={() =>
-            console.log('チキン')}>
-          <Text style={styles.textBtnCheck}>Countinue</Text>
-        </TouchableOpacity> */}
+        })}
 
       </ScrollView>
     </View>
