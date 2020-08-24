@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, ScrollView, Text, View, Image, StatusBar, TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/dist/Ionicons';
-import Tts from 'react-native-tts';
 import Voice from '@react-native-community/voice';
-import { toRomaji } from 'wanakana'
-import { transliterate as tr } from 'transliteration';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import RNPermissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
+import Tts from 'react-native-tts';
+import Icon from 'react-native-vector-icons/dist/Ionicons';
+import { toRomaji } from 'wanakana';
 
-import { Space, ModalExample } from '../../components'
-import { PoultryPng, PoultrySvg } from '../../assets'
+import { PoultrySvg } from '../../assets';
+import { ModalExample, Space } from '../../components';
+import { colors } from '../../utils';
+import styles from './styles';
+
 
 export default function Example() {
   const [datas, setDatas] = useState({
-    recognized: '',
-    pitch: '',
-    error: '',
-    end: '',
-    started: '',
     results: [''],
-    partialResults: [],
   })
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
@@ -150,7 +146,8 @@ export default function Example() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container
+    }>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       <ModalExample
@@ -184,7 +181,7 @@ export default function Example() {
 
         <TouchableOpacity
           disabled={isBtnSpeak ? true : false}
-          style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? '#78c800' : '#ce2e6c' }]}
+          style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.buttonRed : colors.buttonGreen }]}
           onPress={startRecord}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
@@ -198,62 +195,6 @@ export default function Example() {
         })}
 
       </ScrollView>
-    </View>
+    </View >
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 35,
-    backgroundColor: 'white'
-  },
-  textTitle: {
-    fontSize: 20,
-    fontFamily: 'Roboto-Bold',
-    color: '#222831',
-  },
-  cardMain: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderColor: "#f0f0f0",
-    borderTopWidth: 2,
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
-    borderBottomWidth: 4,
-    borderRadius: 20,
-    backgroundColor: 'white',
-  },
-  textJapan: {
-    fontFamily: 'Roboto-Regular',
-    color: '#222831',
-  },
-  wrapperBtnVolume: {
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 40,
-    height: 40,
-    backgroundColor: '#1089ff',
-    borderRadius: 20,
-  },
-  textBtnCheck: {
-    textAlign: 'center',
-    fontFamily: 'Roboto-Bold',
-    color: 'white',
-    fontSize: 20,
-  },
-  btnOnCheck: {
-    borderRadius: 15,
-    paddingVertical: 8,
-    borderColor: "#f0f0f0",
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 3,
-    // elevation: 3,
-    // Color green #21bf73
-  }
-})
