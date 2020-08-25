@@ -1,9 +1,10 @@
 import React from 'react'
-import { Example } from './pages'
+import { Example, ListLearning } from './pages'
 
 
 export default function App() {
   return (
-    <Example />
+    // <Example />
+    <ListLearning />
   )
 }
