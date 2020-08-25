@@ -1,10 +1,10 @@
-import React from 'react'
-import { StyleSheet, StatusBar, Text, View, ScrollView } from 'react-native'
-import Icon from 'react-native-vector-icons/dist/Ionicons';
-import { toRomaji } from 'wanakana';
+import React from 'react';
+import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import IconFeather from 'react-native-vector-icons/dist/Feather';
 
-import { colors } from '../../utils'
-import { Space } from '../../components'
+import { CardLearning, Space } from '../../components';
+import { colors } from '../../utils';
+
 
 export default function ListLearning() {
   return (
@@ -12,112 +12,20 @@ export default function ListLearning() {
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       <View style={styles.wrapperHeader}>
-        <Icon name="menu" size={30} color={colors.textDefault} />
+        <IconFeather name="bar-chart-2" size={30} color={colors.textDefault} style={{ transform: [{ rotate: '90deg' }] }} />
       </View>
-
 
       <View style={styles.wrapperMain}>
         <Space valSpace={4} />
-        <Text style={styles.textHeader}>Learning Japanes</Text>
-        <Text style={styles.textCourse}>Course</Text>
+        <View style={styles.headerMain}>
+          <Text style={styles.textHeader}>Learning Japanes</Text>
+          <Text style={styles.textCourse}>Course</Text>
+        </View>
 
         <Space valSpace={10} />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.headerMain}>
 
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
-
-          <Space valSpace={10} />
-          <View style={styles.wrapperCard}>
-            <View style={styles.btnPlay}>
-              <Icon name="play" size={25} color="white" />
-            </View>
-
-            <View style={styles.wrapperCardText}>
-              <Text style={styles.textJapanes}>なにしてるの</Text>
-              <Text style={styles.textRomaji}>{toRomaji('なにしてるの')}</Text>
-            </View>
-          </View>
+          <CardLearning textJapan="なにしてるの" />
 
           <Space valSpace={10} />
         </ScrollView>
@@ -133,7 +41,7 @@ const styles = StyleSheet.create({
   },
   wrapperHeader: {
     height: 65,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -144,46 +52,13 @@ const styles = StyleSheet.create({
   },
   wrapperMain: {
     flex: 1,
-    paddingHorizontal: 10
+    // paddingHorizontal: 15
+  },
+  headerMain: {
+    paddingHorizontal: 15
   },
   textCourse: {
     fontSize: 14,
-    fontFamily: 'Roboto-Regular',
-    color: colors.textDefault,
-  },
-  wrapperCard: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderColor: colors.border,
-    borderTopWidth: 2,
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
-    borderBottomWidth: 4,
-    borderRadius: 10,
-    flexDirection: 'row',
-  },
-  btnPlay: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    width: 40,
-    height: 40,
-    backgroundColor: colors.textDefault,
-    borderRadius: 20,
-  },
-  wrapperCardText: {
-    flex: 1,
-    justifyContent: 'center',
-    marginLeft: 20
-  },
-  textJapanes: {
-    fontSize: 14,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
-  textRomaji: {
-    fontSize: 11,
     fontFamily: 'Roboto-Regular',
     color: colors.textDefault,
   },

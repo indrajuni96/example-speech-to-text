@@ -1,10 +1,11 @@
+import 'react-native-gesture-handler';
 import React from 'react'
-import { Example, ListLearning } from './pages'
+
+import Routers from './router/Routers'
 
 
 export default function App() {
   return (
-    // <Example />
-    <ListLearning />
+    <Routers />
   )
 }
