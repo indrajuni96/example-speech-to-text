@@ -1,12 +1,32 @@
 import React from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
 
 import { CardLearning, Space } from '../../components';
 import { colors } from '../../utils';
 
+export default function ListLearning({ navigation }) {
 
-export default function ListLearning() {
+  const items = [
+    {
+      id: 1,
+      japanes: 'なにしてるの'
+    },
+    {
+      id: 2,
+      japanes: 'チキン'
+    },
+    {
+      id: 3,
+      japanes: 'おはようございます'
+    },
+  ]
+
+  const onMoveCard = (item) => {
+    console.log("on move card")
+    navigation.navigate("Example", { item })
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -23,12 +43,17 @@ export default function ListLearning() {
         </View>
 
         <Space valSpace={10} />
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.headerMain}>
-
-          <CardLearning textJapan="なにしてるの" />
+        <View style={styles.headerMain}>
+          <FlatList
+            data={items}
+            renderItem={({ item }) => (
+              <CardLearning textJapan={item.japanes} onPress={() => onMoveCard(item.japanes)} />
+            )}
+            keyExtractor={item => item.id.toString()}
+          />
 
           <Space valSpace={10} />
-        </ScrollView>
+        </View>
       </View>
     </View>
   )

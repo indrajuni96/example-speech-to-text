@@ -7,12 +7,12 @@ import Icon from 'react-native-vector-icons/dist/Ionicons';
 import { toRomaji } from 'wanakana';
 
 import { PoultrySvg } from '../../assets';
-import { ModalExample, Space } from '../../components';
+import { ModalExample, Space, CardCourse } from '../../components';
 import { colors } from '../../utils';
 import styles from './styles';
 
 
-export default function Example() {
+export default function Example({ route, navigation }) {
   const [datas, setDatas] = useState({
     results: [''],
   })
@@ -20,7 +20,7 @@ export default function Example() {
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
   const [isPermission, setIsPermission] = useState(false)
-  const quiz = 'なにしてるの'
+  const quiz = route.params.item
 
   useEffect(() => {
     requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
@@ -146,8 +146,7 @@ export default function Example() {
   }
 
   return (
-    <View style={styles.container
-    }>
+    <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       <ModalExample
@@ -160,23 +159,7 @@ export default function Example() {
         <Text style={styles.textTitle}>What sound does this make?</Text>
         <Space valSpace={40} />
 
-        <View style={styles.cardMain}>
-          <PoultrySvg width={210} height={200} />
-
-          <Space valSpace={20} />
-          <Text style={[styles.textJapan, { fontSize: 19 }]}>{quiz}</Text>
-
-          <Space valSpace={1} />
-          <Text style={[styles.textJapan, { fontSize: 15 }]}>{toRomaji(quiz)}</Text>
-
-          <TouchableOpacity
-            disabled={isBtnSpeak ? true : false}
-            style={styles.wrapperBtnVolume}
-            onPress={onSpek}>
-            <Icon name="volume-medium" size={30} color="white" />
-          </TouchableOpacity>
-        </View>
-
+        <CardCourse item={quiz} isBtnSpeak={isBtnSpeak} onPress={onSpek} />
         <Space valSpace={25} />
 
         <TouchableOpacity
@@ -186,13 +169,17 @@ export default function Example() {
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
 
-        {datas.results.map((result, index) => {
+        {/* <TouchableOpacity onPress={() => navigation.push("Example")}>
+          <Text>Touch me</Text>
+        </TouchableOpacity> */}
+
+        {/* {datas.results.map((result, index) => {
           return (
             <Text key={`result-${index}`} style={styles.stat}>
               {toRomaji(result)}
             </Text>
           );
-        })}
+        })} */}
 
       </ScrollView>
     </View >

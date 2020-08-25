@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import IconIonicons from 'react-native-vector-icons/dist/Ionicons';
 import { toRomaji } from 'wanakana';
 
-import { colors } from '../../utils'
-import Space from '../space/space'
+import { colors } from '../../../utils'
+import Space from '../../space/space'
 
-export default function CardLearning({ textJapan }) {
+export default function CardLearning({ textJapan, onPress }) {
   return (
     <>
       <Space valSpace={10} />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.wrapperCard}>
           <View style={styles.btnPlay}>
             <IconIonicons name="play" size={25} color="white" />
