@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
+import { useDispatch, useSelector } from 'react-redux'
 
 import { CardLearning, Space } from '../../components';
 import { colors } from '../../utils';
+import { getItems } from '../../redux/actions/item'
 
 export default function ListLearning({ navigation }) {
+  const dispatch = useDispatch()
+  const items = useSelector((state) => state.itemStore)
 
-  const items = [
-    {
-      id: 1,
-      japanes: 'なにしてるの'
-    },
-    {
-      id: 2,
-      japanes: 'チキン'
-    },
-    {
-      id: 3,
-      japanes: 'おはようございます'
-    },
-  ]
+  useEffect(() => {
+    dispatch(getItems())
+  }, [])
+
+  // const items = [
+  //   {
+  //     id: 1,
+  //     japanes: 'なにしてるの'
+  //   },
+  //   {
+  //     id: 2,
+  //     japanes: 'チキン'
+  //   },
+  //   {
+  //     id: 3,
+  //     japanes: 'おはようございます'
+  //   },
+  // ]
 
   const onMoveCard = (item) => {
     console.log("on move card")
@@ -45,7 +53,7 @@ export default function ListLearning({ navigation }) {
         <Space valSpace={10} />
         <View style={styles.headerMain}>
           <FlatList
-            data={items}
+            data={items.item}
             renderItem={({ item }) => (
               <CardLearning textJapan={item.japanes} onPress={() => onMoveCard(item.japanes)} />
             )}
