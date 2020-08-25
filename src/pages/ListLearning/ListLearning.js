@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CardLearning, Space } from '../../components';
 import { colors } from '../../utils';
 import { getItems } from '../../redux/actions/item'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ListLearning({ navigation }) {
   const dispatch = useDispatch()
@@ -14,21 +15,6 @@ export default function ListLearning({ navigation }) {
   useEffect(() => {
     dispatch(getItems())
   }, [])
-
-  // const items = [
-  //   {
-  //     id: 1,
-  //     japanes: 'なにしてるの'
-  //   },
-  //   {
-  //     id: 2,
-  //     japanes: 'チキン'
-  //   },
-  //   {
-  //     id: 3,
-  //     japanes: 'おはようございます'
-  //   },
-  // ]
 
   const onMoveCard = (item) => {
     console.log("on move card")
@@ -40,7 +26,9 @@ export default function ListLearning({ navigation }) {
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       <View style={styles.wrapperHeader}>
-        <IconFeather name="bar-chart-2" size={30} color={colors.textDefault} style={{ transform: [{ rotate: '90deg' }] }} />
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <IconFeather name="bar-chart-2" size={30} color={colors.textDefault} style={{ transform: [{ rotate: '90deg' }] }} />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.wrapperMain}>
