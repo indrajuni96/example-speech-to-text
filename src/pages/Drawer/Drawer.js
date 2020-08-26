@@ -21,6 +21,8 @@ export default function Drawer({ navigation }) {
         <CardDrawerMenu nameNemu="Learning" onPress={() => navigation.navigate("Home")} />
 
         <CardDrawerMenu nameNemu="History" onPress={() => navigation.navigate("History")} />
+
+        <CardDrawerMenu nameNemu="Profile" onPress={() => { }} />
       </View>
 
       <View style={styles.wrapperVersion}>
