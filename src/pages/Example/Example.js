@@ -23,7 +23,7 @@ export default function Example({ route, navigation }) {
   const quiz = route.params.item
 
   useEffect(() => {
-    requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
+    // requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
     Tts.getInitStatus().then(initTs())
 
     Voice.onSpeechStart = onSpeechStart;
@@ -127,22 +127,78 @@ export default function Example({ route, navigation }) {
   const startRecord = async () => {
     console.log('onStartMicroPhone')
 
-    if (isPermission) {
-      setIsBtnSpeak(true)
-      setDatas({
-        ...datas,
-        ['results']: []
-      })
+    // if (isPermission) {
+    setIsBtnSpeak(true)
+    setDatas({
+      ...datas,
+      ['results']: []
+    })
 
-      try {
-        await Voice.start('ja');
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
+    try {
+      await Voice.start('ja');
+    } catch (error) {
+      console.log(error)
     }
+    // } else {
+    //   requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
+    // }
 
+  }
+
+  const countValueArray = (data) => {
+    let counts = {}
+    data.forEach(value => {
+      counts[value] = (counts[value] || 0) + 1
+    })
+
+    return counts
+  }
+
+  const onExampleFun = () => {
+    console.log('function example')
+    // deklarasi nilai pertama
+    // variable answer (di ganti sama voice result)
+    // let question = "おかえりなさい"
+    let answer = ["おはようございます", "チキン", "どんな", "もんだいない", "チキン", "どんな", "チキン"]
+
+    // split string to array
+    let questionArray = quiz.split(' ')
+    // console.log(questionArray)
+
+    // japanes to romaji
+    let questionRomaji = []
+    let answerRomaji = []
+
+    questionArray.forEach(value => questionRomaji.push(toRomaji(value)))
+    answer.forEach(value => answerRomaji.push(toRomaji(value)))
+    // console.log(questionRomaji)
+    // console.log(answerRomaji)
+
+    const countValueQestion = countValueArray(questionRomaji)
+    const countValueAnswer = countValueArray(answerRomaji)
+    // console.log(countValueQestion)
+    // console.log(countValueAnswer)
+
+    let resultIn = []
+    let resultOut = []
+
+    answerRomaji.forEach(value => {
+      let countValueResIn = countValueArray(resultIn)
+
+      if (questionRomaji.includes(value)) {
+        if (countValueResIn.value) {
+          if (countValueResIn.value < countValueQestion.value) {
+            resultIn.push(value)
+          }
+        } else {
+          if (!resultIn.includes(value)) {
+            resultIn.push(value)
+          }
+        }
+      }
+    })
+
+    console.log(resultIn)
   }
 
   return (
@@ -165,7 +221,7 @@ export default function Example({ route, navigation }) {
         <TouchableOpacity
           disabled={isBtnSpeak ? true : false}
           style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.buttonRed : colors.buttonGreen }]}
-          onPress={startRecord}>
+          onPress={onExampleFun}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
 

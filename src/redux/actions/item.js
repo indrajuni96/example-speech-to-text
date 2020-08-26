@@ -17,6 +17,11 @@ export const getItems = () => {
           id: 3,
           japanes: 'おはようございます'
         },
+        {
+          id: 4,
+          japanes: 'やくにたたない'
+          // やく に たた ない
+        }
       ]
     }
   }
