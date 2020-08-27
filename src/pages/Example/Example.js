@@ -5,8 +5,8 @@ import RNPermissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Tts from 'react-native-tts';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import { toRomaji } from 'wanakana';
+import { transliterate as tr } from 'transliteration'
 
-import { PoultrySvg } from '../../assets';
 import { ModalExample, Space, CardCourse } from '../../components';
 import { colors } from '../../utils';
 import styles from './styles';
@@ -32,6 +32,7 @@ export default function Example({ route, navigation }) {
     Voice.onSpeechResults = onSpeechResults;
 
     return () => {
+      console.log('EXAMPLE WILL UN MOUNT')
       Voice.destroy().then(Voice.removeAllListeners)
     }
   }, [])
@@ -96,19 +97,48 @@ export default function Example({ route, navigation }) {
   };
 
   const onSpeechResults = (e) => {
-    console.log('onSpeechResults: ', e.value);
-    let resultRomaji = []
-    // let quizRomaji = toRomaji(quiz)
+    // console.log('onSpeechResults: ', e.value);
 
-    e.value.forEach(result => {
-      if (quiz.includes(result)) {
-        resultRomaji.push(toRomaji(result))
+    // split string to array
+    let questionArray = quiz.split(' ')
+    // console.log(questionArray)
+
+    // japanes to romaji
+    let questionRomaji = []
+    let answerRomaji = []
+
+    questionArray.forEach(value => questionRomaji.push(toRomaji(value)))
+    e.value.forEach(value => answerRomaji.push(toRomaji(value)))
+    // console.log(questionRomaji)
+    console.log(answerRomaji)
+
+    const countValueQestion = countValueArray(questionRomaji)
+    const countValueAnswer = countValueArray(answerRomaji)
+    // console.log(countValueQestion)
+    // console.log(countValueAnswer)
+
+    let resultIn = []
+    let resultOut = []
+
+    answerRomaji.forEach(value => {
+      let countValueResIn = countValueArray(resultIn)
+
+      if (questionRomaji.includes(value)) {
+        if (countValueResIn.value) {
+          if (countValueResIn.value < countValueQestion.value) {
+            resultIn.push(value)
+          }
+        } else {
+          if (!resultIn.includes(value)) {
+            resultIn.push(value)
+          }
+        }
       }
-      resultRomaji.push(toRomaji(result))
-    });
+    })
 
+    console.log(resultIn)
 
-    if (resultRomaji.length > 0) {
+    if (resultIn.length > 0) {
       console.log('BENAR')
       setIsQuestion(true)
     } else {
@@ -117,10 +147,11 @@ export default function Example({ route, navigation }) {
     }
     toggleModal(true)
 
-    setDatas({
-      ...datas,
-      ['results']: resultRomaji
-    })
+    // setDatas({
+    //   ...datas,
+    //   ['results']: resultRomaji
+    // })
+
     setIsBtnSpeak(false)
   };
 
@@ -201,13 +232,22 @@ export default function Example({ route, navigation }) {
     console.log(resultIn)
   }
 
+  const onPressButtonModal = () => {
+    toggleModal(false)
+    setTimeout(() => {
+
+      navigation.goBack()
+    }, 1000)
+
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
       <ModalExample
         isModalVisible={isModalVisible}
-        toggleModal={() => toggleModal(false)}
+        toggleModal={onPressButtonModal}
         isQuestion={isQuestion}
       />
 
@@ -221,13 +261,9 @@ export default function Example({ route, navigation }) {
         <TouchableOpacity
           disabled={isBtnSpeak ? true : false}
           style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.buttonRed : colors.buttonGreen }]}
-          onPress={onExampleFun}>
+          onPress={startRecord}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity onPress={() => navigation.push("Example")}>
-          <Text>Touch me</Text>
-        </TouchableOpacity> */}
 
         {/* {datas.results.map((result, index) => {
           return (
