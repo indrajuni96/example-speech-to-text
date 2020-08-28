@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, Text, View, BackHandler, ToastAndroid } from 'react-native';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,11 +9,40 @@ import { getItems } from '../../redux/actions/item'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ListLearning({ navigation }) {
+  let countBack = 0
   const dispatch = useDispatch()
   const items = useSelector((state) => state.itemStore)
 
+  const backAction = () => {
+
+    if (navigation.isFocused()) {
+
+      if (countBack === 0) {
+        countBack++
+
+        ToastAndroid.show("Tekan sekali lagi untuk keluar", ToastAndroid.SHORT)
+      } else if (countBack == 1) {
+        BackHandler.exitApp()
+      }
+
+      setTimeout(() => {
+        countBack = 0
+      }, 1500)
+
+    }
+    return true
+  }
+
   useEffect(() => {
     dispatch(getItems())
+
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
   }, [])
 
   const onMoveCard = (item) => {
