@@ -1,16 +1,13 @@
 import Voice from '@react-native-community/voice';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
-import RNPermissions, { PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Tts from 'react-native-tts';
-import Icon from 'react-native-vector-icons/dist/Ionicons';
 import { toRomaji } from 'wanakana';
 import { transliterate as tr } from 'transliteration'
 
 import { ModalExample, Space, CardCourse } from '../../components';
 import { colors } from '../../utils';
 import styles from './styles';
-
 
 export default function Example({ route, navigation }) {
   const [datas, setDatas] = useState({
@@ -19,11 +16,9 @@ export default function Example({ route, navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
-  const [isPermission, setIsPermission] = useState(false)
   const quiz = route.params.item
 
   useEffect(() => {
-    // requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
     Tts.getInitStatus().then(initTs())
 
     Voice.onSpeechStart = onSpeechStart;
@@ -36,37 +31,6 @@ export default function Example({ route, navigation }) {
       Voice.destroy().then(Voice.removeAllListeners)
     }
   }, [])
-
-  const requestPermission = (PERMISSIONS_VALUES) => {
-    RNPermissions.request(PERMISSIONS_VALUES)
-      .then(() => checkPermissions(PERMISSIONS_VALUES))
-      .catch(error => console.log(error))
-  }
-
-  const checkPermissions = (PERMISSIONS_VALUES) => {
-    RNPermissions.check(PERMISSIONS_VALUES)
-      .then((result) => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
-            break;
-          case RESULTS.DENIED:
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            setIsPermission(true)
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-  }
 
   const toggleModal = (val) => {
     setIsModalVisible(val)
@@ -158,7 +122,6 @@ export default function Example({ route, navigation }) {
   const startRecord = async () => {
     console.log('onStartMicroPhone')
 
-    // if (isPermission) {
     setIsBtnSpeak(true)
     setDatas({
       ...datas,
@@ -170,10 +133,6 @@ export default function Example({ route, navigation }) {
     } catch (error) {
       console.log(error)
     }
-    // } else {
-    //   requestPermission(PERMISSIONS.ANDROID.RECORD_AUDIO)
-    // }
-
   }
 
   const countValueArray = (data) => {
