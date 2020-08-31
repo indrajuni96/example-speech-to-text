@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CardLearning, Space } from '../../components';
+import { getItems } from '../../redux/actions/item';
 import { colors, ConfigBackHandler } from '../../utils';
-import { getItems } from '../../redux/actions/item'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 export default function ListLearning({ navigation }) {
   const dispatch = useDispatch()
   const items = useSelector((state) => state.itemStore)
 
+  ConfigBackHandler(navigation)
+
   useEffect(() => {
     dispatch(getItems())
-
-    ConfigBackHandler(navigation)
   }, [])
+
 
   const onMoveCard = (item) => {
     console.log("on move card")

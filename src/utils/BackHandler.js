@@ -1,32 +1,41 @@
 import React from 'react'
 import { BackHandler, ToastAndroid } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 
 export default function ConfigBackHandler(navigation) {
-  let countBack = 0
-  const backAction = () => {
-    console.log(navigation.isFocused())
-    if (navigation.isFocused()) {
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log('SCREEN FOCUSED')
 
-      if (countBack === 0) {
-        countBack++
+      let countBack = 0
+      const backAction = () => {
+        console.log(navigation.isFocused())
+        if (navigation.isFocused()) {
 
-        ToastAndroid.show("Tekan sekali lagi untuk keluar", ToastAndroid.SHORT)
-      } else if (countBack == 1) {
-        BackHandler.exitApp()
+          if (countBack === 0) {
+            countBack++
+
+            ToastAndroid.show("Tekan sekali lagi untuk keluar", ToastAndroid.SHORT)
+          } else if (countBack == 1) {
+            BackHandler.exitApp()
+          }
+
+          setTimeout(() => {
+            countBack = 0
+          }, 1500)
+
+        }
+        return true
       }
 
-      setTimeout(() => {
-        countBack = 0
-      }, 1500)
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
 
-    }
-    return true
-  }
-
-  const backHandler = BackHandler.addEventListener(
-    "hardwareBackPress",
-    backAction
-  );
-
-  return () => backHandler.remove();
+      return () => {
+        console.log('SCREEN UNFOCUSED')
+        backHandler.remove()
+      }
+    }, []))
 }

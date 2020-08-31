@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import IconFeather from 'react-native-vector-icons/dist/Feather';
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import IconFeather from 'react-native-vector-icons/dist/Feather'
 
-import { colors, ConfigBackHandler } from '../../utils';
+import { colors, ConfigBackHandler } from '../../utils'
+
 
 export default function History({ navigation }) {
-  useEffect(() => {
-    ConfigBackHandler(navigation)
-  }, [])
+  ConfigBackHandler(navigation)
 
   return (
     <View style={styles.container}>
