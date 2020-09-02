@@ -5,11 +5,11 @@ import { useFocusEffect } from '@react-navigation/native'
 export default function ConfigBackHandler(navigation) {
   useFocusEffect(
     React.useCallback(() => {
-      console.log('SCREEN FOCUSED')
+      // console.log('SCREEN FOCUSED')
 
       let countBack = 0
       const backAction = () => {
-        console.log(navigation.isFocused())
+        // console.log(navigation.isFocused())
         if (navigation.isFocused()) {
 
           if (countBack === 0) {
@@ -34,7 +34,7 @@ export default function ConfigBackHandler(navigation) {
       );
 
       return () => {
-        console.log('SCREEN UNFOCUSED')
+        // console.log('SCREEN UNFOCUSED')
         backHandler.remove()
       }
     }, []))

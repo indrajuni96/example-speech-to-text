@@ -1,4 +1,5 @@
 export const GET_ITEMS = "GET_ITEMS"
+export const RANDOM_ITEM = "RANDOM_ITEM"
 
 export const getItems = () => {
   return {
@@ -24,5 +25,11 @@ export const getItems = () => {
         }
       ]
     }
+  }
+}
+
+export const randomItem = () => {
+  return {
+    type: RANDOM_ITEM
   }
 }
