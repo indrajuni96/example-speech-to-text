@@ -1,5 +1,6 @@
 export const GET_ITEMS = "GET_ITEMS"
 export const RANDOM_ITEM = "RANDOM_ITEM"
+export const REMOVE_ITEM = "REMOVE_ITEM"
 
 export const getItems = () => {
   return {
@@ -31,5 +32,12 @@ export const getItems = () => {
 export const randomItem = () => {
   return {
     type: RANDOM_ITEM
+  }
+}
+
+export const removeItem = (value) => {
+  return {
+    type: REMOVE_ITEM,
+    value
   }
 }

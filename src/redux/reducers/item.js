@@ -1,5 +1,4 @@
 import * as actions from '../actions/item'
-import { act } from 'react-test-renderer'
 
 const initialState = {
   item: [],
@@ -28,16 +27,22 @@ export default function Item(state = initialState, action) {
         item: action.payload.items
       }
     case actions.RANDOM_ITEM:
+      let itemRandom
       const result = state.items.sort(function (a, b) { return 0.5 - Math.random() })
-      const removeItem = state.items.splice(result[0].id, 1)
 
-      console.log(result)
-
+      if (result.length > 0) itemRandom = result[0].nama
+      else itemRandom = 'FINISH'
 
       return {
         ...state,
-        // currentItem: result[0].nama,
-        // items: state.items.splice(result[0].id, 1)
+        currentItem: itemRandom,
+      }
+    case actions.REMOVE_ITEM:
+      state.items.splice(action.value[0].id, 1)
+
+      return {
+        ...state,
+        // items: [...state.items, resultRemove]
       }
     default:
       return state

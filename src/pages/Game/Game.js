@@ -1,23 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { randomItem } from '../../redux/actions/item';
+import { randomItem, removeItem } from '../../redux/actions/item';
 
 export default function Game({ navigation }) {
+  const [isFinish, setIsFinish] = useState(false)
+
   const dispatch = useDispatch()
-  const items = useSelector((state) => state.itemStore.currentItem)
+  const items = useSelector((state) => state.itemStore)
 
   useEffect(() => {
     dispatch(randomItem())
   }, [])
 
+  const onPressRandom = () => {
+    console.log(items.items.length)
+    if (items.items.length == 1) {
+      console.log('SELESAI')
+      setIsFinish(true)
+    } else {
+      dispatch(removeItem(items.currentItem))
+      navigation.push('Game')
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text>{items}</Text>
+      <Text>{items.currentItem}</Text>
       <Button
-        title="RANDOM"
-        onPress={() => navigation.push('Game')} />
+        disabled={isFinish}
+        title={isFinish ? "FINISH" : "RANDOM"}
+        onPress={onPressRandom} />
     </View>
   )
 }
