@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { randomItem, removeItem } from '../../redux/actions/item';
+import { ConfigBackHandler } from '../../utils'
 
 export default function Game({ navigation }) {
   const [isFinish, setIsFinish] = useState(false)
@@ -10,12 +11,13 @@ export default function Game({ navigation }) {
   const dispatch = useDispatch()
   const items = useSelector((state) => state.itemStore)
 
+  ConfigBackHandler(navigation)
+
   useEffect(() => {
     dispatch(randomItem())
   }, [])
 
   const onPressRandom = () => {
-    console.log(items.items.length)
     if (items.items.length == 1) {
       console.log('SELESAI')
       setIsFinish(true)
