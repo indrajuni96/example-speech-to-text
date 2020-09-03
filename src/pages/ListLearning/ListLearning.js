@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, Text, View, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +53,10 @@ export default function ListLearning({ navigation }) {
           />
 
           <Space valSpace={10} />
+
+          <Button
+            title="Example Game Random"
+            onPress={() => navigation.replace('Game')} />
         </View>
       </View>
     </View>
