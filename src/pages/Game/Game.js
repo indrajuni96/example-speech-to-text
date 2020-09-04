@@ -22,7 +22,7 @@ export default function Game({ navigation }) {
       console.log('SELESAI')
       setIsFinish(true)
     } else {
-      dispatch(removeItem(items.currentItem))
+      dispatch(removeItem(items.id))
       navigation.push('Game')
     }
   }

@@ -10,7 +10,7 @@ export default function HomeStackScreen() {
   return (
     <HomeStack.Navigator
       screenOptions={screenOptions}
-      initialRouteName="ListLearning" >
+      initialRouteName="Game" >
       <HomeStack.Screen name="Example" component={Example} />
       <HomeStack.Screen name="Game" component={Game} />
       <HomeStack.Screen name="ListLearning" component={ListLearning} />

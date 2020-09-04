@@ -16,6 +16,7 @@ const initialState = {
       nama: 'monyet'
     }
   ],
+  id: 0,
   currentItem: '',
 }
 
@@ -27,25 +28,24 @@ export default function Item(state = initialState, action) {
         item: action.payload.items
       }
     case actions.RANDOM_ITEM:
-      let itemValue
-      const result = state.items.sort(function (a, b) { return 0.5 - Math.random() })
+      let id = null, itemValue = ''
+      const result = state.items.sort((a, b) => 0.5 - Math.random())
 
       if (result.length > 0) {
+        id = result[0].id
         itemValue = result[0].nama
       }
       else itemValue = 'FINISH'
 
       return {
         ...state,
+        id,
         currentItem: itemValue,
       }
     case actions.REMOVE_ITEM:
-      let deleteItem = state.items
-      deleteItem.splice(deleteItem.findIndex(val => val.nama == action.value), 1)
-
       return {
         ...state,
-        items: deleteItem
+        items: state.items.filter(item => item.id !== action.id)
       }
     default:
       return state

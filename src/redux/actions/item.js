@@ -35,9 +35,9 @@ export const randomItem = () => {
   }
 }
 
-export const removeItem = (value) => {
+export const removeItem = (id) => {
   return {
     type: REMOVE_ITEM,
-    value
+    id
   }
 }
