@@ -10,7 +10,7 @@ import Space from '../../space/space'
 export default function CardCourse({ item, isBtnSpeak, onPress }) {
   return (
     <View style={styles.cardMain}>
-      <PoultrySvg width={210} height={200} />
+      {/* <PoultrySvg width={210} height={200} /> */}
 
       <Space valSpace={20} />
       <Text style={[styles.textJapan, { fontSize: 19 }]}>{item}</Text>

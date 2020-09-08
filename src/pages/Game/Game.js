@@ -15,15 +15,46 @@ export default function Game({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
-  const [soal, setSoal] = useState('')
+  let soal
 
 
   const dispatch = useDispatch()
-  const { id, items, item } = useSelector((state) => ({
-    id: state.itemStore.id,
-    items: state.itemStore.items,
-    item: state.itemStore.currentItem
-  }))
+  const { id, items, item } = useSelector((state) => {
+    soal = state.itemStore.currentItem
+    return ({
+      id: state.itemStore.id,
+      items: state.itemStore.items,
+      item: state.itemStore.currentItem,
+    })
+  })
+
+  // const { id, items, item } = useSelector((state) => {
+  //   let id
+  //   let itemValue
+  //   // let results = state.itemStore.items.sort((a, b) => 0.5 - Math.random())
+  //   console.log(state.itemStore.items.length)
+  //   const random = Math.floor(Math.random() * state.itemStore.items.length)
+
+  //   // if (results.length > 0) {
+  //   //   id = results[0].id
+  //   //   itemValue = results[0].japanes
+  //   // }
+  //   // else {
+  //   //   itemValue = 'FINISH'
+  //   // }
+
+  //   return {
+  //     id: id,
+  //     items: state.itemStore.items,
+  //     item: state.itemStore.items[random].japanes
+  //   }
+
+  //   // return {
+  //   //   id: state.itemStore.items[0].id,
+  //   //   items: state.itemStore.items,
+  //   //   item: state.itemStore.items[0].japanes
+  //   // }
+  // })
 
   // ConfigBackHandler(navigation)
 
@@ -52,15 +83,15 @@ export default function Game({ navigation }) {
   }
 
   const onSpeechStart = (e) => {
-    console.log('onSpeechStart: ', e);
+    console.log('onSpeechStart: ', toRomaji(item));
   };
 
   const onSpeechEnd = (e) => {
-    console.log('onSpeechEnd: ', e);
+    console.log('onSpeechEnd: ', toRomaji(item));
   };
 
   const onSpeechError = (e) => {
-    console.log('onSpeechError: ', e);
+    console.log('onSpeechError: ', toRomaji(soal));
     toggleModal(true)
     setIsBtnSpeak(false)
     setIsQuestion(false)
@@ -160,21 +191,16 @@ export default function Game({ navigation }) {
       console.log('SELESAI')
       setIsFinish(true)
     } else {
-      dispatch(removeItem(items.id))
+      dispatch(removeItem(id))
       setTimeout(() => {
-        navigation.push('Game')
+        navigation.replace('Game')
       }, 1000)
     }
   }
 
-  const onPressRandom = () => {
-    if (items.length == 1) {
-      console.log('SELESAI')
-      setIsFinish(true)
-    } else {
-      dispatch(removeItem(id))
-      navigation.push('Game')
-    }
+  const tesReducer = () => {
+    console.log('TES REDUCER')
+    console.log(toRomaji(item))
   }
 
   return (
@@ -201,6 +227,10 @@ export default function Game({ navigation }) {
           style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.buttonRed : colors.buttonGreen }]}
           onPress={startRecord}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={tesReducer}>
+          <Text>TES REDUCER</Text>
         </TouchableOpacity>
 
       </ScrollView>

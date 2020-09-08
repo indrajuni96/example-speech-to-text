@@ -56,7 +56,7 @@ export default function ListLearning({ navigation }) {
 
           <Button
             title="Example Game Random"
-            onPress={() => navigation.replace('Game')} />
+            onPress={() => navigation.navigate('Game')} />
         </View>
       </View>
     </View>
