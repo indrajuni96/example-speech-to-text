@@ -15,12 +15,12 @@ export default function Game({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isBtnSpeak, setIsBtnSpeak] = useState(false)
   const [isQuestion, setIsQuestion] = useState(false)
-  let soal
+  let itemName
 
 
   const dispatch = useDispatch()
   const { id, items, item } = useSelector((state) => {
-    soal = state.itemStore.currentItem
+    itemName = state.itemStore.currentItem
     return ({
       id: state.itemStore.id,
       items: state.itemStore.items,
@@ -69,7 +69,7 @@ export default function Game({ navigation }) {
 
     return () => {
       console.log('EXAMPLE WILL UN MOUNT')
-      Voice.destroy().then(Voice.removeAllListeners)
+      Voice.destroy().then(Voice.removeAllListeners())
     }
   }, [])
 
@@ -83,15 +83,15 @@ export default function Game({ navigation }) {
   }
 
   const onSpeechStart = (e) => {
-    console.log('onSpeechStart: ', toRomaji(item));
+    console.log('onSpeechStart: ', toRomaji(itemName));
   };
 
   const onSpeechEnd = (e) => {
-    console.log('onSpeechEnd: ', toRomaji(item));
+    console.log('onSpeechEnd: ', toRomaji(itemName));
   };
 
   const onSpeechError = (e) => {
-    console.log('onSpeechError: ', toRomaji(soal));
+    console.log('onSpeechError: ', toRomaji(itemName));
     toggleModal(true)
     setIsBtnSpeak(false)
     setIsQuestion(false)
@@ -99,9 +99,9 @@ export default function Game({ navigation }) {
 
   const onSpeechResults = (e) => {
     // console.log('onSpeechResults: ', e.value);
-    console.log('on speech result :', toRomaji(item))
+    console.log('on speech result  ok:', toRomaji(itemName))
     // split string to array
-    let questionArray = item.split(' ')
+    let questionArray = itemName.split(' ')
     // console.log(questionArray)
 
     // japanes to romaji

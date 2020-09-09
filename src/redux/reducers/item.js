@@ -24,8 +24,8 @@ export default function Item(state = initialState, action) {
       // else itemValue = 'FINISH'
 
       const randomIndex = Math.floor(Math.random() * state.items.length)
-      console.log('LENGTH : ', state.items.length)
-      console.log(state.items[randomIndex].japanes)
+      // console.log('LENGTH : ', state.items.length)
+      // console.log(state.items[randomIndex].japanes)
 
       return {
         ...state,
