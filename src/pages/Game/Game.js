@@ -17,7 +17,6 @@ export default function Game({ navigation }) {
   const [isQuestion, setIsQuestion] = useState(false)
   let itemName
 
-
   const dispatch = useDispatch()
   const { id, items, item } = useSelector((state) => {
     itemName = state.itemStore.currentItem
@@ -28,35 +27,7 @@ export default function Game({ navigation }) {
     })
   })
 
-  // const { id, items, item } = useSelector((state) => {
-  //   let id
-  //   let itemValue
-  //   // let results = state.itemStore.items.sort((a, b) => 0.5 - Math.random())
-  //   console.log(state.itemStore.items.length)
-  //   const random = Math.floor(Math.random() * state.itemStore.items.length)
-
-  //   // if (results.length > 0) {
-  //   //   id = results[0].id
-  //   //   itemValue = results[0].japanes
-  //   // }
-  //   // else {
-  //   //   itemValue = 'FINISH'
-  //   // }
-
-  //   return {
-  //     id: id,
-  //     items: state.itemStore.items,
-  //     item: state.itemStore.items[random].japanes
-  //   }
-
-  //   // return {
-  //   //   id: state.itemStore.items[0].id,
-  //   //   items: state.itemStore.items,
-  //   //   item: state.itemStore.items[0].japanes
-  //   // }
-  // })
-
-  // ConfigBackHandler(navigation)
+  ConfigBackHandler(navigation)
 
   useEffect(() => {
     dispatch(randomItem())
@@ -190,17 +161,15 @@ export default function Game({ navigation }) {
     if (items.length == 1) {
       console.log('SELESAI')
       setIsFinish(true)
+      setTimeout(() => {
+        navigation.replace('ListLearning')
+      }, 1000)
     } else {
       dispatch(removeItem(id))
       setTimeout(() => {
         navigation.replace('Game')
       }, 1000)
     }
-  }
-
-  const tesReducer = () => {
-    console.log('TES REDUCER')
-    console.log(toRomaji(item))
   }
 
   return (
@@ -228,11 +197,6 @@ export default function Game({ navigation }) {
           onPress={startRecord}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={tesReducer}>
-          <Text>TES REDUCER</Text>
-        </TouchableOpacity>
-
       </ScrollView>
     </View >
   )
