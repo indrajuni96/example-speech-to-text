@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackHandler, ToastAndroid } from 'react-native'
+import { BackHandler, ToastAndroid, Alert } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 
 export default function ConfigBackHandler(navigation) {
@@ -10,9 +10,21 @@ export default function ConfigBackHandler(navigation) {
 
       let countBack = 0
       const backAction = () => {
-
         if (navigation.dangerouslyGetState().routes[0].name === "Game") {
-          ToastAndroid.show("Game akan berakhir jika keluar", ToastAndroid.SHORT)
+          // ToastAndroid.show("Game akan berakhir jika keluar", ToastAndroid.SHORT)
+          Alert.alert("Hold on!", "Are you sure you want to go back?", [
+            {
+              text: "Cancel",
+              onPress: () => null,
+              style: "cancel"
+            },
+            {
+              text: "YES", onPress: () =>
+                setTimeout(() => {
+                  navigation.replace('ListLearning')
+                }, 1000)
+            }
+          ])
         } else {
           // console.log(navigation.isFocused())
           if (navigation.isFocused()) {
@@ -31,6 +43,7 @@ export default function ConfigBackHandler(navigation) {
 
           }
         }
+
         return true
       }
 
