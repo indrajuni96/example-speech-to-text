@@ -11,7 +11,7 @@ import { colors, ConfigBackHandler } from '../../utils';
 
 export default function ListLearning({ navigation }) {
   const dispatch = useDispatch()
-  const items = useSelector((state) => state.itemStore)
+  const items = useSelector((state) => state.itemStore.items)
 
   ConfigBackHandler(navigation)
 
@@ -45,7 +45,7 @@ export default function ListLearning({ navigation }) {
         <Space valSpace={10} />
         <View style={styles.headerMain}>
           <FlatList
-            data={items.item}
+            data={items}
             renderItem={({ item }) => (
               <CardLearning textJapan={item.japanes} onPress={() => onMoveCard(item.japanes)} />
             )}

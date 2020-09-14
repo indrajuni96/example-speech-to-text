@@ -12,14 +12,14 @@ export default function ConfigBackHandler(navigation) {
       const backAction = () => {
         if (navigation.dangerouslyGetState().routes[0].name === "Game") {
           // ToastAndroid.show("Game akan berakhir jika keluar", ToastAndroid.SHORT)
-          Alert.alert("Hold on!", "Are you sure you want to go back?", [
+          Alert.alert("", "Game akan berakhir jika keluar!!!", [
             {
-              text: "Cancel",
+              text: "BATAL",
               onPress: () => null,
               style: "cancel"
             },
             {
-              text: "YES", onPress: () =>
+              text: "KELUAR", onPress: () =>
                 setTimeout(() => {
                   navigation.replace('ListLearning')
                 }, 1000)
