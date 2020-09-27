@@ -2,7 +2,7 @@ import React from 'react'
 import { BackHandler, ToastAndroid, Alert } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 
-export default function ConfigBackHandler(navigation) {
+export const ConfigBackHandler = (navigation) => {
   useFocusEffect(
     React.useCallback(() => {
       // console.log('SCREEN FOCUSED')

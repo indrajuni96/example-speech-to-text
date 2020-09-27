@@ -1,4 +1,3 @@
-import { colors } from './colors/colors'
-import ConfigBackHandler from './BackHandler'
-
-export { colors, ConfigBackHandler }
+export * from './colors/colors'
+export * from './useForm/UseForm'
+export * from './BackHandler'

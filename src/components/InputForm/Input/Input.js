@@ -3,11 +3,15 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 
 import { colors } from '../../../utils'
 
-export default function Input({ label }) {
+export default function Input({ label, value, onChangeText, secureTextEntry }) {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry} />
     </View>
   )
 }
