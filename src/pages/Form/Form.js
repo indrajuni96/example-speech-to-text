@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
+import { Text, TouchableOpacity, View, Button, ScrollView } from 'react-native'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
 
+import styles from './styles'
 import { colors, ConfigBackHandler, useForm } from '../../utils'
 import { Input, Space } from '../../components'
-import { ScrollView } from 'react-native-gesture-handler'
 
 export default function Form({ navigation }) {
   ConfigBackHandler(navigation)
@@ -73,32 +73,3 @@ export default function Form({ navigation }) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  wrapperHeader: {
-    height: 65,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textHeader: {
-    fontSize: 17,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
-  wrapperText: {
-    flex: 1,
-    alignItems: 'center',
-    marginRight: 30
-  },
-  wrapperMain: {
-    flex: 1,
-  },
-  scrollView: {
-    paddingHorizontal: 15
-  }
-})

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, View, Button } from 'react-native';
+import { FlatList, StatusBar, Text, View, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconFeather from 'react-native-vector-icons/dist/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 
+import styles from './styles'
 import { CardLearning, Space } from '../../components';
 import { getItems } from '../../redux/actions/item';
 import { colors, ConfigBackHandler } from '../../utils';
-
 
 export default function ListLearning({ navigation }) {
   const dispatch = useDispatch()
@@ -62,33 +62,3 @@ export default function ListLearning({ navigation }) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  wrapperHeader: {
-    height: 65,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textHeader: {
-    fontSize: 17,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
-  wrapperMain: {
-    flex: 1,
-    // paddingHorizontal: 15
-  },
-  headerMain: {
-    paddingHorizontal: 15
-  },
-  textCourse: {
-    fontSize: 14,
-    fontFamily: 'Roboto-Regular',
-    color: colors.textDefault,
-  },
-})

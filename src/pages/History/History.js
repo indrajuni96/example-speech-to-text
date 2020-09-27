@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
 
+import styles from './styles'
 import { colors, ConfigBackHandler } from '../../utils'
-
 
 export default function History({ navigation }) {
   ConfigBackHandler(navigation)
@@ -23,26 +23,3 @@ export default function History({ navigation }) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  },
-  wrapperHeader: {
-    height: 65,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textHeader: {
-    fontSize: 17,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
-  wrapperText: {
-    flex: 1,
-    alignItems: 'center',
-    marginRight: 30
-  }
-})
