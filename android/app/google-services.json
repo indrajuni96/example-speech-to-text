@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "136223031085",
+    "firebase_url": "https://example-speech-be026.firebaseio.com",
+    "project_id": "example-speech-be026",
+    "storage_bucket": "example-speech-be026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136223031085:android:0c87dc66d3e05332751da4",
+        "android_client_info": {
+          "package_name": "com.speech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136223031085-thuor580c9i8h1nf4erorlj7bvjei7rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByNVYoZSbkjgJ9rn7OypNLCyGMUVCt5o8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136223031085-thuor580c9i8h1nf4erorlj7bvjei7rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

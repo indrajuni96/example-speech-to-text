@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Text, TouchableOpacity, View, Button, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, View, Button, ScrollView, Keyboard } from 'react-native'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
+import auth from '@react-native-firebase/auth'
 
 import styles from './styles'
 import { colors, ConfigBackHandler, useForm } from '../../utils'
@@ -17,8 +18,25 @@ export default function Form({ navigation }) {
   })
 
   const onContinue = () => {
+    Keyboard.dismiss()
     console.log('on continue')
-    console.log(form)
+    auth()
+      .createUserWithEmailAndPassword(form.email, form.password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        setForm('reset')
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
   }
 
   return (
@@ -34,7 +52,10 @@ export default function Form({ navigation }) {
       </View>
 
       <View style={styles.wrapperMain}>
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          style={styles.scrollView}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
           <Input
             label="Nama Lengkap"
             value={form.namaLengkap}
