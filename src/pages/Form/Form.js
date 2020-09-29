@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Text, TouchableOpacity, View, Button, ScrollView, Keyboard } from 'react-native'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
 import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles'
@@ -25,9 +26,18 @@ export default function Form({ navigation }) {
 
     auth()
       .createUserWithEmailAndPassword(form.email, form.password)
-      .then(() => {
-        setForm('reset')
+      .then((result) => {
         setIsLoading(false)
+        setForm('reset')
+
+        firestore().collection(`users`)
+          .doc(result.user.uid)
+          .set({
+            namaLengkap: form.namaLengkap,
+            alamat: form.alamat,
+            email: form.email
+          })
+
         showMessage({
           message: 'User account created & signed in!',
           type: "default",
