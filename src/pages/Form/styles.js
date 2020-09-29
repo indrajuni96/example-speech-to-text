@@ -27,6 +27,17 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     paddingHorizontal: 15
+  },
+  button: {
+    backgroundColor: colors.textDefault,
+    borderRadius: 10,
+    paddingVertical: 8,
+  },
+  textButton: {
+    textAlign: 'center',
+    fontFamily: 'Roboto-Bold',
+    color: 'white',
+    fontSize: 20,
   }
 })
 
