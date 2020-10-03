@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Text, TouchableOpacity, View, Button, ScrollView, Keyboard } from 'react-native'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
+import { useDispatch, useSelector } from 'react-redux'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import { showMessage } from 'react-native-flash-message'
@@ -8,35 +9,26 @@ import { showMessage } from 'react-native-flash-message'
 import styles from './styles'
 import { colors, ConfigBackHandler, useForm } from '../../utils'
 import { Input, Space, Loading } from '../../components'
+import { register } from '../../redux/actions/auth'
 
 export default function Form({ navigation }) {
   ConfigBackHandler(navigation)
 
-  const [isLoading, setIsLoading] = useState(false)
   const [form, setForm] = useForm({
     namaLengkap: '',
     alamat: '',
     email: '',
     password: ''
   })
+  const isLoading = useSelector((state) => state.authStore.isLoading)
+  const dispatch = useDispatch()
 
   const onContinue = () => {
     Keyboard.dismiss()
-    setIsLoading(true)
 
-    auth()
-      .createUserWithEmailAndPassword(form.email, form.password)
-      .then((result) => {
-        setIsLoading(false)
+    dispatch(register(form))
+      .then(() => {
         setForm('reset')
-
-        firestore().collection(`users`)
-          .doc(result.user.uid)
-          .set({
-            namaLengkap: form.namaLengkap,
-            alamat: form.alamat,
-            email: form.email
-          })
 
         showMessage({
           message: 'User account created & signed in!',
@@ -44,13 +36,12 @@ export default function Form({ navigation }) {
           backgroundColor: colors.buttonRed,
         })
       })
-      .catch(error => {
+      .catch((error) => {
         let errorMessage = 'Terjadi kesalahan!!!'
 
         if (error.code === 'auth/email-already-in-use') errorMessage = 'That email address is already in use!'
         if (error.code === 'auth/invalid-email') errorMessage = 'That email address is invalid!'
 
-        setIsLoading(false)
         showMessage({
           message: errorMessage,
           type: "default",
@@ -103,11 +94,6 @@ export default function Form({ navigation }) {
               value={form.password}
               onChangeText={value => setForm('password', value)} />
             <Space valSpace={24} />
-
-            {/* <Button              
-              title="Continue"
-              onPress={onContinue}
-            /> */}
 
             <TouchableOpacity
               style={styles.button}
