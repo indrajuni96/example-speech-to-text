@@ -16,42 +16,35 @@ import { register } from '../../redux/actions/auth'
 export default function Form({ navigation }) {
   ConfigBackHandler(navigation)
 
-  const [form, setForm] = useForm({
-    namaLengkap: '',
-    alamat: '',
-    email: '',
-    password: ''
-  })
   const isLoading = useSelector((state) => state.authStore.isLoading)
   const textErrorMessage = 'Wajib Diisi'
   const dispatch = useDispatch()
 
-  const onContinue = (form) => {
-    console.log(form)
+  const onSubmit = (values, { resetForm }) => {
     Keyboard.dismiss()
 
-    // dispatch(register(form))
-    //   .then(() => {
-    //     setForm('reset')
+    dispatch(register(values))
+      .then(() => {
+        resetForm()
 
-    //     showMessage({
-    //       message: 'User account created & signed in!',
-    //       type: "default",
-    //       backgroundColor: colors.buttonRed,
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     let errorMessage = 'Terjadi kesalahan!!!'
+        showMessage({
+          message: 'User account created & signed in!',
+          type: "default",
+          backgroundColor: colors.buttonRed,
+        })
+      })
+      .catch((error) => {
+        let errorMessage = 'Terjadi kesalahan!!!'
 
-    //     if (error.code === 'auth/email-already-in-use') errorMessage = 'That email address is already in use!'
-    //     if (error.code === 'auth/invalid-email') errorMessage = 'That email address is invalid!'
+        if (error.code === 'auth/email-already-in-use') errorMessage = 'That email address is already in use!'
+        if (error.code === 'auth/invalid-email') errorMessage = 'That email address is invalid!'
 
-    //     showMessage({
-    //       message: errorMessage,
-    //       type: "default",
-    //       backgroundColor: colors.textDefault,
-    //     })
-    //   })
+        showMessage({
+          message: errorMessage,
+          type: "default",
+          backgroundColor: colors.textDefault,
+        })
+      })
   }
 
   return (
@@ -81,9 +74,10 @@ export default function Form({ navigation }) {
               email: Yup.string().required(textErrorMessage).trim(textErrorMessage).email('format harus email'),
               password: Yup.string().required(textErrorMessage).trim(textErrorMessage).min(6, 'minimal 6 karakter')
             })}
-            onSubmit={(values) => {
-              onContinue(values)
-            }}
+            // onSubmit={(values,{resetForm}) => {
+            //   onContinue(values,resetForm)
+            // }}
+            onSubmit={onSubmit}
           >
             {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
               <ScrollView
