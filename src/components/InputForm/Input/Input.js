@@ -3,13 +3,14 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 
 import { colors } from '../../../utils'
 
-export default function Input({ label, value, onChangeText, secureTextEntry }) {
+export default function Input({ label, value, onChangeText, onBlur, secureTextEntry, errors, touched }) {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, { borderColor: errors && touched ? colors.buttonGreen : colors.border }]}
         value={value}
+        onBlur={onBlur}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry} />
     </View>
@@ -19,7 +20,6 @@ export default function Input({ label, value, onChangeText, secureTextEntry }) {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: colors.border,
     borderRadius: 10,
     padding: 12
   },

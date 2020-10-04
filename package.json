@@ -18,6 +18,7 @@
     "@react-navigation/drawer": "^5.9.0",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "formik": "^2.1.7",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-flash-message": "^0.1.16",
@@ -35,7 +36,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.2",
     "transliteration": "^2.1.11",
-    "wanakana": "^4.0.2"
+    "wanakana": "^4.0.2",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
