@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-import { FlatList, StatusBar, Text, View, Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import IconFeather from 'react-native-vector-icons/dist/Feather';
+import { Button, FlatList, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './styles'
-import { CardLearning, Space } from '../../components';
+import { CardLearning, Header, Space } from '../../components';
 import { getItems } from '../../redux/actions/item';
-import { colors, ConfigBackHandler } from '../../utils';
+import { ConfigBackHandler } from '../../utils';
+import styles from './styles';
 
 export default function ListLearning({ navigation }) {
   const dispatch = useDispatch()
@@ -27,13 +25,9 @@ export default function ListLearning({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
-
-      <View style={styles.wrapperHeader}>
-        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-          <IconFeather name="bar-chart-2" size={30} color={colors.textDefault} style={{ transform: [{ rotate: '90deg' }] }} />
-        </TouchableOpacity>
-      </View>
+      <Header
+        onPress={() => navigation.toggleDrawer()}
+      />
 
       <View style={styles.wrapperMain}>
         <Space valSpace={4} />

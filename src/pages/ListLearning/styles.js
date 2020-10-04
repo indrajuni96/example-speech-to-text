@@ -6,17 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  wrapperHeader: {
-    height: 65,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textHeader: {
-    fontSize: 17,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
   wrapperMain: {
     flex: 1,
     // paddingHorizontal: 15

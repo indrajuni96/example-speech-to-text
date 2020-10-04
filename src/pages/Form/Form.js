@@ -1,17 +1,14 @@
-import React, { useState } from 'react'
-import { Text, TouchableOpacity, View, Button, ScrollView, Keyboard } from 'react-native'
-import IconFeather from 'react-native-vector-icons/dist/Feather'
-import { useDispatch, useSelector } from 'react-redux'
-import auth from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
-import { showMessage } from 'react-native-flash-message'
 import { Formik } from 'formik'
+import React from 'react'
+import { Keyboard, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { showMessage } from 'react-native-flash-message'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 
-import styles from './styles'
-import { colors, ConfigBackHandler, useForm } from '../../utils'
-import { Input, Space, Loading, ErrorMessage } from '../../components'
+import { ErrorMessage, Header, Input, Loading, Space } from '../../components'
 import { register } from '../../redux/actions/auth'
+import { colors, ConfigBackHandler } from '../../utils'
+import styles from './styles'
 
 export default function Form({ navigation }) {
   ConfigBackHandler(navigation)
@@ -50,15 +47,10 @@ export default function Form({ navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.wrapperHeader}>
-          <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-            <IconFeather name="bar-chart-2" size={30} color={colors.textDefault} style={{ transform: [{ rotate: '90deg' }] }} />
-          </TouchableOpacity>
-
-          <View style={styles.wrapperText}>
-            <Text style={styles.textHeader}>Form Example</Text>
-          </View>
-        </View>
+        <Header
+          onPress={() => navigation.toggleDrawer()}
+          title="Form Example"
+        />
 
         <View style={styles.wrapperMain}>
           <Formik
@@ -74,9 +66,6 @@ export default function Form({ navigation }) {
               email: Yup.string().required(textErrorMessage).trim(textErrorMessage).email('format harus email'),
               password: Yup.string().required(textErrorMessage).trim(textErrorMessage).min(6, 'minimal 6 karakter')
             })}
-            // onSubmit={(values,{resetForm}) => {
-            //   onContinue(values,resetForm)
-            // }}
             onSubmit={onSubmit}
           >
             {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
