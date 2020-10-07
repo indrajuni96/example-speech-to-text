@@ -4,13 +4,13 @@ import firestore from '@react-native-firebase/firestore'
 import * as types from './ActionTypes'
 
 export const register = (data) => ({
-  type: types.REGISTER_USER,
+  type: types.AUTH_USER,
   payload: new Promise(async (resolve, reject) => {
     try {
-      const result = await auth().createUserWithEmailAndPassword(data.email, data.password)
+      const result = await auth().createUserWithEmailAndPassword(data.email.toLowerCase(), data.password)
       delete data.password
 
-      await firestore().collection(`users`)
+      await firestore().collection('users')
         .doc(result.user.uid)
         .set({
           namaLengkap: data.namaLengkap,
@@ -19,6 +19,21 @@ export const register = (data) => ({
         })
 
       resolve({ id: result.user.uid, ...data })
+    } catch (error) {
+      reject(error)
+    }
+  })
+})
+
+export const login = (data) => ({
+  type: types.AUTH_USER,
+  payload: new Promise(async (resolve, reject) => {
+    try {
+      const dataLogin = await auth().signInWithEmailAndPassword(data.email.toLowerCase(), data.password)
+
+      const dataUser = await firestore().collection('users').doc(dataLogin.user.uid).get()
+
+      resolve(dataUser._data)
     } catch (error) {
       reject(error)
     }

@@ -2,23 +2,24 @@ import * as types from '../actions/ActionTypes'
 
 const initialState = {
   user: {},
-  isLoading: false
+  isLoading: false,
+  // loggedIn:false
 }
 
 export default function Auth(state = initialState, action) {
   switch (action.type) {
-    case `${types.REGISTER_USER}_PENDING`:
+    case `${types.AUTH_USER}_PENDING`:
       return {
         ...state,
         isLoading: true
       }
-    case `${types.REGISTER_USER}_FULFILLED`:
+    case `${types.AUTH_USER}_FULFILLED`:
       return {
         ...state,
-        user: action.payload,
-        isLoading: false
+        isLoading: false,
+        user: action.payload
       }
-    case `${types.REGISTER_USER}_REJECTED`:
+    case `${types.AUTH_USER}_REJECTED`:
       return {
         ...state,
         isLoading: false

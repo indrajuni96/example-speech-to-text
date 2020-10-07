@@ -1,17 +1,42 @@
 import React from 'react'
 import { ScrollView, StatusBar, Text, View, TouchableWithoutFeedback } from 'react-native'
+import { showMessage } from 'react-native-flash-message'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import { colors, ConfigBackHandler } from '../../utils'
 import { Input, Loading, Space, ErrorMessage } from '../../components'
+import { login } from '../../redux/actions/auth'
 import styles from './styles'
 
-export default function Register() {
+export default function Register({ navigation }) {
+  ConfigBackHandler(navigation)
   const textErrorMessage = 'Wajib Diisi'
+  const isLoading = useSelector((state) => state.authStore.isLoading)
+  const dispatch = useDispatch()
 
-  const onSubmit = (values) => {
-    console.log(values)
+  const onSubmit = (values, { resetForm }) => {
+    dispatch(login(values))
+      .then(() => {
+        resetForm()
+        showMessage({
+          message: 'User account Login!',
+          type: "default",
+          backgroundColor: colors.buttonRed,
+        })
+      })
+      .catch((error) => {
+        let errorMessage = 'Terjadi kesalahan!!!'
+        console.log(error.code)
+
+        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') errorMessage = 'Email atau Password Anda salah'
+        showMessage({
+          message: errorMessage,
+          type: "default",
+          backgroundColor: colors.textDefault,
+        })
+      })
   }
 
   return (
@@ -40,6 +65,7 @@ export default function Register() {
             {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => {
               const disable = values.email && values.password ? false : true
               const opacity = values.email && values.password ? 1 : 0.3
+
               return (
                 <>
                   <Input
@@ -79,8 +105,9 @@ export default function Register() {
             }
           </Formik>
         </View>
-
       </View>
+
+      { isLoading && <Loading />}
     </>
   )
 }
