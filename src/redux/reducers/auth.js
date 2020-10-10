@@ -2,6 +2,7 @@ import * as types from '../actions/ActionTypes'
 
 const initialState = {
   user: {},
+  userUID: null,
   isLoading: false,
   // loggedIn:false
 }
@@ -17,7 +18,8 @@ export default function Auth(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        user: action.payload
+        user: action.payload.data,
+        userUID: action.payload.userUID
       }
     case `${types.AUTH_USER}_REJECTED`:
       return {

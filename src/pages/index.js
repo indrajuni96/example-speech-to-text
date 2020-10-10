@@ -4,6 +4,6 @@ import CustomDrawerContent from './Drawer/Drawer'
 import History from './History/History'
 import Game from './Game/Game'
 import FormExample from './Form/Form'
-import Register from './Register/Register'
+import Login from './Login/Login'
 
-export { Example, ListLearning, CustomDrawerContent, History, Game, FormExample, Register }
+export { Example, ListLearning, CustomDrawerContent, History, Game, FormExample, Login }

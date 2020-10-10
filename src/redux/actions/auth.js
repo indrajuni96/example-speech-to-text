@@ -33,7 +33,7 @@ export const login = (data) => ({
 
       const dataUser = await firestore().collection('users').doc(dataLogin.user.uid).get()
 
-      resolve(dataUser._data)
+      resolve({ data: dataUser._data, userUID: dataLogin.user.uid })
     } catch (error) {
       reject(error)
     }

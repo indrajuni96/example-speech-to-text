@@ -18,13 +18,14 @@ export default function Register({ navigation }) {
 
   const onSubmit = (values, { resetForm }) => {
     dispatch(login(values))
-      .then(() => {
-        resetForm()
-        showMessage({
-          message: 'User account Login!',
-          type: "default",
-          backgroundColor: colors.buttonRed,
-        })
+      .then((result) => {
+        navigation.replace("App")
+        // resetForm()
+        // showMessage({
+        //   message: 'User account Login!',
+        //   type: "default",
+        //   backgroundColor: colors.buttonRed,
+        // })
       })
       .catch((error) => {
         let errorMessage = 'Terjadi kesalahan!!!'

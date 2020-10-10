@@ -1,11 +1,14 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import styles from './styles'
 import { BoySvg } from '../../assets'
 import { Space, CardDrawerMenu } from '../../components'
 
 export default function Drawer({ navigation }) {
+  const { user, isLoading } = useSelector((state) => state.authStore)
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapperMain}>
@@ -15,7 +18,7 @@ export default function Drawer({ navigation }) {
         </View>
 
         <Space valSpace={10} />
-        <Text style={styles.textName}>Indra Juniyanto</Text>
+        <Text style={styles.textName}>{user.namaLengkap}</Text>
 
         <Space valSpace={20} />
         <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Home")} />
