@@ -1,6 +1,6 @@
 import AuthStackScreen from './AuthStackScreen'
-import HomeStackScreen from './HomeStackScreen'
+import DashboardStackScreen from './DashboardStackScreen'
 import HistoryStackScreen from './HistoryStackScreen'
 import FormStackScreen from './FormStackScreen'
 
-export { AuthStackScreen, HomeStackScreen, HistoryStackScreen, FormStackScreen }
+export { AuthStackScreen, DashboardStackScreen, HistoryStackScreen, FormStackScreen }

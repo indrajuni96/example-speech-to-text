@@ -21,7 +21,7 @@ export default function Drawer({ navigation }) {
         <Text style={styles.textName}>{user.namaLengkap}</Text>
 
         <Space valSpace={20} />
-        <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Home")} />
+        <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Dashboard")} />
 
         <CardDrawerMenu nameNemu="Form Example" onPress={() => navigation.navigate("Form")} />
 
