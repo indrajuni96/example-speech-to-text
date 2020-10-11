@@ -31,7 +31,7 @@ export default function Drawer({ navigation }) {
       </View>
 
       <View style={styles.wrapperVersion}>
-        <Text style={styles.textVersion}>Version 0.1.2 Beta</Text>
+        <Text style={styles.textVersion}>Version 0.2.0 Beta</Text>
       </View>
     </View>
   )
