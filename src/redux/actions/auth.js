@@ -39,3 +39,16 @@ export const login = (data) => ({
     }
   })
 })
+
+export const logout = () => ({
+  type: types.LOGOUT_USER,
+  payload: new Promise(async (resolve, reject) => {
+    try {
+      await auth().signOut()
+      resolve({ data: {}, userUID: null })
+    }
+    catch (error) {
+      reject(error)
+    }
+  })
+})

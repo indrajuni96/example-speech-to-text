@@ -20,12 +20,6 @@ export default function Register({ navigation }) {
     dispatch(login(values))
       .then((result) => {
         navigation.replace("App")
-        // resetForm()
-        // showMessage({
-        //   message: 'User account Login!',
-        //   type: "default",
-        //   backgroundColor: colors.buttonRed,
-        // })
       })
       .catch((error) => {
         let errorMessage = 'Terjadi kesalahan!!!'

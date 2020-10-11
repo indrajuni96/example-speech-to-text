@@ -1,13 +1,26 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './styles'
 import { BoySvg } from '../../assets'
 import { Space, CardDrawerMenu } from '../../components'
+import { logout } from '../../redux/actions/auth'
 
 export default function Drawer({ navigation }) {
   const { user, isLoading } = useSelector((state) => state.authStore)
+  const dispatch = useDispatch()
+
+  const onLogout = () => {
+    dispatch(logout())
+      .then(() => {
+        navigation.replace("Auth")
+      })
+      .catch((error) => {
+        console.log(error)
+        // showMessage error blm di buat
+      })
+  }
 
   return (
     <View style={styles.container}>
@@ -28,6 +41,8 @@ export default function Drawer({ navigation }) {
         <CardDrawerMenu nameNemu="History" onPress={() => navigation.navigate("History")} />
 
         <CardDrawerMenu nameNemu="Profile" onPress={() => { }} />
+
+        <CardDrawerMenu nameNemu="Logout" onPress={onLogout} />
       </View>
 
       <View style={styles.wrapperVersion}>
