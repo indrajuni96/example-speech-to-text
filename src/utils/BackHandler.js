@@ -21,7 +21,7 @@ export const ConfigBackHandler = (navigation) => {
             {
               text: "KELUAR", onPress: () =>
                 setTimeout(() => {
-                  navigation.replace('ListLearning')
+                  navigation.replace('Dashboard')
                 }, 1000)
             }
           ])

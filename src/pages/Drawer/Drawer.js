@@ -40,7 +40,7 @@ export default function Drawer({ navigation }) {
 
         <CardDrawerMenu nameNemu="History" onPress={() => navigation.navigate("History")} />
 
-        <CardDrawerMenu nameNemu="Profile" onPress={() => { }} />
+        <CardDrawerMenu nameNemu="Profile" onPress={() => navigation.navigate("Profile")} />
 
         <CardDrawerMenu nameNemu="Logout" onPress={onLogout} />
       </View>

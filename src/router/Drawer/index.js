@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import { optionsDrawer } from './config'
 import { CustomDrawerContent } from '../../pages'
-import { DashboardStackScreen, HistoryStackScreen, FormStackScreen } from '../Stack'
+import { DashboardStackScreen, HistoryStackScreen, FormStackScreen, ProfileStackScreen } from '../Stack'
 
 const Drawer = createDrawerNavigator()
 
@@ -27,6 +27,10 @@ export const DrawerScreen = () => {
       <Drawer.Screen
         name="Form"
         component={FormStackScreen}
+        options={(navigation) => optionsDrawer(navigation)} />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileStackScreen}
         options={(navigation) => optionsDrawer(navigation)} />
     </Drawer.Navigator>
   )

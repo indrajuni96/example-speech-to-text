@@ -26,6 +26,9 @@ export default function Register({ navigation }) {
         console.log(error.code)
 
         if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') errorMessage = 'Email atau Password Anda salah'
+
+        if (error.code === 'auth/network-request-failed') errorMessage = 'Tidak ada koneksi internet'
+
         showMessage({
           message: errorMessage,
           type: "default",
