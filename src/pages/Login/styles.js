@@ -4,7 +4,8 @@ import { colors } from '../../utils'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingHorizontal: 30
   },
   wrapperTitle: {
     alignItems: 'center'
@@ -21,10 +22,6 @@ const styles = StyleSheet.create({
   },
   wrapperMain: {
     flex: 1,
-    paddingHorizontal: 15,
-  },
-  scrollView: {
-    paddingHorizontal: 15,
   },
   button: {
     backgroundColor: colors.textDefault,
@@ -36,6 +33,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 20,
+  },
+  wrapperDaftar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  textBelum: {
+    fontSize: 14,
+    fontFamily: 'Roboto-Bold',
+    color: colors.textDefault,
+    opacity: 0.5
+  },
+  textDaftar: {
+    fontSize: 14,
+    fontFamily: 'Roboto-Bold',
+    color: colors.textDefault,
   }
 })
 

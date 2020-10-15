@@ -1,13 +1,13 @@
 import React from 'react'
-import { ScrollView, StatusBar, Text, View, TouchableWithoutFeedback } from 'react-native'
+import { ScrollView, StatusBar, Text, TouchableWithoutFeedback, View, Keyboard } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { colors, ConfigBackHandler } from '../../utils'
-import { Input, Loading, Space, ErrorMessage } from '../../components'
+import { ErrorMessage, Input, Loading, Space } from '../../components'
 import { login } from '../../redux/actions/auth'
+import { colors, ConfigBackHandler } from '../../utils'
 import styles from './styles'
 
 export default function Register({ navigation }) {
@@ -17,6 +17,7 @@ export default function Register({ navigation }) {
   const dispatch = useDispatch()
 
   const onSubmit = (values, { resetForm }) => {
+    Keyboard.dismiss()
     dispatch(login(values))
       .then((result) => {
         navigation.replace("App")
@@ -37,10 +38,21 @@ export default function Register({ navigation }) {
       })
   }
 
+  const onSubmitDaftar = () => {
+    console.log('Daftar')
+    showMessage({
+      message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke "089502165963 untuk membeli COFFE...',
+      type: "default",
+      backgroundColor: colors.textDefault,
+    })
+  }
+
   return (
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <View style={styles.container}>
+      <ScrollView style={styles.container}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
         <Space valSpace={50} />
         <View style={styles.wrapperTitle}>
           <Text style={styles.textLogin}>Login</Text>
@@ -103,7 +115,21 @@ export default function Register({ navigation }) {
             }
           </Formik>
         </View>
-      </View>
+
+        <Space valSpace={20} />
+        <View style={styles.wrapperDaftar}>
+          <Text style={styles.textBelum}>Belum punya akun?</Text>
+
+          <TouchableWithoutFeedback
+            onPress={onSubmitDaftar}>
+            <View>
+              <Text style={styles.textDaftar}>Daftar Disini</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+
+        <Space valSpace={50} />
+      </ScrollView>
 
       { isLoading && <Loading />}
     </>
