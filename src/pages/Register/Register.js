@@ -7,50 +7,29 @@ import * as Yup from 'yup'
 
 import { ErrorMessage, Input, Loading, Space } from '../../components'
 import { login } from '../../redux/actions/auth'
-import { colors, ConfigBackHandler } from '../../utils'
+import { colors, ConfigBackHandler, InputNumber } from '../../utils'
 import styles from './styles'
 
-export default function Login({ navigation }) {
+export default function Register({ navigation }) {
   ConfigBackHandler(navigation)
   const textErrorMessage = 'Wajib Diisi'
   const isLoading = useSelector((state) => state.authStore.isLoading)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('re render screen login')
+    console.log('re render screen register')
   }, [])
 
   const onSubmit = (values, { resetForm }) => {
     Keyboard.dismiss()
-    dispatch(login(values))
-      .then((result) => {
-        navigation.replace("App")
-      })
-      .catch((error) => {
-        let errorMessage = 'Terjadi kesalahan!!!'
-        console.log(error.code)
-
-        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') errorMessage = 'Email atau Password Anda salah'
-
-        if (error.code === 'auth/network-request-failed') errorMessage = 'Tidak ada koneksi internet'
-
-        showMessage({
-          message: errorMessage,
-          type: "default",
-          backgroundColor: colors.textDefault,
-        })
-      })
   }
 
-  const onSubmitDaftar = () => {
-    navigation.navigate('Register')
-
-    // console.log('Daftar')
-    // showMessage({
-    //   message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke "089502165963 untuk membeli COFFE...',
-    //   type: "default",
-    //   backgroundColor: colors.textDefault,
-    // })
+  const onSubmitMasuk = () => {
+    Keyboard.dismiss()
+    setTimeout(() => {
+      // navigation.navigate('Login')
+      navigation.goBack()
+    }, 1000)
   }
 
   return (
@@ -61,29 +40,58 @@ export default function Login({ navigation }) {
         showsVerticalScrollIndicator={false}>
         <Space valSpace={50} />
         <View style={styles.wrapperTitle}>
-          <Text style={styles.textLogin}>Login</Text>
-          <Text style={styles.textAccess}>Access account</Text>
+          <Text style={styles.textLogin}>Register</Text>
         </View>
         <Space valSpace={50} />
 
         <View style={styles.wrapperMain}>
           <Formik
             initialValues={{
+              nama: '',
+              nomor: '',
               email: '',
               password: ''
             }}
             validationSchema={Yup.object({
+              nama: Yup.string().required(textErrorMessage).trim(textErrorMessage),
+              nomor: Yup.string().required(textErrorMessage),
               email: Yup.string().required(textErrorMessage).trim(textErrorMessage).email('format harus email'),
               password: Yup.string().required(textErrorMessage).trim(textErrorMessage).min(6, 'minimal 6 karakter')
             })}
             onSubmit={onSubmit}
           >
-            {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => {
+            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, touched, errors, isSubmitting }) => {
               const disable = values.email && values.password ? false : true
               const opacity = values.email && values.password ? 1 : 0.3
 
               return (
                 <>
+                  <Input
+                    label="Nama"
+                    value={values.nama}
+                    errors={errors.nama}
+                    touched={touched.nama}
+                    onChangeText={handleChange('nama')}
+                    onBlur={handleBlur('nama')}
+                  />
+                  <ErrorMessage touched={touched.nama} errors={errors.nama} />
+
+                  <Input
+                    label="Nomor telepon"
+                    numeric
+                    value={values.nomor}
+                    errors={errors.nomor}
+                    touched={touched.nomor}
+                    onChangeText={text => {
+                      setFieldValue(
+                        'nomor',
+                        InputNumber(text)
+                      )
+                    }}
+                    onBlur={handleBlur('nomor')}
+                  />
+                  <ErrorMessage touched={touched.nomor} errors={errors.nomor} />
+
                   <Input
                     label="Email"
                     value={values.email}
@@ -111,7 +119,7 @@ export default function Login({ navigation }) {
                     onPress={handleSubmit}
                   >
                     <View style={[styles.button, { opacity }]}>
-                      <Text style={styles.textButton}>Login</Text>
+                      <Text style={styles.textButton}>Register</Text>
                     </View>
                   </TouchableWithoutFeedback>
                   <Space valSpace={24} />
@@ -123,13 +131,13 @@ export default function Login({ navigation }) {
         </View>
 
         <Space valSpace={20} />
-        <View style={styles.wrapperDaftar}>
-          <Text style={styles.textBelum}>Belum punya akun?</Text>
+        <View style={styles.wrapperMasuk}>
+          <Text style={styles.textSudah}>Sudah pernah punya akun? </Text>
 
           <TouchableWithoutFeedback
-            onPress={onSubmitDaftar}>
+            onPress={onSubmitMasuk}>
             <View>
-              <Text style={styles.textDaftar}>Daftar Disini</Text>
+              <Text style={styles.textMasuk}>Masuk</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>

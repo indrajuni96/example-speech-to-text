@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 
 import { colors } from '../../../utils'
 
-export default function Input({ label, value, onChangeText, onBlur, secureTextEntry, errors, touched }) {
+export default function Input({ label, value, numeric, onChangeText, onBlur, secureTextEntry, errors, touched }) {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
@@ -12,7 +12,8 @@ export default function Input({ label, value, onChangeText, onBlur, secureTextEn
         value={value}
         onBlur={onBlur}
         onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry} />
+        secureTextEntry={secureTextEntry}
+        keyboardType={numeric && 'numeric'} />
     </View>
   )
 }
