@@ -31,7 +31,7 @@ export default function Drawer({ navigation }) {
         </View>
 
         <Space valSpace={10} />
-        <Text style={styles.textName}>{user.namaLengkap}</Text>
+        <Text style={styles.textName}>{user.nama}</Text>
 
         <Space valSpace={20} />
         <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Dashboard")} />

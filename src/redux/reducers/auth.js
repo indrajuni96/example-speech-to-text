@@ -9,19 +9,19 @@ const initialState = {
 
 export default function Auth(state = initialState, action) {
   switch (action.type) {
-    case `${types.AUTH_USER}_PENDING`:
+    case `${types.LOGIN_USER}_PENDING`:
       return {
         ...state,
         isLoading: true
       }
-    case `${types.AUTH_USER}_FULFILLED`:
+    case `${types.LOGIN_USER}_FULFILLED`:
       return {
         ...state,
         isLoading: false,
         user: action.payload.data,
         userUID: action.payload.userUID
       }
-    case `${types.AUTH_USER}_REJECTED`:
+    case `${types.LOGIN_USER}_REJECTED`:
       return {
         ...state,
         isLoading: false

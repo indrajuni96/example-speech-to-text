@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore'
 import * as types from './ActionTypes'
 
 export const register = (data) => ({
-  type: types.AUTH_USER,
+  type: types.REGISTER_USER,
   payload: new Promise(async (resolve, reject) => {
     try {
       const result = await auth().createUserWithEmailAndPassword(data.email.toLowerCase(), data.password)
@@ -13,8 +13,8 @@ export const register = (data) => ({
       await firestore().collection('users')
         .doc(result.user.uid)
         .set({
-          namaLengkap: data.namaLengkap,
-          alamat: data.alamat,
+          nama: data.nama,
+          nomor: data.nomor,
           email: data.email
         })
 
@@ -26,7 +26,7 @@ export const register = (data) => ({
 })
 
 export const login = (data) => ({
-  type: types.AUTH_USER,
+  type: types.LOGIN_USER,
   payload: new Promise(async (resolve, reject) => {
     try {
       const dataLogin = await auth().signInWithEmailAndPassword(data.email.toLowerCase(), data.password)

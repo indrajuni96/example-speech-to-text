@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import { ErrorMessage, Input, Loading, Space } from '../../components'
-import { login } from '../../redux/actions/auth'
+import { register } from '../../redux/actions/auth'
 import { colors, ConfigBackHandler, InputNumber } from '../../utils'
 import styles from './styles'
 
@@ -22,6 +22,29 @@ export default function Register({ navigation }) {
 
   const onSubmit = (values, { resetForm }) => {
     Keyboard.dismiss()
+
+    dispatch(register(values))
+      .then(() => {
+        resetForm()
+
+        showMessage({
+          message: 'User account created & signed in!',
+          type: "default",
+          backgroundColor: colors.buttonRed,
+        })
+      })
+      .catch((error) => {
+        let errorMessage = 'Terjadi kesalahan!!!'
+
+        if (error.code === 'auth/email-already-in-use') errorMessage = 'That email address is already in use!'
+        if (error.code === 'auth/invalid-email') errorMessage = 'That email address is invalid!'
+
+        showMessage({
+          message: errorMessage,
+          type: "default",
+          backgroundColor: colors.textDefault,
+        })
+      })
   }
 
   const onSubmitMasuk = () => {
