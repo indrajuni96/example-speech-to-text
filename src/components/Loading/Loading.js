@@ -6,7 +6,7 @@ import { colors } from '../../utils'
 export default function Loading({ splash }) {
   const color = splash ? colors.textDefault : 'white'
   const backgroundColor = splash ? 'white' : 'rgba(0,0,0,0.5)'
-  const text = splash ? 'PLease wait...' : 'Loading...'
+  const text = splash ? 'Please wait...' : 'Loading...'
 
   return (
     <>

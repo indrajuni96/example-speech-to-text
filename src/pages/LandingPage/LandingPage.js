@@ -1,13 +1,37 @@
 import React from 'react'
 import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
+import Carousel from 'react-native-snap-carousel'
 
-import { Space } from '../../components'
+import { Space, CardLandingPage } from '../../components'
 import { colors, ConfigBackHandler } from '../../utils'
 import { ProssesSvg } from '../../assets'
 import styles from './styles'
 
 export default function LandingPage({ navigation }) {
   ConfigBackHandler(navigation)
+
+  const dummyCarousel = [
+    {
+      landingSvg: 'ProssesSvg',
+      textTitle: 'Aplikasi Belajar Online',
+      textBody: '#PastiBisa'
+    },
+    {
+      landingSvg: 'TimeSvg',
+      textTitle: 'Waktu Belajar Kapanpun',
+      textBody: '#Kapanpun'
+    }
+  ]
+
+  const _renderItem = ({ item, index }) =>
+    (
+      <CardLandingPage
+        landingSvg={item.landingSvg}
+        textTitle={item.textTitle}
+        textBody={item.textBody}
+      />
+    )
+
 
   return (
     <>
@@ -16,14 +40,20 @@ export default function LandingPage({ navigation }) {
         <View style={styles.wrapperHeader}>
           <Text style={styles.textKyoto}>Kyoto</Text>
         </View>
-        {/* <Space valSpace={60} /> */}
 
         <View style={styles.wrapperSnapImage}>
-          <ProssesSvg width={180} height={180} />
-
-          <Space valSpace={20} />
-          <Text style={styles.textTitleImage}>Aplikasi Belajar Online</Text>
-          <Text style={styles.textTitleImage}>#PastiBisa</Text>
+          <Carousel
+            // layout={"default"}
+            data={dummyCarousel}
+            renderItem={_renderItem}
+            sliderWidth={500}
+            itemWidth={500}
+          // loop={true}
+          // loopClonesPerSide={2}
+          // autoplay={true}
+          // autoplayDelay={500}
+          // autoplayInterval={3000}
+          />
         </View>
 
         <View style={styles.wrapperButton}>
