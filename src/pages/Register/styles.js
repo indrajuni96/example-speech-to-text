@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 30
+  },
+  wrapperScrollView: {
+    paddingHorizontal: 15
   },
   wrapperTitle: {
     alignItems: 'center'

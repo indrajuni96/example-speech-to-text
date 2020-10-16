@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { showMessage } from 'react-native-flash-message'
 
 import { Space, CardLandingPage } from '../../components'
 import { colors, ConfigBackHandler } from '../../utils'
@@ -37,6 +38,16 @@ export default function LandingPage({ navigation }) {
         textBody={item.textBody}
       />
     )
+
+  const onSubmitDaftar = () => {
+    // navigation.navigate('Register')
+    showMessage({
+      message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke "089502165963 untuk membeli COFFEE...',
+      type: "default",
+      backgroundColor: colors.textDefault,
+      duration: 5000
+    })
+  }
 
 
   return (
@@ -76,7 +87,9 @@ export default function LandingPage({ navigation }) {
 
         <View style={styles.wrapperButton}>
           <View style={styles.btnMasuk}>
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(colors.textDefault, false)}>
+            <TouchableNativeFeedback
+              background={TouchableNativeFeedback.Ripple(colors.textDefault, false)}
+              onPress={() => navigation.navigate('Login')} >
               <View style={styles.wrapperText}>
                 <Text style={styles.textMasuk}>MASUK</Text>
               </View>
@@ -86,7 +99,9 @@ export default function LandingPage({ navigation }) {
           <Space valSpace={10} />
 
           <View style={styles.btnDaftar}>
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('white', false)}>
+            <TouchableNativeFeedback
+              background={TouchableNativeFeedback.Ripple('white', false)}
+              onPress={onSubmitDaftar}>
               <View style={styles.wrapperText}>
                 <Text style={styles.textDaftar}>DAFTAR</Text>
               </View>
