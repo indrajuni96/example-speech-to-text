@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 
 import { Space, CardLandingPage } from '../../components'
 import { colors, ConfigBackHandler } from '../../utils'
@@ -9,8 +9,9 @@ import styles from './styles'
 
 export default function LandingPage({ navigation }) {
   ConfigBackHandler(navigation)
+  const [activeSlide, setActiveSlide] = useState(0)
 
-  const dummyCarousel = [
+  const dummy = [
     {
       landingSvg: 'ProssesSvg',
       textTitle: 'Aplikasi Belajar Online',
@@ -18,8 +19,13 @@ export default function LandingPage({ navigation }) {
     },
     {
       landingSvg: 'TimeSvg',
-      textTitle: 'Waktu Belajar Kapanpun',
-      textBody: '#Kapanpun'
+      textTitle: 'Waktu Belajar Yang Flexsible',
+      textBody: '#AyoBelajar'
+    },
+    {
+      landingSvg: 'CampingSvg',
+      textTitle: 'Dimana Saja Bisa Belajar',
+      textBody: '#AnyWhere'
     }
   ]
 
@@ -41,18 +47,30 @@ export default function LandingPage({ navigation }) {
           <Text style={styles.textKyoto}>Kyoto</Text>
         </View>
 
-        <View style={styles.wrapperSnapImage}>
+        <View style={styles.wrapperMainSnapImage}>
           <Carousel
-            // layout={"default"}
-            data={dummyCarousel}
+            layout={"default"}
+            data={dummy}
             renderItem={_renderItem}
             sliderWidth={500}
             itemWidth={500}
-          // loop={true}
-          // loopClonesPerSide={2}
-          // autoplay={true}
-          // autoplayDelay={500}
-          // autoplayInterval={3000}
+            inactiveSlideScale={0.94}
+            inactiveSlideOpacity={0.7}
+            // loop={true}
+            // loopClonesPerSide={2}
+            // autoplay={true}
+            // autoplayDelay={500}
+            // autoplayInterval={3000}
+            onSnapToItem={(item) => setActiveSlide(item)}
+          />
+
+          <Pagination
+            dotsLength={dummy.length}
+            activeDotIndex={activeSlide}
+            containerStyle={{ backgroundColor: 'white' }}
+            dotStyle={styles.pagination}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={0.6}
           />
         </View>
 

@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 30,
   },
-  wrapperSnapImage: {
-    flex: 3,
-    justifyContent: 'center',
+  wrapperMainSnapImage: {
+    flex: 4,
     alignItems: 'center',
   },
   textKyoto: {
@@ -22,6 +21,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     color: colors.textDefault,
     fontSize: 15,
+  },
+  pagination: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: colors.textDefault,
   },
   wrapperButton: {
     flex: 1,
