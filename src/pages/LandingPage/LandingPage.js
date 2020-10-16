@@ -57,19 +57,23 @@ export default function LandingPage({ navigation }) {
         </View>
 
         <View style={styles.wrapperButton}>
-          <TouchableNativeFeedback>
-            <View style={styles.btnMasuk}>
-              <Text style={styles.textMasuk}>MASUK</Text>
-            </View>
-          </TouchableNativeFeedback>
+          <View style={styles.btnMasuk}>
+            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(colors.textDefault, false)}>
+              <View style={styles.wrapperText}>
+                <Text style={styles.textMasuk}>MASUK</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
 
           <Space valSpace={10} />
 
-          <TouchableNativeFeedback>
-            <View style={styles.btnDaftar}>
-              <Text style={styles.textDaftar}>DAFTAR</Text>
-            </View>
-          </TouchableNativeFeedback>
+          <View style={styles.btnDaftar}>
+            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('white', false)}>
+              <View style={styles.wrapperText}>
+                <Text style={styles.textDaftar}>DAFTAR</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
         </View>
       </View>
     </>

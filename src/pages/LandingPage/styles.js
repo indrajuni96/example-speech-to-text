@@ -31,10 +31,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.textDefault,
     borderRadius: 10,
+    overflow: 'hidden',
+  },
+  wrapperText: {
     paddingVertical: 8,
+    alignItems: 'center'
   },
   textMasuk: {
-    textAlign: 'center',
     fontFamily: 'Roboto-Bold',
     color: colors.textDefault,
     fontSize: 18,
@@ -42,10 +45,9 @@ const styles = StyleSheet.create({
   btnDaftar: {
     backgroundColor: colors.textDefault,
     borderRadius: 10,
-    paddingVertical: 8,
+    overflow: 'hidden',
   },
   textDaftar: {
-    textAlign: 'center',
     fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 18,
