@@ -49,8 +49,8 @@ export default function Dashboard({ navigation }) {
 
           <Space valSpace={10} />
 
-          <Button
-            title="Example Game Random"
+          <CardLearning
+            textJapan="Example Game Random"
             onPress={() => navigation.replace('Game')} />
         </View>
       </View>

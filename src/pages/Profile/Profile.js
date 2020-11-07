@@ -24,7 +24,7 @@ export default function Profile({ navigation }) {
 
         <View style={styles.cardProfile}>
           <Text style={styles.textTitle}>NAMA LENGKAP</Text>
-          <Text style={styles.textValue}>Indra Juniyanto</Text>
+          <Text style={styles.textValue}>{user.nama}</Text>
         </View>
         <Space valSpace={15} />
 
@@ -36,7 +36,7 @@ export default function Profile({ navigation }) {
 
         <View style={styles.cardProfile}>
           <Text style={styles.textTitle}>EMAIL</Text>
-          <Text style={styles.textValue}>indrajuniyanto96@gmail.com</Text>
+          <Text style={styles.textValue}>{user.email}</Text>
         </View>
         <Space valSpace={15} />
 
