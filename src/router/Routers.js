@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector } from 'react-redux'
+import SplashScreen from 'react-native-splash-screen'
 
 import { AuthStackScreen } from './Stack'
 import { DrawerScreen } from './Drawer'
@@ -25,18 +26,6 @@ const RootStackScreen = () => {
 }
 
 export default function Routers() {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000)
-  }, [])
-
-  if (isLoading) {
-    return <Loading splash />
-  }
-
   return (
     <NavigationContainer>
       <RootStackScreen />
