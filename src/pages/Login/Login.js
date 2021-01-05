@@ -4,7 +4,8 @@ import { Keyboard, ScrollView, Text, TouchableWithoutFeedback, View } from 'reac
 import { showMessage } from 'react-native-flash-message'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
-import { ErrorMessage, Header, Input, Loading, Space } from '../../components'
+
+import { ErrorMessage, Header, Input, Loading, Space, Button } from '../../components'
 import { login } from '../../redux/actions/auth'
 import { colors } from '../../utils'
 import styles from './styles'
@@ -109,14 +110,19 @@ export default function Login({ navigation }) {
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
                     <Space valSpace={24} />
-                    <TouchableWithoutFeedback
+                    {/* <TouchableWithoutFeedback
                       disabled={disable}
                       onPress={handleSubmit}
-                    >
+                    > 
                       <View style={[styles.button, { opacity }]}>
                         <Text style={styles.textButton}>MASUK</Text>
                       </View>
-                    </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback> */}
+                    <Button
+                      name='MASUK'
+                      opacity={opacity}
+                      disabled={disable}
+                      onPress={handleSubmit} />
                     <Space valSpace={24} />
                   </>
                 )
