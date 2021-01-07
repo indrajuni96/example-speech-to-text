@@ -110,14 +110,6 @@ export default function Login({ navigation }) {
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
                     <Space valSpace={24} />
-                    {/* <TouchableWithoutFeedback
-                      disabled={disable}
-                      onPress={handleSubmit}
-                    > 
-                      <View style={[styles.button, { opacity }]}>
-                        <Text style={styles.textButton}>MASUK</Text>
-                      </View>
-                    </TouchableWithoutFeedback> */}
                     <Button
                       name='MASUK'
                       opacity={opacity}

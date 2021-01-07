@@ -3,7 +3,7 @@ import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { showMessage } from 'react-native-flash-message'
 
-import { Space, CardLandingPage } from '../../components'
+import { Space, CardLandingPage, Button } from '../../components'
 import { colors, ConfigBackHandler } from '../../utils'
 import { ProssesSvg } from '../../assets'
 import styles from './styles'
@@ -31,13 +31,13 @@ export default function LandingPage({ navigation }) {
   ]
 
   const _renderItem = ({ item, index }) =>
-    (
-      <CardLandingPage
-        landingSvg={item.landingSvg}
-        textTitle={item.textTitle}
-        textBody={item.textBody}
-      />
-    )
+  (
+    <CardLandingPage
+      landingSvg={item.landingSvg}
+      textTitle={item.textTitle}
+      textBody={item.textBody}
+    />
+  )
 
   const onSubmitDaftar = () => {
     // navigation.navigate('Register')
@@ -87,15 +87,10 @@ export default function LandingPage({ navigation }) {
         </View>
 
         <View style={styles.wrapperButton}>
-          <View style={styles.btnMasuk}>
-            <TouchableNativeFeedback
-              background={TouchableNativeFeedback.Ripple(colors.textDefault, false)}
-              onPress={() => navigation.navigate('Login')} >
-              <View style={styles.wrapperText}>
-                <Text style={styles.textMasuk}>MASUK</Text>
-              </View>
-            </TouchableNativeFeedback>
-          </View>
+          <Button
+            ripple
+            name="MASUK"
+            onPress={() => navigation.navigate('Login')} />
 
           <Space valSpace={10} />
 
