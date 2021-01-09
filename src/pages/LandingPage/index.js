@@ -94,15 +94,11 @@ export default function LandingPage({ navigation }) {
 
           <Space valSpace={10} />
 
-          <View style={styles.btnDaftar}>
-            <TouchableNativeFeedback
-              background={TouchableNativeFeedback.Ripple('white', false)}
-              onPress={onSubmitDaftar}>
-              <View style={styles.wrapperText}>
-                <Text style={styles.textDaftar}>DAFTAR</Text>
-              </View>
-            </TouchableNativeFeedback>
-          </View>
+          <Button
+            ripple
+            dark
+            name="DAFTAR"
+            onPress={onSubmitDaftar} />
         </View>
       </View>
     </>

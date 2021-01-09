@@ -4,9 +4,9 @@ import { color } from 'react-native-reanimated'
 
 import { colors } from '../../utils'
 
-const Button = ({ disabled, onPress, name, opacity, ripple }) => {
-  const color = ripple ? colors.textDefault : colors.white
-  const backgroundColor = ripple ? colors.white : colors.textDefault
+const Button = ({ disabled, onPress, name, opacity, ripple, dark }) => {
+  const color = dark ? colors.white : colors.textDefault
+  const backgroundColor = dark ? colors.textDefault : colors.white
 
   return (
     <View style={[styles.content, { backgroundColor }]}>
