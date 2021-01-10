@@ -4,31 +4,13 @@ import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { showMessage } from 'react-native-flash-message'
 
 import { Space, CardLandingPage, Button } from '../../components'
-import { colors, ConfigBackHandler } from '../../utils'
+import { colors, ConfigBackHandler, dataDummy } from '../../utils'
 import { ProssesSvg } from '../../assets'
 import styles from './styles'
 
 export default function LandingPage({ navigation }) {
   ConfigBackHandler(navigation)
   const [activeSlide, setActiveSlide] = useState(0)
-
-  const dummy = [
-    {
-      landingSvg: 'ProssesSvg',
-      textTitle: 'Aplikasi Belajar Online',
-      textBody: '#PastiBisa'
-    },
-    {
-      landingSvg: 'TimeSvg',
-      textTitle: 'Waktu Belajar Yang Flexsible',
-      textBody: '#AyoBelajar'
-    },
-    {
-      landingSvg: 'CampingSvg',
-      textTitle: 'Dimana Saja Bisa Belajar',
-      textBody: '#AnyWhere'
-    }
-  ]
 
   const _renderItem = ({ item, index }) =>
   (
@@ -62,7 +44,7 @@ export default function LandingPage({ navigation }) {
         <View style={styles.wrapperMainSnapImage}>
           <Carousel
             layout={"default"}
-            data={dummy}
+            data={dataDummy.landingPage}
             renderItem={_renderItem}
             sliderWidth={500}
             itemWidth={500}
@@ -77,7 +59,7 @@ export default function LandingPage({ navigation }) {
           />
 
           <Pagination
-            dotsLength={dummy.length}
+            dotsLength={dataDummy.landingPage.length}
             activeDotIndex={activeSlide}
             containerStyle={{ backgroundColor: 'white' }}
             dotStyle={styles.pagination}
