@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, Pressable } from 'react-native'
-import { color } from 'react-native-reanimated'
 
 import { colors } from '../../utils'
 
 const Button = ({ disabled, onPress, name, opacity, ripple, dark }) => {
   const color = dark ? colors.white : colors.textDefault
+  const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
 
   return (
@@ -14,7 +14,7 @@ const Button = ({ disabled, onPress, name, opacity, ripple, dark }) => {
         disabled={disabled}
         style={[styles.pressable, { opacity }]}
         onPress={onPress}
-        android_ripple={{ color, opacity: 0.1 }}>
+        android_ripple={{ color: colorRipple, opacity: 0.1 }}>
         <Text style={[styles.text, { color }]}>{name}</Text>
       </Pressable>
     </View>
