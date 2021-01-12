@@ -22,14 +22,14 @@ export default function LandingPage({ navigation }) {
   )
 
   const onSubmitDaftar = () => {
-    // navigation.navigate('Register')
-    showMessage({
-      // message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke virtual account BCA "70001089502165963" untuk membeli COFFEE...',
-      message: 'Fitur dalam pengerjaan...',
-      type: "default",
-      backgroundColor: colors.textDefault,
-      duration: 5000
-    })
+    navigation.navigate('Register')
+    // showMessage({
+    //   // message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke virtual account BCA "70001089502165963" untuk membeli COFFEE...',
+    //   message: 'Fitur dalam pengerjaan...',
+    //   type: "default",
+    //   backgroundColor: colors.textDefault,
+    //   duration: 5000
+    // })
   }
 
 

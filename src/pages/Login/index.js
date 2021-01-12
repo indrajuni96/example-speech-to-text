@@ -56,9 +56,9 @@ export default function Login({ navigation }) {
     <>
       <View style={styles.container}>
         <Header
-          onPress={() => navigation.goBack()}
-          // title="Masuk"
           goBack
+          // title="Masuk"
+          onPress={() => navigation.goBack()}
         />
 
         <ScrollView style={styles.wrapperScrollView}

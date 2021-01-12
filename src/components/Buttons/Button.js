@@ -9,10 +9,10 @@ const Button = ({ disabled, onPress, name, opacity, ripple, dark }) => {
   const backgroundColor = dark ? colors.textDefault : colors.white
 
   return (
-    <View style={[styles.content, { backgroundColor }]}>
+    <View style={[styles.content, { backgroundColor, opacity }]}>
       <Pressable
         disabled={disabled}
-        style={[styles.pressable, { opacity }]}
+        style={styles.pressable}
         onPress={onPress}
         android_ripple={{ color: colorRipple, opacity: 0.1 }}>
         <Text style={[styles.text, { color }]}>{name}</Text>
