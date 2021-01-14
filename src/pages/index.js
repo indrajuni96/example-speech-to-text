@@ -8,5 +8,18 @@ import CustomDrawerContent from './Drawer'
 import History from './History'
 import Game from './Game'
 import FormExample from './Form'
+import Materi from './Materi'
 
-export { LandingPage, Dashboard, Login, Register, Profile, Example, CustomDrawerContent, History, Game, FormExample }
+export {
+  LandingPage,
+  Dashboard,
+  Login,
+  Register,
+  Profile,
+  Example,
+  CustomDrawerContent,
+  History,
+  Game,
+  FormExample,
+  Materi
+}

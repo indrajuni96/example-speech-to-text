@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import { optionsDrawer } from './config'
 import { CustomDrawerContent } from '../../pages'
-import { DashboardStackScreen, HistoryStackScreen, FormStackScreen, ProfileStackScreen } from '../Stack'
+import { DashboardStackScreen, HistoryStackScreen, FormStackScreen, ProfileStackScreen, MateriStackScreen } from '../Stack'
 
 const Drawer = createDrawerNavigator()
 
@@ -19,6 +19,10 @@ export const DrawerScreen = () => {
       <Drawer.Screen
         name="Dashboard"
         component={DashboardStackScreen}
+        options={(navigation) => optionsDrawer(navigation)} />
+      <Drawer.Screen
+        name="Materi"
+        component={MateriStackScreen}
         options={(navigation) => optionsDrawer(navigation)} />
       <Drawer.Screen
         name="History"

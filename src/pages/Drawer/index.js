@@ -36,6 +36,8 @@ export default function Drawer({ navigation }) {
         <Space valSpace={20} />
         <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Dashboard")} />
 
+        <CardDrawerMenu nameNemu="Materi" onPress={() => navigation.navigate("Materi")} />
+
         <CardDrawerMenu nameNemu="Form Example" onPress={() => navigation.navigate("Form")} />
 
         <CardDrawerMenu nameNemu="History" onPress={() => navigation.navigate("History")} />
