@@ -42,6 +42,7 @@ export default function Example({ route, navigation }) {
   }
 
   const onSpek = async () => {
+    Tts.stop()
     Tts.speak(quiz)
   }
 
@@ -51,13 +52,13 @@ export default function Example({ route, navigation }) {
 
   const onSpeechEnd = (e) => {
     console.log('onSpeechEnd: ', e);
+    toggleModal(true)
+    setIsBtnSpeak(false)
+    setIsQuestion(false)
   };
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
-    toggleModal(true)
-    setIsBtnSpeak(false)
-    setIsQuestion(false)
   };
 
   const onSpeechResults = (e) => {
@@ -193,11 +194,10 @@ export default function Example({ route, navigation }) {
 
   const onPressButtonModal = () => {
     toggleModal(false)
+
     setTimeout(() => {
-
       navigation.goBack()
-    }, 1000)
-
+    }, 2000)
   }
 
   return (
