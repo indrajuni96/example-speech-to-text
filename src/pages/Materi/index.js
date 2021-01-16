@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, SafeAreaView, ScrollView } from 'react-native'
+import { Text, View, SafeAreaView, ScrollView, Keyboard } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -25,17 +25,17 @@ const Materi = ({ navigation }) => {
   const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
+    Keyboard.dismiss()
+
     setIsLoading(true)
 
     try {
       await dispatch(createMateri(values))
       setTimeout(() => {
         setIsLoading(false)
-        console.log('success')
       }, 2000)
 
     } catch (error) {
-      console.log(error)
       setIsLoading(false)
     }
   }

@@ -6,8 +6,12 @@ export const createMateri = (data) => {
   return async (dispatch, getState) => {
     const userUID = getState().authStore.userUID
 
-    console.log(userUID)
-    console.log(data)
-    console.log('action createMateri')
+    firestore().collection('materies')
+      .add({
+        kataBicara: data.kataBicara,
+        createBy: userUID
+      })
+      .then(() => console.log('materies success added!'))
+      .catch((error) => console.log(error))
   }
 }
