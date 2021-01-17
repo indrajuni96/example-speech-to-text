@@ -14,7 +14,7 @@ const initialValues = {
   kataBicara: ''
 }
 
-const validationSchema = Yup.object().shape({
+const validationSchema = Yup.object({
   kataBicara: Yup.string()
     .required('Wajib Diisi')
     .trim('Wajib Diisi')
@@ -24,19 +24,28 @@ const Materi = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     Keyboard.dismiss()
-
     setIsLoading(true)
 
     try {
       await dispatch(createMateri(values))
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 2000)
+      setIsLoading(false)
+      resetForm()
 
+      showMessage({
+        message: 'Materi success created',
+        type: "default",
+        backgroundColor: colors.buttonRed,
+      })
     } catch (error) {
       setIsLoading(false)
+
+      showMessage({
+        message: 'Materi failed created!',
+        type: "default",
+        backgroundColor: colors.textDefault,
+      })
     }
   }
 
