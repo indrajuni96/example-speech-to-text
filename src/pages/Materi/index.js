@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, View, SafeAreaView, ScrollView, Keyboard } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles';
@@ -21,16 +21,14 @@ const validationSchema = Yup.object({
 })
 
 const Materi = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const isLoading = useSelector((state) => state.materiStore.isLoading)
   const dispatch = useDispatch()
 
   const onSubmit = async (values, { resetForm }) => {
     Keyboard.dismiss()
-    setIsLoading(true)
 
     try {
       await dispatch(createMateri(values))
-      setIsLoading(false)
       resetForm()
 
       showMessage({
@@ -39,7 +37,7 @@ const Materi = ({ navigation }) => {
         backgroundColor: colors.buttonRed,
       })
     } catch (error) {
-      setIsLoading(false)
+      console.log(error)
 
       showMessage({
         message: 'Materi failed created!',
