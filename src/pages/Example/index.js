@@ -219,7 +219,7 @@ export default function Example({ route, navigation }) {
 
         <TouchableOpacity
           disabled={isBtnSpeak ? true : false}
-          style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.buttonRed : colors.buttonGreen }]}
+          style={[styles.btnOnCheck, { backgroundColor: isBtnSpeak ? colors.greenDark : colors.redDark }]}
           onPress={startRecord}>
           <Text style={styles.textBtnCheck}>{isBtnSpeak ? "Speak" : "Start"}</Text>
         </TouchableOpacity>

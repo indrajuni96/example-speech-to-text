@@ -27,7 +27,7 @@ export default function Form({ navigation }) {
         showMessage({
           message: 'User account created & signed in!',
           type: "default",
-          backgroundColor: colors.buttonRed,
+          backgroundColor: colors.greenDark,
         })
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ export default function Form({ navigation }) {
         showMessage({
           message: errorMessage,
           type: "default",
-          backgroundColor: colors.textDefault,
+          backgroundColor: colors.redDark,
         })
       })
   }

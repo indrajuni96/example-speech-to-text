@@ -34,15 +34,13 @@ const Materi = ({ navigation }) => {
       showMessage({
         message: 'Materi success created',
         type: "default",
-        backgroundColor: colors.buttonRed,
+        backgroundColor: colors.greenDark
       })
     } catch (error) {
-      console.log(error)
-
       showMessage({
         message: 'Materi failed created!',
         type: "default",
-        backgroundColor: colors.textDefault,
+        backgroundColor: colors.redDark
       })
     }
   }

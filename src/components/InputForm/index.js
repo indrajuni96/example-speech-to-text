@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 
-import { colors } from '../../../utils'
+import { colors } from '../../utils'
 
 export default function Input({ label, value, numeric, onChangeText, onBlur, secureTextEntry, errors, touched }) {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={[styles.input, { borderColor: errors && touched ? colors.buttonGreen : colors.border }]}
+        style={[styles.input, { borderColor: errors && touched ? colors.redDark : colors.border }]}
         value={value}
         onBlur={onBlur}
         onChangeText={onChangeText}

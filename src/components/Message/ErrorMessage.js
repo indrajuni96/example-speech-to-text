@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
   textError: {
     fontSize: 11,
     fontFamily: 'Roboto-Bold',
-    color: colors.buttonGreen,
+    color: colors.redDark,
   },
 })

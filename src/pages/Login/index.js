@@ -36,7 +36,7 @@ export default function Login({ navigation }) {
         showMessage({
           message: errorMessage,
           type: "default",
-          backgroundColor: colors.textDefault,
+          backgroundColor: colors.redDark
         })
       })
   }

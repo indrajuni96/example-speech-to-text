@@ -6,5 +6,8 @@ export const colors = {
   buttonGreen: '#ce2e6c',
   white: '#ffff',
   whiteDark: '#ebebeb',
-  blueDark: '#394867'
+  blueDark: '#394867',
+  redDark: '#ce2e6c',
+  greenDark: '#78c800',
+  blueLight: '#1089ff',
 }
