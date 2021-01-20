@@ -2,8 +2,9 @@ import firestore from '@react-native-firebase/firestore'
 
 import * as types from './ActionTypes'
 
-const materiIsLoading = () => ({
-  type: types.MATERI_IS_LOADING
+const materiIsLoading = (isLoading) => ({
+  type: types.MATERI_IS_LOADING,
+  isLoading
 })
 
 const materiCreateSuccess = (materi) => ({
@@ -17,9 +18,9 @@ const materiCreateFailed = () => ({
 
 export const createMateri = (data) => {
   return async (dispatch, getState) => {
-    try {
-      dispatch(materiIsLoading())
+    dispatch(materiIsLoading(true))
 
+    try {
       const userUID = getState().authStore.userUID
 
       await firestore()
@@ -34,5 +35,7 @@ export const createMateri = (data) => {
       dispatch(materiCreateFailed())
       throw new Error('failed create materi!')
     }
+
+    dispatch(materiIsLoading(false))
   }
 }

@@ -11,18 +11,16 @@ const Materi = (state = initialState, action) => {
     case types.MATERI_IS_LOADING:
       return {
         ...state,
-        isLoading: true
+        isLoading: action.isLoading
       }
     case types.CREATE_MATERI_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         // materies: action.materi
       }
     case types.CREATE_MATERI_FAILED: {
       return {
         ...state,
-        isLoading: false,
         hasError: true
       }
     }

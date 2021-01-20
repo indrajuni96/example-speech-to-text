@@ -1,16 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 
-export default function space({ valSpace }) {
-  return (
-    <View style={styles.space(valSpace)} />
-  )
+const Space = ({ valSpace, width }) => {
+  return <View style={{ height: valSpace, width }} />
 }
 
-const styles = StyleSheet.create({
-  space: (value) => {
-    return {
-      height: value
-    }
-  }
-})
+export default Space

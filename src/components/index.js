@@ -9,5 +9,19 @@ import ErrorMessage from './Message/ErrorMessage'
 import Header from './Header/Header'
 import CardLandingPage from './Cards/CardLandingPage/CardLandingPage'
 import Button from './Buttons/Button'
+import List from './Lists'
 
-export { Space, ModalExample, CardLearning, CardCourse, CardDrawerMenu, CardLandingPage, Input, Loading, ErrorMessage, Header, Button }
+export {
+  Space,
+  ModalExample,
+  CardLearning,
+  CardCourse,
+  CardDrawerMenu,
+  CardLandingPage,
+  Input,
+  Loading,
+  ErrorMessage,
+  Header,
+  Button,
+  List
+}

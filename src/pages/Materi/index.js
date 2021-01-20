@@ -7,7 +7,7 @@ import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles';
 import { colors, ConfigBackHandler } from '../../utils'
-import { Header, Input, Button, Space, Loading, ErrorMessage } from '../../components'
+import { Header, Input, Button, Space, Loading, ErrorMessage, List } from '../../components'
 import { createMateri } from '../../redux/actions/materi'
 
 const initialValues = {
@@ -54,7 +54,15 @@ const Materi = ({ navigation }) => {
         />
 
         <SafeAreaView style={styles.wrapperMain}>
-          <ScrollView
+          <List
+            kata="Burung"
+            onPress={() => console.log('list')} />
+
+          <List
+            kata="Harimau"
+            onPress={() => console.log('list')} />
+
+          {/* <ScrollView
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}>
             <Formik
@@ -89,7 +97,7 @@ const Materi = ({ navigation }) => {
                 )
               }}
             </Formik>
-          </ScrollView>
+          </ScrollView> */}
         </SafeAreaView>
       </View>
 
