@@ -1,12 +1,29 @@
 import React from 'react'
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
+import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import { colors } from '../../utils'
 
-const Button = ({ disabled, onPress, name, opacity, ripple, dark }) => {
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
+
+const Button = ({ circle, disabled, onPress, name, opacity, ripple, dark }) => {
   const color = dark ? colors.white : colors.textDefault
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
+
+  if (circle) {
+    return (
+      <View style={[styles.contentCircle, { backgroundColor, opacity }]}>
+        <Pressable
+          disabled={disabled}
+          style={styles.pressableCircle}
+          onPress={onPress}
+          android_ripple={{ color: colorRipple, opacity: 0.1 }}>
+          <IconFontAwesome5 name="plus" style={styles.icon} />
+        </Pressable>
+      </View>
+    )
+  }
 
   return (
     <View style={[styles.content, { backgroundColor, opacity }]}>
@@ -34,11 +51,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  contentCircle: {
+    height: 55,
+    width: 55,
+    borderWidth: 1,
+    borderColor: colors.textDefault,
+    borderRadius: 50,
+    overflow: 'hidden',
+  },
+  pressableCircle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   text: {
     textAlign: 'center',
     fontFamily: 'Roboto-Bold',
     fontSize: 20,
   },
+  icon: {
+    color: colors.white,
+    fontSize: SCREEN_WIDTH * 0.08
+  }
 })
 
 export default Button

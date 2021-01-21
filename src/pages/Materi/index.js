@@ -54,18 +54,31 @@ const Materi = ({ navigation }) => {
         />
 
         <SafeAreaView style={styles.wrapperMain}>
-          <List
-            kata="Burung"
-            onPress={() => console.log('list')} />
-
-          <List
-            kata="Harimau"
-            onPress={() => console.log('list')} />
-
-          {/* <ScrollView
+          <ScrollView
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}>
-            <Formik
+            <List
+              kata="Burung"
+              onPress={() => console.log('list')} />
+
+            <List
+              kata="Harimau"
+              onPress={() => console.log('list')} />
+
+            <List
+              kata="Kucing"
+              onPress={() => console.log('list')} />
+
+            <List
+              kata="Kelinci"
+              onPress={() => console.log('list')} />
+
+            <List
+              kata="Beruang"
+              onPress={() => console.log('list')} />
+
+
+            {/* <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={onSubmit}>
@@ -96,9 +109,16 @@ const Materi = ({ navigation }) => {
                   </>
                 )
               }}
-            </Formik>
-          </ScrollView> */}
+            </Formik> */}
+          </ScrollView>
         </SafeAreaView>
+
+        <View style={styles.fab}>
+          <Button
+            dark
+            circle
+            onPress={() => console.log('fab')} />
+        </View>
       </View>
 
       { isLoading && <Loading />}

@@ -12,6 +12,13 @@ const styles = StyleSheet.create({
   wrapperMain: {
     flex: 1,
     paddingHorizontal: 15
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    marginRight: SCREEN_WIDTH * 0.06,
+    marginBottom: SCREEN_HEIGHT * 0.05
   }
 })
 
