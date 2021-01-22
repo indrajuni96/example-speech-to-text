@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CardLearning, Header, Space } from '../../components';
-import { getItems } from '../../redux/actions/item';
-import { ConfigBackHandler } from '../../utils';
 import styles from './styles';
+import { ConfigBackHandler } from '../../utils';
+import { getItems } from '../../redux/actions/item';
+import { CardLearning, Header, Space } from '../../components';
 
 export default function Dashboard({ navigation }) {
   const dispatch = useDispatch()
@@ -17,9 +17,7 @@ export default function Dashboard({ navigation }) {
     dispatch(getItems())
   }, [])
 
-
   const onMoveCard = (item) => {
-    console.log("on move card")
     navigation.navigate("Example", { item })
   }
 
