@@ -1,5 +1,4 @@
 import Space from './space/space'
-import ModalExample from './modal/ModalExample'
 import CardLearning from './Cards/CardLearning/CardLearning'
 import CardCourse from './Cards/CardCourse/CardCourse'
 import CardDrawerMenu from './Cards/CardDrawerMenu/CardDrawerMenu'
@@ -10,10 +9,11 @@ import Header from './Header/Header'
 import CardLandingPage from './Cards/CardLandingPage/CardLandingPage'
 import Button from './Buttons/Button'
 import List from './Lists'
+import ModalGame from './modal/Game'
+import ModalMateri from './modal/Materi'
 
 export {
   Space,
-  ModalExample,
   CardLearning,
   CardCourse,
   CardDrawerMenu,
@@ -23,5 +23,7 @@ export {
   ErrorMessage,
   Header,
   Button,
-  List
+  List,
+  ModalGame,
+  ModalMateri
 }

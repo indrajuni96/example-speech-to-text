@@ -5,7 +5,7 @@ import Tts from 'react-native-tts';
 import { toRomaji } from 'wanakana';
 import { transliterate as tr } from 'transliteration'
 
-import { ModalExample, Space, CardCourse } from '../../components';
+import { ModalGame, Space, CardCourse } from '../../components';
 import { colors } from '../../utils';
 import styles from './styles';
 
@@ -204,7 +204,7 @@ export default function Example({ route, navigation }) {
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-      <ModalExample
+      <ModalGame
         isModalVisible={isModalVisible}
         toggleModal={onPressButtonModal}
         isQuestion={isQuestion}

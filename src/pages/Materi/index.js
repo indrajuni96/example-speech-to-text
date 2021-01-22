@@ -7,7 +7,7 @@ import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles';
 import { colors, ConfigBackHandler } from '../../utils'
-import { Header, Input, Button, Space, Loading, ErrorMessage, List } from '../../components'
+import { Header, Input, Button, Space, Loading, ErrorMessage, List, ModalMateri } from '../../components'
 import { createMateri } from '../../redux/actions/materi'
 
 const initialValues = {
@@ -21,6 +21,7 @@ const validationSchema = Yup.object({
 })
 
 const Materi = ({ navigation }) => {
+  const [isVisible, setIsVisible] = useState(false)
   const isLoading = useSelector((state) => state.materiStore.isLoading)
   const dispatch = useDispatch()
 
@@ -48,6 +49,10 @@ const Materi = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
+        <ModalMateri
+          isVisible={isVisible}
+          close={() => setIsVisible(false)} />
+
         <Header
           onPress={() => navigation.toggleDrawer()}
           title="Materi"
@@ -117,7 +122,7 @@ const Materi = ({ navigation }) => {
           <Button
             dark
             circle
-            onPress={() => console.log('fab')} />
+            onPress={() => setIsVisible(true)} />
         </View>
       </View>
 

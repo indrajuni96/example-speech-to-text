@@ -5,7 +5,7 @@ import Tts from 'react-native-tts';
 import Voice from '@react-native-community/voice';
 import { toRomaji } from 'wanakana';
 
-import { ModalExample, Space, CardCourse } from '../../components';
+import { ModalGame, Space, CardCourse } from '../../components';
 import { randomItem, removeItem } from '../../redux/actions/item';
 import { colors, ConfigBackHandler } from '../../utils'
 import styles from './styles';
@@ -176,7 +176,7 @@ export default function Game({ navigation }) {
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-      <ModalExample
+      <ModalGame
         isModalVisible={isModalVisible}
         toggleModal={onPressButtonModal}
         isQuestion={isQuestion}
