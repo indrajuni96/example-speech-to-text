@@ -3,14 +3,10 @@ import { View, Text } from 'react-native'
 import Modal from 'react-native-modal'
 
 import styles from './styles'
-
-const PanelHeader = () => (
-  <View style={styles.panelHeader}>
-    <View style={styles.panelHandle} />
-  </View>
-)
+import PanelHeader from '../../Header/PanelHeader'
 
 const ModalMateri = ({ isVisible, close }) => {
+  console.log('modal materi')
 
   return (
     <Modal
