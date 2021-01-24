@@ -51,7 +51,10 @@ const Materi = ({ navigation }) => {
       <View style={styles.container}>
         <ModalMateri
           isVisible={isVisible}
-          close={() => setIsVisible(false)} />
+          close={() => setIsVisible(false)}
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          validationSchema={validationSchema} />
 
         <Header
           onPress={() => navigation.toggleDrawer()}
@@ -81,40 +84,6 @@ const Materi = ({ navigation }) => {
             <List
               kata="Beruang"
               onPress={() => console.log('list')} />
-
-
-            {/* <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}>
-              {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => {
-                const disable = values.kataBicara ? false : true
-                const opacity = values.kataBicara ? 1 : 0.3
-
-                return (
-                  <>
-                    <Input
-                      label="Kata Bicara"
-                      value={values.kataBicara}
-                      errors={errors.kataBicara}
-                      touched={touched.kataBicara}
-                      onChangeText={handleChange('kataBicara')}
-                      onBlur={handleBlur('kataBicara')}
-                    />
-                    <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
-
-                    <Space valSpace={20} />
-
-                    <Button
-                      dark
-                      name='SIMPAN'
-                      opacity={opacity}
-                      disabled={disable}
-                      onPress={handleSubmit} />
-                  </>
-                )
-              }}
-            </Formik> */}
           </ScrollView>
         </SafeAreaView>
 

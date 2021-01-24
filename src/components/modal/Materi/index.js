@@ -1,11 +1,17 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import Modal from 'react-native-modal'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 import styles from './styles'
+import Input from '../../InputForm'
+import Space from '../../space/space'
+import Button from '../../Buttons/Button'
 import PanelHeader from '../../Header/PanelHeader'
+import ErrorMessage from '../../Message/ErrorMessage'
 
-const ModalMateri = ({ isVisible, close }) => {
+const ModalMateri = ({ isVisible, close, onSubmit, initialValues, validationSchema }) => {
   console.log('modal materi')
 
   return (
@@ -22,6 +28,46 @@ const ModalMateri = ({ isVisible, close }) => {
       swipeDirection={['down']}>
       <View style={styles.content}>
         <PanelHeader />
+
+        <SafeAreaView style={styles.safeAreaView}>
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}>
+              {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => {
+                const disable = values.kataBicara ? false : true
+                const opacity = values.kataBicara ? 1 : 0.3
+
+                return (
+                  <>
+                    <Input
+                      label="Kata Bicara"
+                      value={values.kataBicara}
+                      errors={errors.kataBicara}
+                      touched={touched.kataBicara}
+                      onChangeText={handleChange('kataBicara')}
+                      onBlur={handleBlur('kataBicara')}
+                    />
+                    <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
+
+                    <Space valSpace={20} />
+
+                    <Button
+                      dark
+                      name='SIMPAN'
+                      opacity={opacity}
+                      disabled={disable}
+                      onPress={handleSubmit} />
+                  </>
+                )
+              }}
+            </Formik>
+          </ScrollView>
+        </SafeAreaView>
+
       </View>
     </Modal>
   )

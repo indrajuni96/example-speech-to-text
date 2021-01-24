@@ -15,7 +15,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: 'hidden'
-  }
+  },
+  safeAreaView: {
+    flex: 1,
+    paddingHorizontal: 15
+  },
 })
 
 export default styles
