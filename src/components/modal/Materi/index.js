@@ -10,9 +10,11 @@ import Space from '../../space/space'
 import Button from '../../Buttons/Button'
 import PanelHeader from '../../Header/PanelHeader'
 import ErrorMessage from '../../Message/ErrorMessage'
+import { useMateri } from '../../../context/MateriContext'
 
-const ModalMateri = ({ isVisible, close, onSubmit, initialValues, validationSchema }) => {
+const ModalMateri = ({ isVisible, close }) => {
   console.log('modal materi')
+  const { initialValues, validationSchema, onSubmit } = useMateri()
 
   return (
     <Modal

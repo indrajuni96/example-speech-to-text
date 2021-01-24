@@ -1,60 +1,29 @@
 import React, { useState } from 'react'
-import { Text, View, SafeAreaView, ScrollView, Keyboard } from 'react-native'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
-import { showMessage } from 'react-native-flash-message'
+import { SafeAreaView, ScrollView, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
-import styles from './styles';
-import { colors, ConfigBackHandler } from '../../utils'
-import { Header, Input, Button, Space, Loading, ErrorMessage, List, ModalMateri } from '../../components'
-import { createMateri } from '../../redux/actions/materi'
-
-const initialValues = {
-  kataBicara: ''
-}
-
-const validationSchema = Yup.object({
-  kataBicara: Yup.string()
-    .required('Wajib Diisi')
-    .trim('Wajib Diisi')
-})
+import styles from './styles'
+import {
+  Button,
+  Header,
+  List,
+  Loading,
+  ModalMateri
+} from '../../components'
+import { MateriProvider } from '../../context/MateriContext'
 
 const Materi = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false)
   const isLoading = useSelector((state) => state.materiStore.isLoading)
-  const dispatch = useDispatch()
-
-  const onSubmit = async (values, { resetForm }) => {
-    Keyboard.dismiss()
-
-    try {
-      await dispatch(createMateri(values))
-      resetForm()
-
-      showMessage({
-        message: 'Materi success created',
-        type: "default",
-        backgroundColor: colors.greenDark
-      })
-    } catch (error) {
-      showMessage({
-        message: 'Materi failed created!',
-        type: "default",
-        backgroundColor: colors.redDark
-      })
-    }
-  }
 
   return (
     <>
       <View style={styles.container}>
-        <ModalMateri
-          isVisible={isVisible}
-          close={() => setIsVisible(false)}
-          onSubmit={onSubmit}
-          initialValues={initialValues}
-          validationSchema={validationSchema} />
+        <MateriProvider>
+          <ModalMateri
+            isVisible={isVisible}
+            close={() => setIsVisible(false)} />
+        </MateriProvider>
 
         <Header
           onPress={() => navigation.toggleDrawer()}
@@ -95,7 +64,7 @@ const Materi = ({ navigation }) => {
         </View>
       </View>
 
-      { isLoading && <Loading />}
+      {isLoading && <Loading />}
     </>
   )
 }
