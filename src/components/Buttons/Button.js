@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import { colors } from '../../utils'
+import { useMateri } from '../../context/MateriContext'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -11,13 +12,20 @@ const Button = ({ circle, disabled, onPress, name, opacity, ripple, dark }) => {
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
 
+  const { openModal } = useMateri()
+
   if (circle) {
+    const onPressable = () => {
+      if (name == 'Materi') openModal()
+      else onPress()
+    }
+
     return (
       <View style={[styles.contentCircle, { backgroundColor, opacity }]}>
         <Pressable
           disabled={disabled}
           style={styles.pressableCircle}
-          onPress={onPress}
+          onPress={onPressable}
           android_ripple={{ color: colorRipple, opacity: 0.1 }}>
           <IconFontAwesome5 name="plus" style={styles.icon} />
         </Pressable>

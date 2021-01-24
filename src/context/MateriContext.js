@@ -16,7 +16,6 @@ const MateriContext = createContext()
 export const useMateri = () => useContext(MateriContext)
 
 export const MateriProvider = ({ children }) => {
-  const [hello, setHello] = useState('hello boy...')
   const [isVisible, setIsVisible] = useState(false)
   const dispatch = useDispatch()
 
@@ -49,14 +48,15 @@ export const MateriProvider = ({ children }) => {
         backgroundColor: colors.redDark
       })
     }
+    closeModal()
   }
 
-  // const close = () => {
-  //   setIsVisible(false)
-  // }
+  const openModal = () => setIsVisible(true)
+
+  const closeModal = () => setIsVisible(false)
 
   return (
-    <MateriContext.Provider value={{ initialValues, validationSchema, onSubmit }}>
+    <MateriContext.Provider value={{ isVisible, openModal, closeModal, initialValues, validationSchema, onSubmit }}>
       {children}
     </MateriContext.Provider>
   )

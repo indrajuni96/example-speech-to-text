@@ -12,9 +12,9 @@ import PanelHeader from '../../Header/PanelHeader'
 import ErrorMessage from '../../Message/ErrorMessage'
 import { useMateri } from '../../../context/MateriContext'
 
-const ModalMateri = ({ isVisible, close }) => {
+const ModalMateri = () => {
   console.log('modal materi')
-  const { initialValues, validationSchema, onSubmit } = useMateri()
+  const { isVisible, closeModal, initialValues, validationSchema, onSubmit } = useMateri()
 
   return (
     <Modal
@@ -26,7 +26,7 @@ const ModalMateri = ({ isVisible, close }) => {
       animationOutTiming={1000}
       backdropTransitionInTiming={800}
       backdropTransitionOutTiming={800}
-      onSwipeComplete={close}
+      onSwipeComplete={closeModal}
       swipeDirection={['down']}>
       <View style={styles.content}>
         <PanelHeader />
