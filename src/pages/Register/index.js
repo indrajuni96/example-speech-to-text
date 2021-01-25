@@ -139,7 +139,6 @@ export default function Register({ navigation }) {
                     <Space valSpace={24} />
 
                     <Button
-                      ripple
                       dark
                       name="DAFTAR"
                       opacity={opacity}

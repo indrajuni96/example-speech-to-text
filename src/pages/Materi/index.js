@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import styles from './styles'
 import {
-  Button,
+  Fab,
   Header,
   List,
   Loading,
@@ -53,7 +53,7 @@ const Materi = ({ navigation }) => {
           </SafeAreaView>
 
           <View style={styles.fab}>
-            <Button
+            <Fab
               dark
               circle
               name="Materi" />

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, StatusBar } from 'react-native'
 
 import { colors } from '../../../utils'
 
@@ -18,8 +18,28 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    paddingHorizontal: 15
+    paddingHorizontal: 20
   },
+  keyboardAvoidingView: {
+    flex: 1
+  },
+  header: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingTop: StatusBar.currentHeight,
+    paddingBottom: 15,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  textHeader: {
+    fontSize: 15,
+    fontFamily: 'Roboto-Bold',
+    color: colors.textDefault,
+  },
+  icon: {
+    color: colors.textDefault,
+    fontSize: SCREEN_WIDTH * 0.08
+  }
 })
 
 export default styles

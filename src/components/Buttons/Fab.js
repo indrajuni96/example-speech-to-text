@@ -7,42 +7,28 @@ import { useMateri } from '../../context/MateriContext'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
-const Button = ({ disabled, onPress, name, opacity, dark }) => {
+const Fab = ({ dark, disabled, name, opacity }) => {
   const color = dark ? colors.white : colors.textDefault
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
 
-  // const { openModal } = useMateri()
+  const { openModal } = useMateri()
 
-  // if (circle) {
-  //   const onPressable = () => {
-  //     if (name == 'Materi') {
-  //       openModal()
-  //     }
-  //     else onPress()
-  //   }
-
-  //   return (
-  //     <View style={[styles.contentCircle, { backgroundColor, opacity }]}>
-  //       <Pressable
-  //         disabled={disabled}
-  //         style={styles.pressableCircle}
-  //         onPress={onPressable}
-  //         android_ripple={{ color: colorRipple, opacity: 0.1 }}>
-  //         <IconFontAwesome5 name="plus" style={styles.icon} />
-  //       </Pressable>
-  //     </View>
-  //   )
-  // }
+  const onPressable = () => {
+    if (name == 'Materi') {
+      openModal()
+    }
+    else onPress()
+  }
 
   return (
     <View style={[styles.content, { backgroundColor, opacity }]}>
       <Pressable
         disabled={disabled}
         style={styles.pressable}
-        onPress={onPress}
+        onPress={onPressable}
         android_ripple={{ color: colorRipple, opacity: 0.1 }}>
-        <Text style={[styles.text, { color }]}>{name}</Text>
+        <IconFontAwesome5 name="plus" style={styles.icon} />
       </Pressable>
     </View>
   )
@@ -51,20 +37,16 @@ const Button = ({ disabled, onPress, name, opacity, dark }) => {
 const styles = StyleSheet.create({
   content: {
     height: 55,
+    width: 55,
     borderWidth: 1,
     borderColor: colors.textDefault,
-    borderRadius: 10,
+    borderRadius: 50,
     overflow: 'hidden',
   },
   pressable: {
-    height: 55,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  text: {
-    textAlign: 'center',
-    fontFamily: 'Roboto-Bold',
-    fontSize: 20,
   },
   icon: {
     color: colors.white,
@@ -72,4 +54,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Button
+export default Fab
