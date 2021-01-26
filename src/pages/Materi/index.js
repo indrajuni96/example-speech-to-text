@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaView, ScrollView, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './styles'
 import {
@@ -10,10 +10,25 @@ import {
   Loading,
   ModalMateri
 } from '../../components'
+import { fetchMateris } from '../../redux/actions/materi'
 import { MateriProvider } from '../../context/MateriContext'
 
 const Materi = ({ navigation }) => {
   const isLoading = useSelector((state) => state.materiStore.isLoading)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    loadMateries()
+  }, [])
+
+  const loadMateries = async () => {
+    try {
+      await dispatch(fetchMateris())
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>

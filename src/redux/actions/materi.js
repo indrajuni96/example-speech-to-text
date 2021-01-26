@@ -39,3 +39,23 @@ export const createMateri = (data) => {
     dispatch(materiIsLoading(false))
   }
 }
+
+export const fetchMateris = () => {
+  return async (dispatch) => {
+    try {
+      let results = []
+
+      const response = await firestore()
+        .collection('materies')
+        .get()
+
+      response.docs.forEach((doc) => {
+        results.push(doc.data())
+      })
+
+      console.log(results)
+    } catch (error) {
+      throw error
+    }
+  }
+}
