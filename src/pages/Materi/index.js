@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, ScrollView, View } from 'react-native'
+import { SafeAreaView, View, FlatList } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './styles'
@@ -14,7 +14,10 @@ import { fetchMateris } from '../../redux/actions/materi'
 import { MateriProvider } from '../../context/MateriContext'
 
 const Materi = ({ navigation }) => {
-  const isLoading = useSelector((state) => state.materiStore.isLoading)
+  const { isLoading, materies } = useSelector((state) => ({
+    isLoading: state.materiStore.isLoading,
+    materies: state.materiStore.materies
+  }))
 
   const dispatch = useDispatch()
 
@@ -42,29 +45,15 @@ const Materi = ({ navigation }) => {
           />
 
           <SafeAreaView style={styles.wrapperMain}>
-            <ScrollView
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}>
-              <List
-                kata="Burung"
-                onPress={() => console.log('list')} />
-
-              <List
-                kata="Harimau"
-                onPress={() => console.log('list')} />
-
-              <List
-                kata="Kucing"
-                onPress={() => console.log('list')} />
-
-              <List
-                kata="Kelinci"
-                onPress={() => console.log('list')} />
-
-              <List
-                kata="Beruang"
-                onPress={() => console.log('list')} />
-            </ScrollView>
+            <FlatList
+              data={materies}
+              keyExtractor={(_, index) => index.toString()}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <List
+                  item={item}
+                  onPress={() => console.log('list')} />
+              )} />
           </SafeAreaView>
 
           <View style={styles.fab}>

@@ -7,7 +7,7 @@ import { colors } from '../../utils'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
-const List = ({ onPress, kata }) => {
+const List = ({ onPress, item }) => {
   return (
     <View style={styles.content}>
       <Pressable
@@ -21,7 +21,7 @@ const List = ({ onPress, kata }) => {
         <Space width={20} />
 
         <View>
-          <Text style={styles.text}>{kata.toUpperCase()}</Text>
+          <Text style={styles.text}>{item.kataBicara.toUpperCase()}</Text>
         </View>
       </Pressable>
     </View>

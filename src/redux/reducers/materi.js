@@ -24,6 +24,12 @@ const Materi = (state = initialState, action) => {
         hasError: true
       }
     }
+    case types.FETCH_MATERIES: {
+      return {
+        ...state,
+        materies: action.results
+      }
+    }
     default:
       return state
   }

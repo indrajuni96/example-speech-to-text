@@ -53,7 +53,10 @@ export const fetchMateris = () => {
         results.push(doc.data())
       })
 
-      console.log(results)
+      dispatch({
+        type: types.FETCH_MATERIES,
+        results
+      })
     } catch (error) {
       throw error
     }
