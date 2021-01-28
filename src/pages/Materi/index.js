@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { SafeAreaView, View, FlatList } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles'
+import { colors } from '../../utils'
 import {
   Fab,
   Header,
@@ -30,6 +32,12 @@ const Materi = ({ navigation }) => {
       await dispatch(fetchMateris())
     } catch (error) {
       console.log(error)
+
+      showMessage({
+        message: 'Terjadi kesalahan fetch materies',
+        type: "default",
+        backgroundColor: colors.redDark
+      })
     }
   }
 
