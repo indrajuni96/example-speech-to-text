@@ -31,7 +31,7 @@ const Materi = ({ navigation }) => {
     try {
       await dispatch(fetchMateris())
     } catch (error) {
-      console.log(error)
+      // console.log(error)
 
       showMessage({
         message: 'Terjadi kesalahan fetch materies',
@@ -39,6 +39,10 @@ const Materi = ({ navigation }) => {
         backgroundColor: colors.redDark
       })
     }
+  }
+
+  const editMateriHandle = (id) => {
+
   }
 
   return (

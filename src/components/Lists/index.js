@@ -4,16 +4,19 @@ import IconIonicons from 'react-native-vector-icons/Ionicons'
 
 import Space from '../space/space'
 import { colors } from '../../utils'
+import { useMateri } from '../../context/MateriContext'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
 const List = ({ onPress, item }) => {
+  const { openModal } = useMateri()
+
   return (
     <View style={styles.content}>
       <Pressable
         style={styles.pressable}
         android_ripple={styles.ripple}
-        onPress={onPress}>
+        onPress={openModal}>
         <View style={styles.contentIcon}>
           <IconIonicons name="cube-sharp" style={styles.icon} />
         </View>
