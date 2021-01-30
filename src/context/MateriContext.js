@@ -17,6 +17,7 @@ export const useMateri = () => useContext(MateriContext)
 
 export const MateriProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false)
+  const [materiId, setMateriId] = useState(null)
   const dispatch = useDispatch()
 
   const initialValues = {
@@ -55,8 +56,22 @@ export const MateriProvider = ({ children }) => {
 
   const closeModal = () => setIsVisible(false)
 
+  const editMateriHandle = (id) => {
+    openModal()
+    setMateriId(id)
+  }
+
   return (
-    <MateriContext.Provider value={{ isVisible, openModal, closeModal, initialValues, validationSchema, onSubmit }}>
+    <MateriContext.Provider value={{
+      isVisible,
+      materiId,
+      initialValues,
+      validationSchema,
+      openModal,
+      editMateriHandle,
+      closeModal,
+      onSubmit
+    }}>
       {children}
     </MateriContext.Provider>
   )

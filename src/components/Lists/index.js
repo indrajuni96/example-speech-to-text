@@ -8,15 +8,15 @@ import { useMateri } from '../../context/MateriContext'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
-const List = ({ onPress, item }) => {
-  const { openModal } = useMateri()
+const List = ({ item }) => {
+  const { editMateriHandle } = useMateri()
 
   return (
     <View style={styles.content}>
       <Pressable
         style={styles.pressable}
         android_ripple={styles.ripple}
-        onPress={openModal}>
+        onPress={() => editMateriHandle(item.id)}>
         <View style={styles.contentIcon}>
           <IconIonicons name="cube-sharp" style={styles.icon} />
         </View>

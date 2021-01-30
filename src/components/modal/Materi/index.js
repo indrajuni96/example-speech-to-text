@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, ScrollView, KeyboardAvoidingView } from 'reac
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Modal from 'react-native-modal'
+import { useSelector, useDispatch } from 'react-redux'
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import styles from './styles'
@@ -13,8 +14,13 @@ import ErrorMessage from '../../Message/ErrorMessage'
 import { useMateri } from '../../../context/MateriContext'
 
 const ModalMateri = () => {
-  console.log('modal materi')
-  const { isVisible, closeModal, initialValues, validationSchema, onSubmit } = useMateri()
+  const { isVisible, materiId, closeModal, validationSchema, onSubmit } = useMateri()
+
+  const editedMateri = useSelector((state) => state.materiStore.materies.find(materi => materi.id === materiId))
+
+  const initialValues = {
+    kataBicara: editedMateri ? editedMateri.kataBicara : ''
+  }
 
   return (
     <Modal

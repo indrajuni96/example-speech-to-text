@@ -41,10 +41,6 @@ const Materi = ({ navigation }) => {
     }
   }
 
-  const editMateriHandle = (id) => {
-
-  }
-
   return (
     <>
       <MateriProvider>
@@ -61,11 +57,7 @@ const Materi = ({ navigation }) => {
               data={materies}
               keyExtractor={(_, index) => index.toString()}
               showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <List
-                  item={item}
-                  onPress={() => console.log('list')} />
-              )} />
+              renderItem={({ item }) => <List item={item} />} />
           </SafeAreaView>
 
           <View style={styles.fab}>

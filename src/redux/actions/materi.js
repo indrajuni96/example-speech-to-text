@@ -2,6 +2,8 @@ import firestore from '@react-native-firebase/firestore'
 
 import * as types from './ActionTypes'
 
+const ref = firestore().collection('materies')
+
 const materiIsLoading = (isLoading) => ({
   type: types.MATERI_IS_LOADING,
   isLoading
@@ -45,12 +47,15 @@ export const fetchMateris = () => {
     try {
       let results = []
 
-      const response = await firestore()
-        .collection('materies')
-        .get()
+      const response = await ref.get()
 
       response.docs.forEach((doc) => {
-        results.push(doc.data())
+        const { kataBicara, createBy } = doc.data()
+        results.push({
+          id: doc.id,
+          kataBicara,
+          createBy
+        })
       })
 
       dispatch({
