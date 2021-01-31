@@ -4,7 +4,6 @@ import React, {
   useContext
 } from 'react'
 import * as Yup from 'yup'
-import { Keyboard } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 
@@ -20,37 +19,11 @@ export const MateriProvider = ({ children }) => {
   const [materiId, setMateriId] = useState(null)
   const dispatch = useDispatch()
 
-  const initialValues = {
-    kataBicara: ''
-  }
-
   const validationSchema = Yup.object({
     kataBicara: Yup.string()
       .required('Wajib Diisi')
       .trim('Wajib Diisi')
   })
-
-  const onSubmit = async (values, { resetForm }) => {
-    Keyboard.dismiss()
-
-    try {
-      await dispatch(createMateri(values))
-      resetForm()
-
-      showMessage({
-        message: 'Materi success created',
-        type: "default",
-        backgroundColor: colors.greenDark
-      })
-    } catch (error) {
-      showMessage({
-        message: 'Materi failed created!',
-        type: "default",
-        backgroundColor: colors.redDark
-      })
-    }
-    closeModal()
-  }
 
   const openModal = () => setIsVisible(true)
 
@@ -65,12 +38,10 @@ export const MateriProvider = ({ children }) => {
     <MateriContext.Provider value={{
       isVisible,
       materiId,
-      initialValues,
       validationSchema,
       openModal,
       editMateriHandle,
-      closeModal,
-      onSubmit
+      closeModal
     }}>
       {children}
     </MateriContext.Provider>

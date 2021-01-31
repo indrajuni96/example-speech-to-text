@@ -1,12 +1,21 @@
 import React from 'react'
-import { View, Text, SafeAreaView, ScrollView, KeyboardAvoidingView } from 'react-native'
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  Keyboard,
+  KeyboardAvoidingView
+} from 'react-native'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Modal from 'react-native-modal'
 import { useSelector, useDispatch } from 'react-redux'
+import { showMessage } from 'react-native-flash-message'
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import styles from './styles'
+import { colors } from '../../../utils'
 import Input from '../../InputForm'
 import Space from '../../space/space'
 import Button from '../../Buttons/Button'
@@ -14,12 +23,39 @@ import ErrorMessage from '../../Message/ErrorMessage'
 import { useMateri } from '../../../context/MateriContext'
 
 const ModalMateri = () => {
-  const { isVisible, materiId, closeModal, validationSchema, onSubmit } = useMateri()
+  const { isVisible, materiId, closeModal, validationSchema } = useMateri()
 
   const editedMateri = useSelector((state) => state.materiStore.materies.find(materi => materi.id === materiId))
 
   const initialValues = {
     kataBicara: editedMateri ? editedMateri.kataBicara : ''
+  }
+
+  const onSubmit = async (values, { resetForm }) => {
+    Keyboard.dismiss()
+
+    try {
+      if (editedMateri) {
+        console.log(`edited id ${materiId}`)
+        console.log(editedMateri)
+      } else {
+        await dispatch(createMateri(values))
+        resetForm()
+
+        showMessage({
+          message: 'Materi success created',
+          type: "default",
+          backgroundColor: colors.greenDark
+        })
+      }
+    } catch (error) {
+      showMessage({
+        message: `Materi failed ${editedMateri ? 'edited!' : 'created...'} `,
+        type: "default",
+        backgroundColor: colors.redDark
+      })
+    }
+    closeModal()
   }
 
   return (
