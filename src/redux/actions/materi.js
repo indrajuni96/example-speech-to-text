@@ -67,3 +67,13 @@ export const fetchMateris = () => {
     }
   }
 }
+
+export const updateMateri = (id, data) => {
+  return async (dispatch) => {
+    try {
+
+    } catch (error) {
+      throw error
+    }
+  }
+}
