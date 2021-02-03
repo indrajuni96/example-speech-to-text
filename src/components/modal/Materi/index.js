@@ -20,12 +20,15 @@ import Input from '../../InputForm'
 import Space from '../../space/space'
 import Button from '../../Buttons/Button'
 import ErrorMessage from '../../Message/ErrorMessage'
+import { createMateri } from '../../../redux/actions/materi'
 import { useMateri } from '../../../context/MateriContext'
 
 const ModalMateri = () => {
   const { isVisible, materiId, closeModal, validationSchema } = useMateri()
 
   const editedMateri = useSelector((state) => state.materiStore.materies.find(materi => materi.id === materiId))
+
+  const dispatch = useDispatch()
 
   const initialValues = {
     kataBicara: editedMateri ? editedMateri.kataBicara : ''

@@ -14,6 +14,7 @@ import {
 } from '../../components'
 import { fetchMateris } from '../../redux/actions/materi'
 import { MateriProvider } from '../../context/MateriContext'
+import { useCallback } from 'react'
 
 const Materi = ({ navigation }) => {
   const { isLoading, materies } = useSelector((state) => ({
@@ -31,8 +32,6 @@ const Materi = ({ navigation }) => {
     try {
       await dispatch(fetchMateris())
     } catch (error) {
-      // console.log(error)
-
       showMessage({
         message: 'Terjadi kesalahan fetch materies',
         type: "default",
