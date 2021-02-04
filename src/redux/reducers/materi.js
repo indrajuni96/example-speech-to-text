@@ -16,7 +16,7 @@ const Materi = (state = initialState, action) => {
     case types.CREATE_MATERI_SUCCESS:
       return {
         ...state,
-        materies: state.materies.concat(action.materi)
+        materies: state.materies.concat(action.materiData)
       }
     case types.CREATE_MATERI_FAILED: {
       return {

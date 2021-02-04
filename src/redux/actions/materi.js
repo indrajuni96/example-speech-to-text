@@ -9,11 +9,6 @@ const materiIsLoading = (isLoading) => ({
   isLoading
 })
 
-const materiCreateSuccess = (materi) => ({
-  type: types.CREATE_MATERI_SUCCESS,
-  materi
-})
-
 const materiCreateFailed = () => ({
   type: types.CREATE_MATERI_FAILED
 })
@@ -51,12 +46,19 @@ export const createMateri = (data) => {
     try {
       const userUID = getState().authStore.userUID
 
-      await ref.add({
+      const response = await ref.add({
         kataBicara: data.kataBicara,
         createBy: userUID
       })
 
-      dispatch(materiCreateSuccess(data))
+      dispatch({
+        type: types.CREATE_MATERI_SUCCESS,
+        materiData: {
+          id: response.id,
+          kataBicara: data.kataBicara,
+          createBy: userUID
+        }
+      })
     } catch (error) {
       dispatch(materiCreateFailed())
       throw new Error('failed create materi!')
