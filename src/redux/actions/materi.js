@@ -71,7 +71,18 @@ export const createMateri = (data) => {
 export const updateMateri = (id, data) => {
   return async (dispatch) => {
     try {
+      const response = await ref.doc(id)
+        .update({
+          kataBicara: data.kataBicara
+        })
 
+      dispatch({
+        type: types.UPDATE_MATERI,
+        materiData: {
+          id,
+          kataBicara: data.kataBicara
+        }
+      })
     } catch (error) {
       throw error
     }

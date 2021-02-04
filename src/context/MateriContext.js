@@ -24,7 +24,10 @@ export const MateriProvider = ({ children }) => {
 
   const openModal = () => setIsVisible(true)
 
-  const closeModal = () => setIsVisible(false)
+  const closeModal = () => {
+    setMateriId(null)
+    setIsVisible(false)
+  }
 
   const editMateriHandle = (id) => {
     openModal()

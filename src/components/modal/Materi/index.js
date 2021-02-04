@@ -20,7 +20,7 @@ import Input from '../../InputForm'
 import Space from '../../space/space'
 import Button from '../../Buttons/Button'
 import ErrorMessage from '../../Message/ErrorMessage'
-import { createMateri } from '../../../redux/actions/materi'
+import { createMateri, updateMateri } from '../../../redux/actions/materi'
 import { useMateri } from '../../../context/MateriContext'
 
 const ModalMateri = () => {
@@ -39,11 +39,15 @@ const ModalMateri = () => {
 
     try {
       if (editedMateri) {
-        console.log(`edited id ${materiId}`)
-        console.log(editedMateri)
+        await dispatch(updateMateri(materiId, values))
+
+        showMessage({
+          message: 'Materi success updated',
+          type: "default",
+          backgroundColor: colors.greenDark
+        })
       } else {
         await dispatch(createMateri(values))
-        resetForm()
 
         showMessage({
           message: 'Materi success created',
@@ -58,6 +62,8 @@ const ModalMateri = () => {
         backgroundColor: colors.redDark
       })
     }
+
+    resetForm()
     closeModal()
   }
 

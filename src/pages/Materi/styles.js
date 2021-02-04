@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   },
   wrapperMain: {
     flex: 1,
-    paddingHorizontal: 15
   },
   fab: {
     position: 'absolute',

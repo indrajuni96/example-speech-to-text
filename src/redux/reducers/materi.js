@@ -13,6 +13,12 @@ const Materi = (state = initialState, action) => {
         ...state,
         isLoading: action.isLoading
       }
+    case types.FETCH_MATERIES: {
+      return {
+        ...state,
+        materies: action.results
+      }
+    }
     case types.CREATE_MATERI_SUCCESS:
       return {
         ...state,
@@ -24,10 +30,20 @@ const Materi = (state = initialState, action) => {
         hasError: true
       }
     }
-    case types.FETCH_MATERIES: {
+    case types.UPDATE_MATERI: {
+      const materiIndex = state.materies.findIndex(materi => materi.id === action.materiData.id)
+
+      const updatedMateri = [...state.materies]
+
+      updatedMateri[materiIndex] = {
+        id: action.materiData.id,
+        kataBicara: action.materiData.kataBicara,
+        createBy: updatedMateri[materiIndex].createBy
+      }
+
       return {
         ...state,
-        materies: action.results
+        materies: updatedMateri
       }
     }
     default:

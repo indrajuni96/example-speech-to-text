@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
     borderLeftWidth: 2,
     borderRightWidth: 2,
     borderBottomWidth: 4,
-    marginBottom: SCREEN_HEIGHT * 0.015,
     borderColor: colors.border,
     backgroundColor: colors.white,
+    marginBottom: SCREEN_HEIGHT * 0.015,
+    marginHorizontal: SCREEN_WIDTH * 0.035
   },
   pressable: {
     flexDirection: 'row',
