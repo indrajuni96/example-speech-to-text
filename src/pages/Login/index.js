@@ -1,44 +1,70 @@
-import { Formik } from 'formik'
 import React, { useEffect } from 'react'
-import { Keyboard, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native'
-import { showMessage } from 'react-native-flash-message'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+  Text,
+  View,
+  Keyboard,
+  Pressable,
+  ScrollView,
+} from 'react-native'
 import * as Yup from 'yup'
+import { Formik } from 'formik'
+import { useNetInfo } from '@react-native-community/netinfo'
+import { useDispatch, useSelector } from 'react-redux'
+import { showMessage } from 'react-native-flash-message'
 
-import { ErrorMessage, Header, Input, Loading, Space, Button } from '../../components'
-import { login } from '../../redux/actions/auth'
-import { colors } from '../../utils'
 import styles from './styles'
+import { colors } from '../../utils'
+import {
+  Input,
+  Space,
+  Header,
+  Button,
+  Loading,
+  ErrorMessage,
+} from '../../components'
+import { login } from '../../redux/actions/auth'
 
 export default function Login({ navigation }) {
   const textErrorMessage = 'Wajib Diisi'
+
   const isLoading = useSelector((state) => state.authStore.isLoading)
+
+  const { isConnected } = useNetInfo()
   const dispatch = useDispatch()
 
+
   useEffect(() => {
-    console.log('re render screen login')
+    // console.log('re render screen login')
   }, [])
 
   const onSubmit = (values, { resetForm }) => {
     Keyboard.dismiss()
-    dispatch(login(values))
-      .then((result) => {
-        navigation.replace("App")
-      })
-      .catch((error) => {
-        let errorMessage = 'Terjadi kesalahan!!!'
-        console.log(error.code)
 
-        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') errorMessage = 'Email atau Password Anda salah'
-
-        if (error.code === 'auth/network-request-failed') errorMessage = 'Tidak ada koneksi internet'
-
-        showMessage({
-          message: errorMessage,
-          type: "default",
-          backgroundColor: colors.redDark
+    if (isConnected) {
+      dispatch(login(values))
+        .then((result) => {
+          navigation.replace("App")
         })
+        .catch((error) => {
+          let errorMessage = 'Terjadi kesalahan!!!'
+
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') errorMessage = 'Email atau Password Anda salah'
+
+          if (error.code === 'auth/network-request-failed') errorMessage = 'Tidak ada koneksi internet'
+
+          showMessage({
+            message: errorMessage,
+            type: "default",
+            backgroundColor: colors.redDark
+          })
+        })
+    } else {
+      showMessage({
+        message: 'Tidak ada koneksi internet',
+        type: "default",
+        backgroundColor: colors.redDark
       })
+    }
   }
 
   const onSubmitDaftar = () => {
@@ -127,12 +153,12 @@ export default function Login({ navigation }) {
           <View style={styles.wrapperDaftar}>
             <Text style={styles.textBelum}>Belum punya akun?</Text>
 
-            <TouchableWithoutFeedback
+            <Pressable
               onPress={onSubmitDaftar}>
               <View>
                 <Text style={styles.textDaftar}>Daftar Disini</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </Pressable>
           </View>
 
           <Space valSpace={50} /> */}
