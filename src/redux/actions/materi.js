@@ -13,29 +13,27 @@ const materiCreateFailed = () => ({
   type: types.CREATE_MATERI_FAILED
 })
 
-export const fetchMateris = () => {
-  return async (dispatch) => {
-    try {
-      let results = []
+export const fetchMateris = () => async (dispatch) => {
+  try {
+    let results = []
 
-      const response = await ref.get()
+    const response = await ref.get()
 
-      response.docs.forEach((doc) => {
-        const { kataBicara, createBy } = doc.data()
-        results.push({
-          id: doc.id,
-          kataBicara,
-          createBy
-        })
+    response.docs.forEach((doc) => {
+      const { kataBicara, createBy } = doc.data()
+      results.push({
+        id: doc.id,
+        kataBicara,
+        createBy
       })
+    })
 
-      dispatch({
-        type: types.FETCH_MATERIES,
-        results
-      })
-    } catch (error) {
-      throw error
-    }
+    dispatch({
+      type: types.FETCH_MATERIES,
+      results
+    })
+  } catch (error) {
+    throw error
   }
 }
 

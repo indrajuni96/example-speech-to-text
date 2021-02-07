@@ -2,9 +2,10 @@ import React from 'react'
 import {
   View,
   Text,
-  SafeAreaView,
-  ScrollView,
   Keyboard,
+  Pressable,
+  ScrollView,
+  SafeAreaView,
   KeyboardAvoidingView
 } from 'react-native'
 import * as Yup from 'yup'
@@ -81,7 +82,9 @@ const ModalMateri = () => {
         <View style={styles.header}>
           <Text style={styles.textHeader}>Tambah Materi</Text>
 
-          <IconMaterialCommunityIcons name="circle-edit-outline" style={styles.icon} />
+          <Pressable onPress={closeModal}>
+            <IconMaterialCommunityIcons name="close" style={styles.icon} />
+          </Pressable>
         </View>
 
         <KeyboardAvoidingView style={styles.keyboardAvoidingView}>

@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   content: {
     height: SCREEN_HEIGHT / 1.5,
     backgroundColor: colors.white,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: SCREEN_HEIGHT * 0.02,
+    borderTopRightRadius: SCREEN_HEIGHT * 0.02,
     overflow: 'hidden'
   },
   safeAreaView: {
