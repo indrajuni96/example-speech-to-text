@@ -86,3 +86,16 @@ export const updateMateri = (id, data) => {
     }
   }
 }
+
+export const deleteMateri = (id) => async (dispatch) => {
+  try {
+    await ref.doc(id).delete()
+
+    dispatch({
+      type: types.DELETE_MATERI,
+      materiData: { id }
+    })
+  } catch (error) {
+    throw error
+  }
+}

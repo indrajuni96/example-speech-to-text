@@ -21,7 +21,7 @@ import Input from '../../InputForm'
 import Space from '../../space/space'
 import Button from '../../Buttons/Button'
 import ErrorMessage from '../../Message/ErrorMessage'
-import { createMateri, updateMateri } from '../../../redux/actions/materi'
+import { createMateri, updateMateri, deleteMateri } from '../../../redux/actions/materi'
 import { useMateri } from '../../../context/MateriContext'
 
 const ModalMateri = () => {
@@ -68,6 +68,27 @@ const ModalMateri = () => {
     closeModal()
   }
 
+  const onDelete = async () => {
+    try {
+      await dispatch(deleteMateri(editedMateri.id))
+
+      showMessage({
+        message: 'Materi success deleted',
+        type: "default",
+        backgroundColor: colors.greenDark
+      })
+    } catch {
+      showMessage({
+        message: "Materi failed deleted ",
+        type: "default",
+        backgroundColor: colors.redDark
+      })
+    }
+
+    // resetForm()
+    closeModal()
+  }
+
   return (
     <Modal
       isVisible={isVisible}
@@ -80,7 +101,7 @@ const ModalMateri = () => {
       backdropTransitionOutTiming={800}>
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.textHeader}>Tambah Materi</Text>
+          <Text style={styles.textHeader}>{editedMateri ? 'Edit' : 'Tambah'} Materi</Text>
 
           <Pressable onPress={closeModal}>
             <IconMaterialCommunityIcons name="close" style={styles.icon} />
@@ -120,6 +141,18 @@ const ModalMateri = () => {
                         opacity={opacity}
                         disabled={disable}
                         onPress={handleSubmit} />
+
+                      {editedMateri ?
+                        <>
+                          <Space valSpace={20} />
+
+                          <Button
+                            name='HAPUS'
+                            opacity={opacity}
+                            disabled={disable}
+                            onPress={onDelete} />
+                        </>
+                        : null}
 
                       <Space valSpace={40} />
                     </>

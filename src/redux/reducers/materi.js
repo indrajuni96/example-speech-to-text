@@ -46,6 +46,14 @@ const Materi = (state = initialState, action) => {
         materies: updatedMateri
       }
     }
+    case types.DELETE_MATERI: {
+      const deleteMateri = state.materies.filter(materi => materi.id !== action.materiData.id)
+
+      return {
+        ...state,
+        materies: deleteMateri
+      }
+    }
     default:
       return state
   }
