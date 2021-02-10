@@ -1,16 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import { showMessage } from 'react-native-flash-message'
 
 import { Space, CardLandingPage, Button } from '../../components'
-import { colors, ConfigBackHandler, dataDummy } from '../../utils'
+import {
+  colors,
+  dataDummy,
+  debounce,
+  ConfigBackHandler,
+} from '../../utils'
 import { ProssesSvg } from '../../assets'
 import styles from './styles'
 
 export default function LandingPage({ navigation }) {
   ConfigBackHandler(navigation)
   const [activeSlide, setActiveSlide] = useState(0)
+
+  const onLogin = useCallback(debounce(() => {
+    navigation.navigate('Login')
+  }, 1000), [])
+
+  const onDaftar = useCallback(debounce(() => {
+    navigation.navigate('Register')
+  }, 1000), [])
 
   const _renderItem = ({ item, index }) =>
   (
@@ -20,18 +33,6 @@ export default function LandingPage({ navigation }) {
       textBody={item.textBody}
     />
   )
-
-  const onSubmitDaftar = () => {
-    navigation.navigate('Register')
-    // showMessage({
-    //   // message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke virtual account BCA "70001089502165963" untuk membeli COFFEE...',
-    //   message: 'Fitur dalam pengerjaan...',
-    //   type: "default",
-    //   backgroundColor: colors.textDefault,
-    //   duration: 5000
-    // })
-  }
-
 
   return (
     <>
@@ -72,7 +73,7 @@ export default function LandingPage({ navigation }) {
           <Button
             ripple
             name="MASUK"
-            onPress={() => navigation.navigate('Login')} />
+            onPress={onLogin} />
 
           <Space valSpace={10} />
 
@@ -80,7 +81,7 @@ export default function LandingPage({ navigation }) {
             ripple
             dark
             name="DAFTAR"
-            onPress={onSubmitDaftar} />
+            onPress={onDaftar} />
         </View>
       </View>
     </>
