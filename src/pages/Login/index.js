@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import {
   Text,
   View,
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles'
-import { colors } from '../../utils'
+import { colors, debounce } from '../../utils'
 import {
   Input,
   Space,
@@ -29,20 +29,19 @@ export default function Login({ navigation }) {
 
   const isLoading = useSelector((state) => state.authStore.isLoading)
 
-  const { isConnected } = useNetInfo()
   const dispatch = useDispatch()
-
+  const { isConnected } = useNetInfo()
 
   useEffect(() => {
     // console.log('re render screen login')
   }, [])
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = useCallback(debounce((values, { resetForm }) => {
     Keyboard.dismiss()
 
     if (isConnected) {
       dispatch(login(values))
-        .then((result) => {
+        .then(() => {
           navigation.replace("App")
         })
         .catch((error) => {
@@ -65,27 +64,18 @@ export default function Login({ navigation }) {
         backgroundColor: colors.redDark
       })
     }
-  }
+  }, 1000), [isConnected])
 
-  const onSubmitDaftar = () => {
+  const onRegister = useCallback(debounce(() => {
     navigation.navigate('Register')
-
-    // console.log('Daftar')
-    // showMessage({
-    //   message: 'Maaf fitur belum tersedia, untuk membantu pengembangan fitur ini bisa isi via "GOPAY" ke "089502165963 untuk membeli COFFE...',
-    //   type: "default",
-    //   backgroundColor: colors.textDefault,
-    // })
-  }
+  }, 1000), [])
 
   return (
     <>
       <View style={styles.container}>
         <Header
           goBack
-          // title="Masuk"
-          onPress={() => navigation.goBack()}
-        />
+          onPress={() => navigation.goBack()} />
 
         <ScrollView style={styles.wrapperScrollView}
           keyboardShouldPersistTaps="handled"
@@ -106,8 +96,7 @@ export default function Login({ navigation }) {
                 email: Yup.string().required(textErrorMessage).trim(textErrorMessage).email('format harus email'),
                 password: Yup.string().required(textErrorMessage).trim(textErrorMessage).min(6, 'minimal 6 karakter')
               })}
-              onSubmit={onSubmit}
-            >
+              onSubmit={onSubmit}>
               {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => {
                 const disable = values.email && values.password ? false : true
                 const opacity = values.email && values.password ? 1 : 0.3
@@ -120,8 +109,7 @@ export default function Login({ navigation }) {
                       errors={errors.email}
                       touched={touched.email}
                       onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                    />
+                      onBlur={handleBlur('email')} />
                     <ErrorMessage touched={touched.email} errors={errors.email} />
 
                     <Input
@@ -131,8 +119,7 @@ export default function Login({ navigation }) {
                       errors={errors.password}
                       touched={touched.password}
                       onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                    />
+                      onBlur={handleBlur('password')} />
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
                     <Space valSpace={24} />
@@ -144,8 +131,7 @@ export default function Login({ navigation }) {
                     <Space valSpace={24} />
                   </>
                 )
-              }
-              }
+              }}
             </Formik>
           </View>
 
@@ -154,7 +140,7 @@ export default function Login({ navigation }) {
             <Text style={styles.textBelum}>Belum punya akun?</Text>
 
             <Pressable
-              onPress={onSubmitDaftar}>
+              onPress={onRegister}>
               <View>
                 <Text style={styles.textDaftar}>Daftar Disini</Text>
               </View>

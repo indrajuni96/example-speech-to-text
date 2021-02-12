@@ -1,16 +1,21 @@
 import React, { useState, useCallback } from 'react'
-import { StatusBar, Text, View, TouchableNativeFeedback } from 'react-native'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { showMessage } from 'react-native-flash-message'
-
-import { Space, CardLandingPage, Button } from '../../components'
 import {
-  colors,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
+
+import {
+  Space,
+  Button,
+  CardLandingPage,
+} from '../../components'
+import {
   dataDummy,
   debounce,
   ConfigBackHandler,
 } from '../../utils'
-import { ProssesSvg } from '../../assets'
 import styles from './styles'
 
 export default function LandingPage({ navigation }) {
@@ -21,18 +26,18 @@ export default function LandingPage({ navigation }) {
     navigation.navigate('Login')
   }, 1000), [])
 
-  const onDaftar = useCallback(debounce(() => {
+  const onRegister = useCallback(debounce(() => {
     navigation.navigate('Register')
   }, 1000), [])
 
   const _renderItem = ({ item, index }) =>
-  (
-    <CardLandingPage
-      landingSvg={item.landingSvg}
-      textTitle={item.textTitle}
-      textBody={item.textBody}
-    />
-  )
+    (
+      <CardLandingPage
+        landingSvg={item.landingSvg}
+        textTitle={item.textTitle}
+        textBody={item.textBody}
+      />
+    )
 
   return (
     <>
@@ -81,7 +86,7 @@ export default function LandingPage({ navigation }) {
             ripple
             dark
             name="DAFTAR"
-            onPress={onDaftar} />
+            onPress={onRegister} />
         </View>
       </View>
     </>
