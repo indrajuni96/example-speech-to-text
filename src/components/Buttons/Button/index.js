@@ -1,39 +1,21 @@
 import React from 'react'
-import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
-import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Dimensions,
+} from 'react-native'
+import PropTypes from 'prop-types'
 
-import { colors } from '../../utils'
-import { useMateri } from '../../context/MateriContext'
+import { colors } from '../../../utils'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
-const Button = ({ disabled, onPress, name, opacity, dark }) => {
+const Button = ({ dark, disabled, name, onPress, opacity }) => {
   const color = dark ? colors.white : colors.textDefault
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
-
-  // const { openModal } = useMateri()
-
-  // if (circle) {
-  //   const onPressable = () => {
-  //     if (name == 'Materi') {
-  //       openModal()
-  //     }
-  //     else onPress()
-  //   }
-
-  //   return (
-  //     <View style={[styles.contentCircle, { backgroundColor, opacity }]}>
-  //       <Pressable
-  //         disabled={disabled}
-  //         style={styles.pressableCircle}
-  //         onPress={onPressable}
-  //         android_ripple={{ color: colorRipple, opacity: 0.1 }}>
-  //         <IconFontAwesome5 name="plus" style={styles.icon} />
-  //       </Pressable>
-  //     </View>
-  //   )
-  // }
 
   return (
     <View style={[styles.content, { backgroundColor, opacity }]}>
@@ -73,3 +55,11 @@ const styles = StyleSheet.create({
 })
 
 export default Button
+
+Button.propTypes = {
+  dark: PropTypes.bool,
+  disabled: PropTypes.bool,
+  name: PropTypes.string,
+  opacity: PropTypes.number,
+  onPress: PropTypes.func,
+}

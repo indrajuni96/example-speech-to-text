@@ -31,13 +31,13 @@ export default function LandingPage({ navigation }) {
   }, 1000), [])
 
   const _renderItem = ({ item, index }) =>
-    (
-      <CardLandingPage
-        landingSvg={item.landingSvg}
-        textTitle={item.textTitle}
-        textBody={item.textBody}
-      />
-    )
+  (
+    <CardLandingPage
+      landingSvg={item.landingSvg}
+      textTitle={item.textTitle}
+      textBody={item.textBody}
+    />
+  )
 
   return (
     <>
@@ -83,8 +83,8 @@ export default function LandingPage({ navigation }) {
           <Space valSpace={10} />
 
           <Button
-            ripple
             dark
+            ripple
             name="DAFTAR"
             onPress={onRegister} />
         </View>
