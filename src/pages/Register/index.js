@@ -1,25 +1,46 @@
 import { Formik } from 'formik'
-import React, { useEffect } from 'react'
-import { Keyboard, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native'
+import React, { useEffect, useCallback } from 'react'
+import {
+  Text,
+  View,
+  Keyboard,
+  ScrollView,
+  Pressable,
+} from 'react-native'
+import * as Yup from 'yup'
 import { showMessage } from 'react-native-flash-message'
 import { useDispatch, useSelector } from 'react-redux'
-import * as Yup from 'yup'
+import { useNetInfo } from '@react-native-community/netinfo'
 
-import { ErrorMessage, Header, Input, Loading, Space, Button } from '../../components'
-import { register } from '../../redux/actions/auth'
-import { colors, InputNumber } from '../../utils'
 import styles from './styles'
+import {
+  Input,
+  Space,
+  Header,
+  Button,
+  Loading,
+  ErrorMessage,
+} from '../../components'
+import {
+  colors,
+  debounce,
+  InputNumber
+} from '../../utils'
+import { register } from '../../redux/actions/auth'
 
 export default function Register({ navigation }) {
   const textErrorMessage = 'Wajib Diisi'
-  const isLoading = useSelector((state) => state.authStore.isLoading)
+
+  const { isConnected } = useNetInfo()
+
   const dispatch = useDispatch()
+  const isLoading = useSelector((state) => state.authStore.isLoading)
 
   useEffect(() => {
     console.log('re render screen register')
   }, [])
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = useCallback(debounce((values, { resetForm }) => {
     Keyboard.dismiss()
 
     dispatch(register(values))
@@ -44,9 +65,9 @@ export default function Register({ navigation }) {
           backgroundColor: colors.redDark,
         })
       })
-  }
+  }, 1000), [isConnected])
 
-  const onSubmitMasuk = () => {
+  const onRegister = () => {
     Keyboard.dismiss()
     setTimeout(() => {
       // navigation.navigate('Login')
@@ -58,10 +79,9 @@ export default function Register({ navigation }) {
     <>
       <View style={styles.container}>
         <Header
-          onPress={() => navigation.goBack()}
-          title="Daftar"
           goBack
-        />
+          title="Daftar"
+          onPress={() => navigation.goBack()} />
 
         <ScrollView
           style={styles.wrapperScrollView}
@@ -81,8 +101,7 @@ export default function Register({ navigation }) {
                 email: Yup.string().required(textErrorMessage).trim(textErrorMessage).email('format harus email'),
                 password: Yup.string().required(textErrorMessage).trim(textErrorMessage).min(6, 'minimal 6 karakter')
               })}
-              onSubmit={onSubmit}
-            >
+              onSubmit={onSubmit} >
               {({ handleChange, handleBlur, handleSubmit, values, setFieldValue, touched, errors, isSubmitting }) => {
                 const disable = values.email && values.password ? false : true
                 const opacity = values.email && values.password ? 1 : 0.3
@@ -95,8 +114,7 @@ export default function Register({ navigation }) {
                       errors={errors.nama}
                       touched={touched.nama}
                       onChangeText={handleChange('nama')}
-                      onBlur={handleBlur('nama')}
-                    />
+                      onBlur={handleBlur('nama')} />
                     <ErrorMessage touched={touched.nama} errors={errors.nama} />
 
                     <Input
@@ -111,8 +129,7 @@ export default function Register({ navigation }) {
                           InputNumber(text)
                         )
                       }}
-                      onBlur={handleBlur('nomor')}
-                    />
+                      onBlur={handleBlur('nomor')} />
                     <ErrorMessage touched={touched.nomor} errors={errors.nomor} />
 
                     <Input
@@ -121,8 +138,7 @@ export default function Register({ navigation }) {
                       errors={errors.email}
                       touched={touched.email}
                       onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                    />
+                      onBlur={handleBlur('email')} />
                     <ErrorMessage touched={touched.email} errors={errors.email} />
 
                     <Input
@@ -132,8 +148,7 @@ export default function Register({ navigation }) {
                       errors={errors.password}
                       touched={touched.password}
                       onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                    />
+                      onBlur={handleBlur('password')} />
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
                     <Space valSpace={24} />
@@ -148,8 +163,7 @@ export default function Register({ navigation }) {
                     <Space valSpace={24} />
                   </>
                 )
-              }
-              }
+              }}
             </Formik>
           </View>
 
@@ -157,12 +171,12 @@ export default function Register({ navigation }) {
           {/* <View style={styles.wrapperMasuk}>
             <Text style={styles.textSudah}>Sudah pernah punya akun? </Text>
 
-            <TouchableWithoutFeedback
-              onPress={onSubmitMasuk}>
+            <Pressable
+              onPress={onRegister}>
               <View>
                 <Text style={styles.textMasuk}>Masuk</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </Pressable>
           </View> */}
 
           {/* <Space valSpace={40} /> */}
