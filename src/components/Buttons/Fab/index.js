@@ -2,16 +2,13 @@ import React from 'react'
 import {
   View,
   Pressable,
-  StyleSheet,
-  Dimensions,
 } from 'react-native'
 import PropTypes from 'prop-types'
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
+import styles from './styles'
 import { colors } from '../../../utils'
 import { useMateri } from '../../../context/MateriContext'
-
-const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
 const Fab = ({ dark, disabled, name, opacity, onPress }) => {
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
@@ -38,26 +35,6 @@ const Fab = ({ dark, disabled, name, opacity, onPress }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  content: {
-    height: 55,
-    width: 55,
-    borderWidth: 1,
-    borderColor: colors.textDefault,
-    borderRadius: 50,
-    overflow: 'hidden',
-  },
-  pressable: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  icon: {
-    color: colors.white,
-    fontSize: SCREEN_WIDTH * 0.08
-  }
-})
 
 export default Fab
 
