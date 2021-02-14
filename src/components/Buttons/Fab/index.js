@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native'
+import PropTypes from 'prop-types'
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import { colors } from '../../../utils'
@@ -12,7 +13,7 @@ import { useMateri } from '../../../context/MateriContext'
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window')
 
-const Fab = ({ dark, disabled, name, opacity }) => {
+const Fab = ({ dark, disabled, name, opacity, onPress }) => {
   const colorRipple = dark ? colors.blueDark : colors.whiteDark
   const backgroundColor = dark ? colors.textDefault : colors.white
 
@@ -59,3 +60,11 @@ const styles = StyleSheet.create({
 })
 
 export default Fab
+
+Fab.propTypes = {
+  dark: PropTypes.bool,
+  disabled: PropTypes.bool,
+  name: PropTypes.string,
+  opacity: PropTypes.number,
+  onPress: PropTypes.func,
+}

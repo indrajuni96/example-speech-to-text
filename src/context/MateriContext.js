@@ -4,17 +4,14 @@ import React, {
   useContext
 } from 'react'
 import * as Yup from 'yup'
-import { showMessage } from 'react-native-flash-message'
-
-import { colors } from '../utils'
 
 const MateriContext = createContext()
 
 export const useMateri = () => useContext(MateriContext)
 
 export const MateriProvider = ({ children }) => {
-  const [isVisible, setIsVisible] = useState(false)
   const [materiId, setMateriId] = useState(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   const validationSchema = Yup.object({
     kataBicara: Yup.string()
@@ -40,8 +37,8 @@ export const MateriProvider = ({ children }) => {
       materiId,
       validationSchema,
       openModal,
+      closeModal,
       editMateriHandle,
-      closeModal
     }}>
       {children}
     </MateriContext.Provider>
