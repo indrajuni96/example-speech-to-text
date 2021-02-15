@@ -8,24 +8,24 @@ import Fab from './Buttons/Fab'
 import Button from './Buttons/Button'
 import Loading from './Loading/Loading'
 import ErrorMessage from './Message/ErrorMessage'
-import CardCourse from './Cards/CardCourse/CardCourse'
+import CardCourse from './Cards/CardCourse'
 import CardLearning from './Cards/CardLearning/CardLearning'
 import CardDrawerMenu from './Cards/CardDrawerMenu/CardDrawerMenu'
 import CardLandingPage from './Cards/CardLandingPage/CardLandingPage'
 
 export {
   Space,
-  CardLearning,
-  CardCourse,
-  CardDrawerMenu,
-  CardLandingPage,
   Input,
-  Loading,
-  ErrorMessage,
-  Header,
   List,
   Fab,
   Button,
+  Loading,
+  Header,
+  ErrorMessage,
   ModalGame,
-  ModalMateri
+  ModalMateri,
+  CardCourse,
+  CardLearning,
+  CardDrawerMenu,
+  CardLandingPage,
 }
