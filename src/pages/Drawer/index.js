@@ -34,17 +34,17 @@ export default function Drawer({ navigation }) {
         <Text style={styles.textName}>{user.nama}</Text>
 
         <Space valSpace={20} />
-        <CardDrawerMenu nameNemu="Dashboard" onPress={() => navigation.navigate("Dashboard")} />
+        <CardDrawerMenu name="Dashboard" onPress={() => navigation.navigate("Dashboard")} />
 
-        <CardDrawerMenu nameNemu="Materi" onPress={() => navigation.navigate("Materi")} />
+        <CardDrawerMenu name="Materi" onPress={() => navigation.navigate("Materi")} />
 
-        <CardDrawerMenu nameNemu="Form Example" onPress={() => navigation.navigate("Form")} />
+        <CardDrawerMenu name="Form Example" onPress={() => navigation.navigate("Form")} />
 
-        <CardDrawerMenu nameNemu="History" onPress={() => navigation.navigate("History")} />
+        <CardDrawerMenu name="History" onPress={() => navigation.navigate("History")} />
 
-        <CardDrawerMenu nameNemu="Profile" onPress={() => navigation.navigate("Profile")} />
+        <CardDrawerMenu name="Profile" onPress={() => navigation.navigate("Profile")} />
 
-        <CardDrawerMenu nameNemu="Logout" onPress={onLogout} />
+        <CardDrawerMenu name="Logout" onPress={onLogout} />
       </View>
 
       <View style={styles.wrapperVersion}>
