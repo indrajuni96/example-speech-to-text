@@ -1,11 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import {
+  Text,
+  View
+} from 'react-native'
+import PropTypes from 'prop-types'
 
-import { colors } from '../../../utils'
-import { ProssesSvg, TimeSvg, CampingSvg } from '../../../assets'
+import styles from './styles'
 import Space from '../../space/space'
+import { ProssesSvg, TimeSvg, CampingSvg } from '../../../assets'
 
-export default function CardLandingPage({ landingSvg, textTitle, textBody }) {
+const CardLandingPage = ({ landingSvg, textTitle, textBody }) => {
   return (
     <View style={styles.wrapperSnapImage}>
 
@@ -20,15 +24,10 @@ export default function CardLandingPage({ landingSvg, textTitle, textBody }) {
   )
 }
 
-const styles = StyleSheet.create({
-  wrapperSnapImage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textTitleImage: {
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-    fontSize: 15,
-  }
-})
+export default CardLandingPage
+
+CardLandingPage.propTypes = {
+  landingSvg: PropTypes.string,
+  textTitle: PropTypes.string,
+  textBody: PropTypes.string
+}

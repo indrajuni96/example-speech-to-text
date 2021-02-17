@@ -11,7 +11,7 @@ import ErrorMessage from './Message/ErrorMessage'
 import CardCourse from './Cards/CardCourse'
 import CardLearning from './Cards/CardLearning/CardLearning'
 import CardDrawerMenu from './Cards/CardDrawerMenu'
-import CardLandingPage from './Cards/CardLandingPage/CardLandingPage'
+import CardLandingPage from './Cards/CardLandingPage'
 
 export {
   Space,
