@@ -9,7 +9,7 @@ import Button from './Buttons/Button'
 import Loading from './Loading/Loading'
 import ErrorMessage from './Message/ErrorMessage'
 import CardCourse from './Cards/CardCourse'
-import CardLearning from './Cards/CardLearning/CardLearning'
+import CardLearning from './Cards/CardLearning'
 import CardDrawerMenu from './Cards/CardDrawerMenu'
 import CardLandingPage from './Cards/CardLandingPage'
 

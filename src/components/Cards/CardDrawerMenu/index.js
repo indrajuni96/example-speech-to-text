@@ -9,7 +9,6 @@ import IconFontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 
 import styles from './styles'
 import { colors } from '../../../utils'
-import CardCourse from '../CardCourse';
 
 const CardDrawerMenu = ({ name, onPress }) => {
   return (
@@ -32,7 +31,7 @@ const CardDrawerMenu = ({ name, onPress }) => {
 
 export default CardDrawerMenu
 
-CardCourse.propTypes = {
+CardDrawerMenu.propTypes = {
   name: PropTypes.string,
   onPress: PropTypes.func
 }
