@@ -1,11 +1,18 @@
 import React from 'react'
-import { StyleSheet, StatusBar, Text, View, TouchableOpacity } from 'react-native'
+import {
+  Text,
+  View,
+  StatusBar,
+  TouchableOpacity
+} from 'react-native'
+import PropTypes from 'prop-types'
 import IconFeather from 'react-native-vector-icons/dist/Feather'
 import IconIonic from 'react-native-vector-icons/dist/Ionicons'
 
+import styles from './styles'
 import { colors } from '../../utils'
 
-export default function Header({ title, onPress, goBack }) {
+const Header = ({ title, onPress, goBack }) => {
   return (
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -26,21 +33,10 @@ export default function Header({ title, onPress, goBack }) {
   )
 }
 
-const styles = StyleSheet.create({
-  wrapperHeader: {
-    height: 65,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  textHeader: {
-    fontSize: 17,
-    fontFamily: 'Roboto-Bold',
-    color: colors.textDefault,
-  },
-  wrapperText: {
-    flex: 1,
-    alignItems: 'center',
-    marginRight: 30
-  },
-})
+export default Header
+
+Header.propTypes = {
+  title: PropTypes.string,
+  goBack: PropTypes.bool,
+  onPress: PropTypes.func
+}

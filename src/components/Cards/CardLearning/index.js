@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
+import PropTypes from 'prop-types'
 import { toRomaji } from 'wanakana';
 import IconIonicons from 'react-native-vector-icons/dist/Ionicons';
 
