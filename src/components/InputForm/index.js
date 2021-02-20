@@ -1,9 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import {
+  Text,
+  View,
+  TextInput
+} from 'react-native'
+import PropTypes from 'prop-types'
 
+import styles from './styles'
 import { colors } from '../../utils'
 
-export default function Input({ label, value, numeric, onChangeText, onBlur, secureTextEntry, errors, touched }) {
+const Input = ({ label, value, numeric, onChangeText, onBlur, secureTextEntry, errors, touched }) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
@@ -18,16 +24,16 @@ export default function Input({ label, value, numeric, onChangeText, onBlur, sec
   )
 }
 
-const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 12
-  },
-  label: {
-    fontSize: 16,
-    color: colors.textDefault,
-    marginBottom: 6,
-    fontFamily: 'Roboto-Regular',
-  }
-})
+export default Input
+
+Input.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  errors: PropTypes.string,
+  goBack: PropTypes.bool,
+  touched: PropTypes.bool,
+  numeric: PropTypes.bool,
+  secureTextEntry: PropTypes.bool,
+  onChangeText: PropTypes.func,
+  onBlur: PropTypes.func,
+}
