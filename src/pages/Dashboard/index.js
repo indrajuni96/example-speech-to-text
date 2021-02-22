@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles';
-import { ConfigBackHandler } from '../../utils';
+import { colors, ConfigBackHandler } from '../../utils';
+import { getTranslate } from '../../helpers'
 import { getItems } from '../../redux/actions/item';
 import { CardLearning, Header, Space } from '../../components';
 
@@ -15,7 +17,23 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     dispatch(getItems())
+    loadTranslate()
   }, [])
+
+  const loadTranslate = async () => {
+    try {
+      const response = await getTranslate('translate')
+      console.log(response)
+
+    } catch (error) {
+      console.log(error)
+      showMessage({
+        message: 'Terjadi kesalahan fetch materies',
+        type: "default",
+        backgroundColor: colors.redDark
+      })
+    }
+  }
 
   const onMoveCard = (item) => {
     navigation.navigate("Example", { item })

@@ -11,14 +11,13 @@ import styles from './styles'
 import { colors } from '../../utils'
 import {
   Fab,
-  Header,
   List,
+  Header,
   Loading,
   ModalMateri
 } from '../../components'
 import { fetchMateris } from '../../redux/actions/materi'
 import { MateriProvider } from '../../context/MateriContext'
-import { useCallback } from 'react'
 
 const Materi = ({ navigation }) => {
   const { isLoading, materies } = useSelector((state) => ({
