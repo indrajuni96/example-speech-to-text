@@ -1,9 +1,9 @@
 import axios from './connection'
 
-export const getTranslate = (url) => {
+export const getTranslate = (url, data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await axios.get(url)
+      const response = await axios.post(url, data)
 
       resolve(response.data)
     } catch (error) {
@@ -12,16 +12,3 @@ export const getTranslate = (url) => {
     }
   })
 }
-
-// export const getTranslate = (url, body) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       const response = await axios.get(url)
-
-//       resolve(response.data)
-//     } catch (error) {
-//       console.log(error)
-//       reject(error)
-//     }
-//   })
-// }

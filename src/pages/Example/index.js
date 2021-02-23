@@ -1,13 +1,23 @@
-import Voice from '@react-native-community/voice';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  View,
+  StatusBar,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Tts from 'react-native-tts';
 import { toRomaji } from 'wanakana';
-import { transliterate as tr } from 'transliteration'
+import Voice from '@react-native-community/voice';
 
-import { ModalGame, Space, CardCourse } from '../../components';
-import { colors } from '../../utils';
+import {
+  Space,
+  ModalGame,
+  CardCourse,
+} from '../../components';
 import styles from './styles';
+import { colors } from '../../utils';
+import { getTranslate } from '../../helpers'
 
 export default function Example({ route, navigation }) {
   const [datas, setDatas] = useState({
@@ -52,72 +62,98 @@ export default function Example({ route, navigation }) {
 
   const onSpeechEnd = (e) => {
     console.log('onSpeechEnd: ', e);
-    toggleModal(true)
-    setIsBtnSpeak(false)
-    setIsQuestion(false)
+    // toggleModal(true)
+    // setIsBtnSpeak(false)
+    // setIsQuestion(false)
   };
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
   };
 
-  const onSpeechResults = (e) => {
-    // console.log('onSpeechResults: ', e.value);
+  // const onSpeechResults = (e) => {
+  //   // console.log('onSpeechResults: ', e.value);
 
-    // split string to array
-    let questionArray = quiz.split(' ')
-    // console.log(questionArray)
+  //   // split string to array
+  //   let questionArray = quiz.split(' ')
+  //   // console.log(questionArray)
 
-    // japanes to romaji
-    let questionRomaji = []
-    let answerRomaji = []
+  //   // japanes to romaji
+  //   let questionRomaji = []
+  //   let answerRomaji = []
 
-    questionArray.forEach(value => questionRomaji.push(toRomaji(value)))
-    e.value.forEach(value => answerRomaji.push(toRomaji(value)))
-    // console.log(questionRomaji)
-    console.log(answerRomaji)
+  //   questionArray.forEach(value => questionRomaji.push(toRomaji(value)))
+  //   e.value.forEach(value => answerRomaji.push(toRomaji(value)))
+  //   // console.log(questionRomaji)
+  //   console.log(answerRomaji)
 
-    const countValueQestion = countValueArray(questionRomaji)
-    const countValueAnswer = countValueArray(answerRomaji)
-    // console.log(countValueQestion)
-    // console.log(countValueAnswer)
+  //   const countValueQestion = countValueArray(questionRomaji)
+  //   const countValueAnswer = countValueArray(answerRomaji)
+  //   // console.log(countValueQestion)
+  //   // console.log(countValueAnswer)
 
-    let resultIn = []
-    let resultOut = []
+  //   let resultIn = []
+  //   let resultOut = []
 
-    answerRomaji.forEach(value => {
-      let countValueResIn = countValueArray(resultIn)
+  //   answerRomaji.forEach(value => {
+  //     let countValueResIn = countValueArray(resultIn)
 
-      if (questionRomaji.includes(value)) {
-        if (countValueResIn.value) {
-          if (countValueResIn.value < countValueQestion.value) {
-            resultIn.push(value)
-          }
-        } else {
-          if (!resultIn.includes(value)) {
-            resultIn.push(value)
-          }
-        }
+  //     if (questionRomaji.includes(value)) {
+  //       if (countValueResIn.value) {
+  //         if (countValueResIn.value < countValueQestion.value) {
+  //           resultIn.push(value)
+  //         }
+  //       } else {
+  //         if (!resultIn.includes(value)) {
+  //           resultIn.push(value)
+  //         }
+  //       }
+  //     }
+  //   })
+
+  //   console.log(resultIn)
+
+  //   if (resultIn.length > 0) {
+  //     console.log('BENAR')
+  //     setIsQuestion(true)
+  //   } else {
+  //     console.log('salah')
+  //     setIsQuestion(false)
+  //   }
+  //   toggleModal(true)
+
+  //   // setDatas({
+  //   //   ...datas,
+  //   //   ['results']: resultRomaji
+  //   // })
+
+  //   setIsBtnSpeak(false)
+  // };
+
+  const onSpeechResults = async (event) => {
+    try {
+      // apabila  hiraga/katakana ada dua kalimat
+      // const questionArray = quiz.split(' ')
+
+      // event.value diambil yg pertama
+      const response = await getTranslate('translate', {
+        "mode": "spaced",
+        "convert": "romaji",
+        "japanese": event.value[0]
+      })
+      // console.log(toRomaji(quiz))
+      // console.log(response.data.result)
+
+      if (response.code === 200) {
+        toggleModal(true)
+        setIsBtnSpeak(false)
       }
-    })
 
-    console.log(resultIn)
-
-    if (resultIn.length > 0) {
-      console.log('BENAR')
-      setIsQuestion(true)
-    } else {
-      console.log('salah')
-      setIsQuestion(false)
+    } catch (error) {
+      console.log(error)
+      toggleModal(true)
+      setIsBtnSpeak(false)
     }
-    toggleModal(true)
-
-    // setDatas({
-    //   ...datas,
-    //   ['results']: resultRomaji
-    // })
-
-    setIsBtnSpeak(false)
   };
 
   const startRecord = async () => {
@@ -226,7 +262,7 @@ export default function Example({ route, navigation }) {
 
         {/* {datas.results.map((result, index) => {
           return (
-            <Text key={`result-${index}`} style={styles.stat}>
+            <Text key={`result - ${ index } `} style={styles.stat}>
               {toRomaji(result)}
             </Text>
           );

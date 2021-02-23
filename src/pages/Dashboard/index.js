@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Pressable,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { showMessage } from 'react-native-flash-message'
 
@@ -17,16 +22,14 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     dispatch(getItems())
-    loadTranslate()
+    // loadTranslate()
   }, [])
 
   const loadTranslate = async () => {
     try {
       const response = await getTranslate('translate')
-      console.log(response)
 
     } catch (error) {
-      console.log(error)
       showMessage({
         message: 'Terjadi kesalahan fetch materies',
         type: "default",
@@ -39,12 +42,30 @@ export default function Dashboard({ navigation }) {
     navigation.navigate("Example", { item })
   }
 
+  const onTranslate = async () => {
+    try {
+      const data = {
+        "convert": "romaji",
+        "japanese": "おはよう私の愛"
+      }
+
+      const response = await getTranslate('translate', data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Header
         onPress={() => navigation.toggleDrawer()}
         title="Dashboard"
       />
+
+      {/* <Pressable onPress={onTranslate}>
+        <Text>translate</Text>
+      </Pressable> */}
 
       <View style={styles.wrapperMain}>
         <Space valSpace={4} />
