@@ -1,7 +1,8 @@
 import axios from 'axios'
+import Config from "react-native-config"
 
 const http = axios.create({
-  baseURL: 'https://translate-japanese.herokuapp.com/api/',
+  baseURL: Config.API_URL,
   headers: { 'Content-Type': 'application/json' }
 })
 

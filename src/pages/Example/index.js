@@ -62,13 +62,13 @@ export default function Example({ route, navigation }) {
 
   const onSpeechEnd = (e) => {
     console.log('onSpeechEnd: ', e);
-    // toggleModal(true)
-    // setIsBtnSpeak(false)
-    // setIsQuestion(false)
   };
 
   const onSpeechError = (e) => {
     console.log('onSpeechError: ', e);
+    toggleModal(true)
+    setIsBtnSpeak(false)
+    setIsQuestion(false)
   };
 
   // const onSpeechResults = (e) => {
@@ -145,16 +145,15 @@ export default function Example({ route, navigation }) {
       // console.log(response.data.result)
 
       if (response.code === 200) {
-        toggleModal(true)
-        setIsBtnSpeak(false)
       }
 
     } catch (error) {
       console.log(error)
-      toggleModal(true)
-      setIsBtnSpeak(false)
     }
-  };
+
+    toggleModal(true)
+    setIsBtnSpeak(false)
+  }
 
   const startRecord = async () => {
     console.log('onStartMicroPhone')

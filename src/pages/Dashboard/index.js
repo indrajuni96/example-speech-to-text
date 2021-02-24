@@ -3,14 +3,11 @@ import {
   Text,
   View,
   FlatList,
-  Pressable,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { showMessage } from 'react-native-flash-message'
 
 import styles from './styles';
-import { colors, ConfigBackHandler } from '../../utils';
-import { getTranslate } from '../../helpers'
+import { ConfigBackHandler } from '../../utils';
 import { getItems } from '../../redux/actions/item';
 import { CardLearning, Header, Space } from '../../components';
 
@@ -22,38 +19,10 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     dispatch(getItems())
-    // loadTranslate()
   }, [])
-
-  const loadTranslate = async () => {
-    try {
-      const response = await getTranslate('translate')
-
-    } catch (error) {
-      showMessage({
-        message: 'Terjadi kesalahan fetch materies',
-        type: "default",
-        backgroundColor: colors.redDark
-      })
-    }
-  }
 
   const onMoveCard = (item) => {
     navigation.navigate("Example", { item })
-  }
-
-  const onTranslate = async () => {
-    try {
-      const data = {
-        "convert": "romaji",
-        "japanese": "おはよう私の愛"
-      }
-
-      const response = await getTranslate('translate', data)
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   return (
@@ -62,10 +31,6 @@ export default function Dashboard({ navigation }) {
         onPress={() => navigation.toggleDrawer()}
         title="Dashboard"
       />
-
-      {/* <Pressable onPress={onTranslate}>
-        <Text>translate</Text>
-      </Pressable> */}
 
       <View style={styles.wrapperMain}>
         <Space valSpace={4} />
