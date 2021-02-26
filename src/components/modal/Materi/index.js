@@ -20,7 +20,7 @@ import { colors } from '../../../utils'
 import Input from '../../InputForm'
 import Space from '../../space/space'
 import Button from '../../Buttons/Button'
-import ErrorMessage from '../../Message/ErrorMessage'
+import ErrorMessage from '../../Message'
 import { createMateri, updateMateri, deleteMateri } from '../../../redux/actions/materi'
 import { useMateri } from '../../../context/MateriContext'
 
