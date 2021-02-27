@@ -184,12 +184,12 @@ export default function Game({ navigation }) {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.textTitle}>What sound does this make?</Text>
-        <Space valSpace={40} />
+        <Space height={40} />
 
         <CardCourse item={item} isBtnSpeak={isBtnSpeak}
           onPress={onSpek}
         />
-        <Space valSpace={25} />
+        <Space height={25} />
 
         <TouchableOpacity
           disabled={isBtnSpeak ? true : false}

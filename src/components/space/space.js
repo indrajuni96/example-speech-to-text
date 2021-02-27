@@ -1,8 +1,14 @@
 import React from 'react'
 import { View } from 'react-native'
+import PropTypes from 'prop-types'
 
-const Space = ({ valSpace, width }) => {
-  return <View style={{ height: valSpace, width }} />
+const Space = ({ height, width }) => {
+  return <View style={{ height, width }} />
 }
 
 export default Space
+
+Space.propTypes = {
+  height: PropTypes.number,
+  width: PropTypes.number
+}

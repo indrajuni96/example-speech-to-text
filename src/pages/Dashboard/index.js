@@ -33,13 +33,13 @@ export default function Dashboard({ navigation }) {
       />
 
       <View style={styles.wrapperMain}>
-        <Space valSpace={4} />
+        <Space height={4} />
         <View style={styles.headerMain}>
           <Text style={styles.textHeader}>Learning Japanes</Text>
           <Text style={styles.textCourse}>Course</Text>
         </View>
 
-        <Space valSpace={10} />
+        <Space height={10} />
         <View style={styles.headerMain}>
           <FlatList
             data={items}
@@ -49,7 +49,7 @@ export default function Dashboard({ navigation }) {
             keyExtractor={item => item.id.toString()}
           />
 
-          <Space valSpace={10} />
+          <Space height={10} />
 
           <CardLearning
             textJapan="Example Game Random"

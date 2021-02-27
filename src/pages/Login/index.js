@@ -84,7 +84,7 @@ export default function Login({ navigation }) {
             <Text style={styles.textLogin}>Kyoto</Text>
             <Text style={styles.textAccess}>Akses untuk belajar</Text>
           </View>
-          <Space valSpace={50} />
+          <Space height={50} />
 
           <View style={styles.wrapperMain}>
             <Formik
@@ -122,20 +122,20 @@ export default function Login({ navigation }) {
                       onBlur={handleBlur('password')} />
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
-                    <Space valSpace={24} />
+                    <Space height={24} />
                     <Button
                       name='MASUK'
                       opacity={opacity}
                       disabled={disable}
                       onPress={handleSubmit} />
-                    <Space valSpace={24} />
+                    <Space height={24} />
                   </>
                 )
               }}
             </Formik>
           </View>
 
-          {/* <Space valSpace={20} />
+          {/* <Space height={20} />
           <View style={styles.wrapperDaftar}>
             <Text style={styles.textBelum}>Belum punya akun?</Text>
 
@@ -147,7 +147,7 @@ export default function Login({ navigation }) {
             </Pressable>
           </View>
 
-          <Space valSpace={50} /> */}
+          <Space height={50} /> */}
         </ScrollView>
       </View>
 

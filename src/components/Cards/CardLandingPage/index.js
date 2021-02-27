@@ -17,7 +17,7 @@ const CardLandingPage = ({ landingSvg, textTitle, textBody }) => {
       { landingSvg === 'TimeSvg' ? <TimeSvg width={180} height={180} /> : null}
       { landingSvg === 'CampingSvg' ? <CampingSvg width={180} height={180} /> : null}
 
-      <Space valSpace={20} />
+      <Space height={20} />
       <Text style={styles.textTitleImage}>{textTitle}</Text>
       <Text style={styles.textTitleImage}>{textBody}</Text>
     </View>

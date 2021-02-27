@@ -17,7 +17,7 @@ const ErrorMessage = ({ touched, errors }) => {
     )
   }
 
-  return <Space valSpace={24} />
+  return <Space height={24} />
 }
 
 export default ErrorMessage

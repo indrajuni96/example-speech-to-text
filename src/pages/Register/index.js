@@ -151,7 +151,7 @@ export default function Register({ navigation }) {
                       onBlur={handleBlur('password')} />
                     <ErrorMessage touched={touched.password} errors={errors.password} />
 
-                    <Space valSpace={24} />
+                    <Space height={24} />
 
                     <Button
                       dark
@@ -160,14 +160,14 @@ export default function Register({ navigation }) {
                       disabled={disable}
                       onPress={handleSubmit} />
 
-                    <Space valSpace={24} />
+                    <Space height={24} />
                   </>
                 )
               }}
             </Formik>
           </View>
 
-          {/* <Space valSpace={10} /> */}
+          {/* <Space height={10} /> */}
           {/* <View style={styles.wrapperMasuk}>
             <Text style={styles.textSudah}>Sudah pernah punya akun? </Text>
 
@@ -179,7 +179,7 @@ export default function Register({ navigation }) {
             </Pressable>
           </View> */}
 
-          {/* <Space valSpace={40} /> */}
+          {/* <Space height={40} /> */}
         </ScrollView>
       </View>
 

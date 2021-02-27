@@ -133,7 +133,7 @@ const ModalMateri = () => {
                       />
                       <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
 
-                      <Space valSpace={20} />
+                      <Space height={20} />
 
                       <Button
                         dark
@@ -144,7 +144,7 @@ const ModalMateri = () => {
 
                       {editedMateri ?
                         <>
-                          <Space valSpace={20} />
+                          <Space height={20} />
 
                           <Button
                             name='HAPUS'
@@ -154,7 +154,7 @@ const ModalMateri = () => {
                         </>
                         : null}
 
-                      <Space valSpace={40} />
+                      <Space height={40} />
                     </>
                   )
                 }}

@@ -14,7 +14,7 @@ import Space from '../../space/space'
 const CardLearning = ({ textJapan, onPress }) => {
   return (
     <>
-      <Space valSpace={10} />
+      <Space height={10} />
       <TouchableOpacity onPress={onPress}>
         <View style={styles.wrapperCard}>
           <View style={styles.btnPlay}>

@@ -115,14 +115,14 @@ export default function Form({ navigation }) {
                 />
                 <ErrorMessage touched={touched.password} errors={errors.password} />
 
-                <Space valSpace={24} />
+                <Space height={24} />
                 <TouchableOpacity
                   style={styles.button}
                   onPress={handleSubmit}
                 >
                   <Text style={styles.textButton}>Continue</Text>
                 </TouchableOpacity>
-                <Space valSpace={24} />
+                <Space height={24} />
               </ScrollView>
             )}
           </Formik>

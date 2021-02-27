@@ -25,15 +25,15 @@ export default function Drawer({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.wrapperMain}>
-        <Space valSpace={30} />
+        <Space height={30} />
         <View style={styles.wrapperImage}>
           <BoySvg width={80} height={80} />
         </View>
 
-        <Space valSpace={10} />
+        <Space height={10} />
         <Text style={styles.textName}>{user.nama}</Text>
 
-        <Space valSpace={20} />
+        <Space height={20} />
         <CardDrawerMenu name="Dashboard" onPress={() => navigation.navigate("Dashboard")} />
 
         <CardDrawerMenu name="Materi" onPress={() => navigation.navigate("Materi")} />

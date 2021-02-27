@@ -23,7 +23,7 @@ const ModalGame = ({ isModalVisible, toggleModal, isQuestion }) => {
       <View style={[styles.scrollableModal, { backgroundColor: bgColorModal, }]}>
         <View style={{ flex: 1 }}>
           <Text style={[styles.textTitle, { color: colorText }]}>{isQuestion ? "Bagus! Arti:" : "Kita lewatkan dulu yang satu ini."}</Text>
-          <Space valSpace={10} />
+          <Space height={10} />
 
           <Text style={[styles.textMain, { color: colorText }]}>{isQuestion ? 'Hello' : 'Belajar lagi!!!'}</Text>
         </View>

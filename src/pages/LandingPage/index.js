@@ -80,7 +80,7 @@ export default function LandingPage({ navigation }) {
             name="MASUK"
             onPress={onLogin} />
 
-          <Space valSpace={10} />
+          <Space height={10} />
 
           <Button
             dark

@@ -17,10 +17,10 @@ const CardCourse = ({ item, isBtnSpeak, onPress }) => {
     <View style={styles.cardMain}>
       <PoultrySvg width={210} height={200} />
 
-      <Space valSpace={20} />
+      <Space height={20} />
       <Text style={[styles.textJapan, { fontSize: 19 }]}>{item}</Text>
 
-      <Space valSpace={1} />
+      <Space height={1} />
       <Text style={[styles.textJapan, { fontSize: 15 }]}>{toRomaji(item)}</Text>
 
       <TouchableOpacity
