@@ -19,10 +19,17 @@ import styles from './styles'
 import { colors } from '../../../utils'
 import Input from '../../InputForm'
 import Space from '../../space/space'
+import Picker from '../../Picker'
 import Button from '../../Buttons/Button'
 import ErrorMessage from '../../Message'
 import { createMateri, updateMateri, deleteMateri } from '../../../redux/actions/materi'
 import { useMateri } from '../../../context/MateriContext'
+
+const itemKategori = [
+  { label: 'Football', value: 'football' },
+  { label: 'Baseball', value: 'baseball' },
+  { label: 'Hockey', value: 'hockey' },
+]
 
 const ModalMateri = () => {
   const { isVisible, materiId, closeModal, validationSchema } = useMateri()
@@ -32,6 +39,7 @@ const ModalMateri = () => {
   const dispatch = useDispatch()
 
   const initialValues = {
+    kategori: editedMateri ? editedMateri.kategori : '',
     kataBicara: editedMateri ? editedMateri.kataBicara : ''
   }
 
@@ -123,14 +131,19 @@ const ModalMateri = () => {
 
                   return (
                     <>
+                      <Text style={styles.label}>Kategori</Text>
+                      <Picker
+                        items={itemKategori}
+                        onValueChange={(value) => console.log(value)} />
+                      <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
+
                       <Input
                         label="Kata Bicara"
                         value={values.kataBicara}
                         errors={errors.kataBicara}
                         touched={touched.kataBicara}
                         onChangeText={handleChange('kataBicara')}
-                        onBlur={handleBlur('kataBicara')}
-                      />
+                        onBlur={handleBlur('kataBicara')} />
                       <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
 
                       <Space height={20} />

@@ -4,6 +4,7 @@ import Space from './space/space'
 import Input from './InputForm'
 import ModalGame from './modal/Game'
 import ModalMateri from './modal/Materi'
+import Picker from './Picker'
 import Fab from './Buttons/Fab'
 import Button from './Buttons/Button'
 import Loading from './Loading'
@@ -18,6 +19,7 @@ export {
   Input,
   List,
   Fab,
+  Picker,
   Button,
   Loading,
   Header,

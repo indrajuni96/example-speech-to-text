@@ -39,6 +39,12 @@ const styles = StyleSheet.create({
   icon: {
     color: colors.textDefault,
     fontSize: SCREEN_WIDTH * 0.08
+  },
+  label: {
+    fontSize: 16,
+    color: colors.textDefault,
+    marginBottom: 6,
+    fontFamily: 'Roboto-Regular',
   }
 })
 
