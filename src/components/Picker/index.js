@@ -10,7 +10,7 @@ const Picker = ({ items, onValueChange }) => {
     <View style={styles.content}>
       <RNPickerSelect
         items={items}
-        placeholder={{ label: 'Pilih kategori...', value: null, color: color }}
+        placeholder={{ label: 'Pilih kategori...', value: null }}
         style={{ inputAndroid: { color: colors.textDefault } }}
         onValueChange={onValueChange}
       />

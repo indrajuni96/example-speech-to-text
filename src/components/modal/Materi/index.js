@@ -32,11 +32,17 @@ const itemKategori = [
 ]
 
 const ModalMateri = () => {
-  const { isVisible, materiId, closeModal, validationSchema } = useMateri()
+  const { isVisible, materiId, closeModal } = useMateri()
 
   const editedMateri = useSelector((state) => state.materiStore.materies.find(materi => materi.id === materiId))
 
   const dispatch = useDispatch()
+
+  const validationSchema = Yup.object({
+    kataBicara: Yup.string()
+      .required('Wajib Diisi')
+      .trim('Wajib Diisi')
+  })
 
   const initialValues = {
     kategori: editedMateri ? editedMateri.kategori : '',
@@ -87,7 +93,7 @@ const ModalMateri = () => {
       })
     } catch {
       showMessage({
-        message: "Materi failed deleted ",
+        message: "Materi failed deleted",
         type: "default",
         backgroundColor: colors.redDark
       })
@@ -135,7 +141,7 @@ const ModalMateri = () => {
                       <Picker
                         items={itemKategori}
                         onValueChange={(value) => console.log(value)} />
-                      <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} />
+                      {/* <ErrorMessage touched={touched.kataBicara} errors={errors.kataBicara} /> */}
 
                       <Input
                         label="Kata Bicara"

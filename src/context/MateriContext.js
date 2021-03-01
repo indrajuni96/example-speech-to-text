@@ -13,12 +13,6 @@ export const MateriProvider = ({ children }) => {
   const [materiId, setMateriId] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  const validationSchema = Yup.object({
-    kataBicara: Yup.string()
-      .required('Wajib Diisi')
-      .trim('Wajib Diisi')
-  })
-
   const openModal = () => setIsVisible(true)
 
   const closeModal = () => {
@@ -35,7 +29,6 @@ export const MateriProvider = ({ children }) => {
     <MateriContext.Provider value={{
       isVisible,
       materiId,
-      validationSchema,
       openModal,
       closeModal,
       editMateriHandle,
