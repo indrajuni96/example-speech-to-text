@@ -47,13 +47,13 @@ export default function Example({ route, navigation }) {
   }
 
   const initTs = async () => {
-    await Tts.setDefaultLanguage('ja');
+    await Tts.setDefaultLanguage('in');
     await Tts.setDefaultRate(0.3)
   }
 
   const onSpek = async () => {
     Tts.stop()
-    Tts.speak(quiz)
+    Tts.speak('ayam kota berjalan di atas rumah')
   }
 
   const onSpeechStart = (e) => {
@@ -131,25 +131,26 @@ export default function Example({ route, navigation }) {
   // };
 
   const onSpeechResults = async (event) => {
-    try {
-      // apabila  hiraga/katakana ada dua kalimat
-      // const questionArray = quiz.split(' ')
+    console.log(event)
+    // try {
+    //   // apabila  hiraga/katakana ada dua kalimat
+    //   // const questionArray = quiz.split(' ')
 
-      // event.value diambil yg pertama
-      const response = await getTranslate('translate', {
-        "mode": "spaced",
-        "convert": "romaji",
-        "japanese": event.value[0]
-      })
-      // console.log(toRomaji(quiz))
-      // console.log(response.data.result)
+    //   // event.value diambil yg pertama
+    //   const response = await getTranslate('translate', {
+    //     "mode": "spaced",
+    //     "convert": "romaji",
+    //     "japanese": event.value[0]
+    //   })
+    //   // console.log(toRomaji(quiz))
+    //   // console.log(response.data.result)
 
-      if (response.code === 200) {
-      }
+    //   if (response.code === 200) {
+    //   }
 
-    } catch (error) {
-      console.log(error)
-    }
+    // } catch (error) {
+    //   console.log(error)
+    // }
 
     toggleModal(true)
     setIsBtnSpeak(false)
@@ -165,7 +166,7 @@ export default function Example({ route, navigation }) {
     })
 
     try {
-      await Voice.start('ja');
+      await Voice.start('in');
     } catch (error) {
       console.log(error)
     }
