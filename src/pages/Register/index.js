@@ -1,11 +1,9 @@
 import { Formik } from 'formik'
 import React, { useEffect, useCallback } from 'react'
 import {
-  Text,
   View,
   Keyboard,
   ScrollView,
-  Pressable,
 } from 'react-native'
 import * as Yup from 'yup'
 import { showMessage } from 'react-native-flash-message'
@@ -66,14 +64,6 @@ export default function Register({ navigation }) {
         })
       })
   }, 1000), [isConnected])
-
-  const onRegister = () => {
-    Keyboard.dismiss()
-    setTimeout(() => {
-      // navigation.navigate('Login')
-      navigation.goBack()
-    }, 1000)
-  }
 
   return (
     <>
@@ -166,20 +156,6 @@ export default function Register({ navigation }) {
               }}
             </Formik>
           </View>
-
-          {/* <Space height={10} /> */}
-          {/* <View style={styles.wrapperMasuk}>
-            <Text style={styles.textSudah}>Sudah pernah punya akun? </Text>
-
-            <Pressable
-              onPress={onRegister}>
-              <View>
-                <Text style={styles.textMasuk}>Masuk</Text>
-              </View>
-            </Pressable>
-          </View> */}
-
-          {/* <Space height={40} /> */}
         </ScrollView>
       </View>
 
