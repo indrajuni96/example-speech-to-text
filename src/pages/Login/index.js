@@ -135,19 +135,6 @@ export default function Login({ navigation }) {
             </Formik>
           </View>
 
-          {/* <Space height={20} />
-          <View style={styles.wrapperDaftar}>
-            <Text style={styles.textBelum}>Belum punya akun?</Text>
-
-            <Pressable
-              onPress={onRegister}>
-              <View>
-                <Text style={styles.textDaftar}>Daftar Disini</Text>
-              </View>
-            </Pressable>
-          </View>
-
-          <Space height={50} /> */}
         </ScrollView>
       </View>
 
