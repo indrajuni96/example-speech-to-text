@@ -5,14 +5,15 @@ import RNPickerSelect from 'react-native-picker-select'
 import styles from './styles'
 import { colors } from '../../utils'
 
-const Picker = ({ items, onValueChange }) => {
+const Picker = ({ items, value, placeholder, onValueChange }) => {
   return (
     <View style={styles.content}>
       <RNPickerSelect
         items={items}
-        placeholder={{ label: 'Pilih kategori...', value: null }}
-        style={{ inputAndroid: { color: colors.textDefault } }}
+        value={value}
+        placeholder={placeholder}
         onValueChange={onValueChange}
+        style={{ inputAndroid: { color: colors.textDefault } }}
       />
     </View>
   )

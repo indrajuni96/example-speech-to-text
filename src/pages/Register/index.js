@@ -14,6 +14,7 @@ import styles from './styles'
 import {
   Input,
   Space,
+  Picker,
   Header,
   Button,
   Loading,
@@ -33,6 +34,12 @@ export default function Register({ navigation }) {
 
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.authStore.isLoading)
+
+  const itemLevelUser = [
+    { label: 'admin', value: 'admin' },
+    { label: 'guru', value: 'guru' },
+    { label: 'orang tua', value: 'orang tua' },
+  ]
 
   useEffect(() => {
     console.log('re render screen register')
@@ -83,6 +90,7 @@ export default function Register({ navigation }) {
                 nama: '',
                 nomor: '',
                 email: '',
+                levelUser: 'orang tua',
                 password: ''
               }}
               validationSchema={Yup.object({
@@ -130,6 +138,12 @@ export default function Register({ navigation }) {
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')} />
                     <ErrorMessage touched={touched.email} errors={errors.email} />
+
+                    <Picker
+                      items={itemLevelUser}
+                      value={values.levelUser}
+                      placeholder={{}}
+                      onValueChange={(text) => setFieldValue('levelUser', text)} />
 
                     <Input
                       label="Password"

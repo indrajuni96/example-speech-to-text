@@ -15,7 +15,8 @@ export const register = (data) => ({
         .set({
           nama: data.nama,
           nomor: data.nomor,
-          email: data.email
+          email: data.email,
+          levelUser: data.levelUser
         })
 
       resolve({ id: result.user.uid, ...data })
