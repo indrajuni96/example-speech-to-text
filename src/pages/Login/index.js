@@ -1,9 +1,8 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import {
   Text,
   View,
   Keyboard,
-  Pressable,
   ScrollView,
 } from 'react-native'
 import * as Yup from 'yup'
@@ -31,10 +30,6 @@ export default function Login({ navigation }) {
 
   const dispatch = useDispatch()
   const { isConnected } = useNetInfo()
-
-  useEffect(() => {
-    // console.log('re render screen login')
-  }, [])
 
   const onSubmit = useCallback(debounce((values, { resetForm }) => {
     Keyboard.dismiss()
